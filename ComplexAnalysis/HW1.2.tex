@@ -1,0 +1,83 @@
+\documentclass{article}
+\usepackage[margin=2cm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{multicol}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\newtheorem{theorem}{Theorum}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{lemma}[theorem]{Lemma}
+\pgfplotsset{compat=1.18}
+\title{Homework Set 1.2}
+\author{Warren Atkison}
+\date{\today}
+\begin{document}
+
+\maketitle
+
+\section*{Exercise 6}
+Show that the points $3 + i$, 6, and $4 + 4i$ are the vertices of a right triangle.
+\begin{proof}
+	If the edges of the triangle formed by these vertices satisfy
+	\[
+		A^2 + B^2 = C^2
+	\]
+	Then they form a right a right triangle.
+	\begin{multicols}{2}
+		
+	\begin{tikzpicture}
+		\begin{axis}[xmin=0, xmax=7, ymin=0, ymax=5, axis x line=middle, axis y line=middle]
+			\addplot[mark=*] coordinates {(3,1)};
+			\addplot[mark=*] coordinates {(6,0)};
+			\addplot[mark=*] coordinates {(4,4)};
+			\addplot[domain=3:6] {-0.333333*x + 2};
+			\addplot[domain=3:4] {3*x - 8};
+			\addplot[domain=4:6] {-2*x + 12};
+
+	
+			
+		\end{axis}
+	\end{tikzpicture} \\
+	Let edge $A$ be the distance from $3 + i$ to $4 + 4i$, $B$ be the distance from $3 + i$ to $6$, and $C$ be the distance from $4 + 4i$ to $6$. Then
+	\begin{align*}
+		A &= \sqrt{(3 - 4)^2 + (1 - 4)^2} = \sqrt{10} \\
+		B &= \sqrt{(3 - 6)^2 + (1 - 0)^2} = \sqrt{10} \\
+		C &= \sqrt{(4 - 6)^2 + (4 - 0)^2} = \sqrt{20}     
+	\end{align*}
+	and
+	\[
+		\sqrt{10}^2 + \sqrt{10}^2 = \sqrt{20}^2   
+	\]
+	\end{multicols}
+\end{proof}
+\section*{Exercise 16}
+Prove that if $|z| = 1 (z \neq 1),$ then Re$[1/(1 - z)] = \frac{1}{2}$
+\begin{proof}
+	Recall that Re$[z] = (z + \overline{z})/2$ and $|z| = z\overline{z}$
+	\begin{align*}
+		\text{Re}[1/(1-z)] = \frac{1}{2}\left(\frac{1}{1-z} + \overline{\left(\frac{1}{1 - z}\right)}\right) &= \frac{1}{2}\left(\frac{1}{1 - z} + \frac{1}{1 - \overline{z}}\right) \\
+														     &= \frac{1}{2}\left(\frac{1 - \overline{z} + 1 - z}{1 - \overline{z} - z + z\overline{z}}\right) \\
+														     &= \frac{1}{2}\left(\frac{1 - \overline{z} + 1 - z}{1 - \overline{z} - z + |z|^2}\right) \\
+														     &= \frac{1}{2}\left(\frac{1 - \overline{z} - z + 1}{1 - \overline{z} - z + 1}\right)\\  &= \frac{1}{2}
+	\end{align*}
+\end{proof}
+\newpage
+\section*{Exercise 17}
+Let $a_1, a_2, \ldots, a_n$ be real constants. Show that if $z_0$ is a root of the polynomial equation \\ $z^n + a_1z^{n-1} + a_2z^{n-2} + \ldots + a_n = 0$, then so is $\overline{z_0}$.
+\begin{proof}
+	Let $f(z) = a_0z^n + a_1z^{n-1} + a_2z^{n-2} + \ldots + a_{n-1}z + a_n$. Since $a_1,a_2,\ldots,a_n \in \mathbb{R}$, $a_i = \overline{a_i}$. Then
+\begin{align*}
+	f(\overline{z_0}) &= a_0\overline{z_0}^n + a_1\overline{z_0}^{n-1} + \ldots + a_n \\
+			&= (\overline{a_0})(\overline{z_0})^n + (\overline{a_1})(\overline{z_0})^{n-1} + \ldots + \overline{a_n} \\
+			&= \overline{a_0z_0^n} + \overline{a_1z_0}^{n-1} + \ldots + \overline{a_n} \\
+			&= \overline{a_0z_0^n + a_1z_0^{n-1} + \ldots + a_n} \\
+			&= \overline{0} \\
+			&= 0
+\end{align*}
+\end{proof}
+\end{document}
