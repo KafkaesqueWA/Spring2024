@@ -1,0 +1,69 @@
+---
+title: "Math 247: Homework 1"
+author: "Warren Atkison"
+header-includes:
+  - \usepackage{float}
+  - \floatplacement{figure}{H}
+output:
+  pdf_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo=TRUE,message=FALSE,warning=FALSE, fig.align = 'center', out.width="80%" )
+```
+
+
+
+### Instructions
+
+Make sure to use complete sentences and explain your answers in detail.
+
+## Skydiving and anxiety
+
+Researchers investigated self-reported anxiety levels immediately before a skydive among 11 first-time skydivers and 13 experienced skydivers (at least 30 jumps) recruited from a parachute center in northern England (Hare et al., 2013). They found that anxiety levels were substantially higher (average anxiety score of 43, higher means more anxiety) among the first-time skydivers as compared to the experienced skydivers (average anxiety score of 27) on a standard test for anxiety (Spielberger State-Trait Anxiety Inventory). _Identify the six steps of a statistical investigation in this study by answering the following questions about this study_.
+
+> a. **Step 1**: Ask a research question. What is the research question being investigated in this study?
+
+How does experience impact the anxiety levels or skydivers?
+
+> b. **Step 2**: Design a study and collect data.
+
+- What are the observational units in the study?
+
+  Skydivers
+
+- How were the observational units obtained?
+
+  They were recruited from a parachute center in northern England
+
+- What are the variables in this study? Classify each as categorical or quantitative.
+
+  Experianced vs inexperienced, (categorical), and anxiety score (quantitative)
+
+> c. **Step 3**: Explore the data.
+
+- What are the average anxiety scores in the two groups?
+
+  43 for first-timers and 27 for experienced divers
+
+- How many individuals are in each group?
+
+  11 first-timers and 13 experienced
+
+> d. **Step 4**: Draw inferences beyond the data. 
+
+What is the researchers’ conclusion about the difference in anxiety levels between the two groups?
+
+experience causes anxiety to drop
+
+> e. **Step 5**: Formulate conclusions.
+
+In order to make their conclusions more relevant, what are the researchers hoping about the 24 skydivers in this study as compared to all skydivers in general?
+
+That they represent the skydiving population as a whole
+
+> f. **Step 6**: Look back and ahead. 
+
+The average age of novice skydivers was 21 and the average age of experienced skydivers was 28. Explain how this could impact the conclusions of the researchers. How could this be addressed in a future study?
+
+Age could also be a reason for a drop in anxiety, as there was also a different in age amongst the two groups. This could be fixed by selecting skydivers or similar age for both groups.
