@@ -12,11 +12,14 @@ output:
 knitr::opts_chunk$set(echo=TRUE,message=FALSE,warning=FALSE, fig.align = 'center', out.width="80%" )
 ```
 
-
+```{r}
+1 + 1
+```
 
 ### Instructions
 
 Make sure to use complete sentences and explain your answers in detail.
+
 
 ## Skydiving and anxiety
 
@@ -38,7 +41,7 @@ How does experience impact the anxiety levels or skydivers?
 
 - What are the variables in this study? Classify each as categorical or quantitative.
 
-  Experianced vs inexperienced, (categorical), and anxiety score (quantitative)
+  Experienced vs inexperienced, (categorical), and anxiety score (quantitative)
 
 > c. **Step 3**: Explore the data.
 
@@ -54,7 +57,7 @@ How does experience impact the anxiety levels or skydivers?
 
 What is the researchers’ conclusion about the difference in anxiety levels between the two groups?
 
-experience causes anxiety to drop
+Experience causes anxiety to drop
 
 > e. **Step 5**: Formulate conclusions.
 
@@ -67,3 +70,5 @@ That they represent the skydiving population as a whole
 The average age of novice skydivers was 21 and the average age of experienced skydivers was 28. Explain how this could impact the conclusions of the researchers. How could this be addressed in a future study?
 
 Age could also be a reason for a drop in anxiety, as there was also a different in age amongst the two groups. This could be fixed by selecting skydivers or similar age for both groups.
+
+

@@ -1,0 +1,54 @@
+\documentclass{article}
+\usepackage[margin=2cm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{multicol}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\newtheorem{theorem}{Theorum}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{lemma}[theorem]{Lemma}
+\title{Homework Set 1.3}
+\author{Warren Atkison}
+\date{\today}
+\begin{document}
+
+\maketitle
+
+\section*{Exercise 11}
+Using the complex product $(1 + i)(5 - i)^4$, derive
+\[
+	\pi/4 = 4\tan^{-1}(1/5) - \tan^{-1}(1/239)
+\]
+First we shall solve for the product.
+\begin{align*}
+	(1 + i)(5 - i)^4 &= (1 + i)(24 - 10i)^2 \\
+			 &= (1 + i)(476 - 480i) \\
+			 &= 956 - 4i
+\end{align*}
+Since both $1 + i$, $5 - i$, and $956 - 4i$ are in either quadraints I or IV, we can use $\arg(x + iy) = \tan^{-1}(y/x)$.
+\begin{align*}	
+	\arg((1 + i)(5-i)^4) &= \arg(1 + i) + 4\arg(5 - i) = \arg(956 - 4i) \\
+			     &= \tan^{-1}(1) + 4\tan^{1}(-1/5) = \tan^{-1}(-4/956) \\
+			     &= \pi/4 - 4\tan(1/5) = -\tan^{-1}(1/239)
+\end{align*}
+Finally we can re-arange our eqaution to get
+\[
+	\pi/4 = 4\tan^{-1}(1/5) - \tan^{-1}(1/239)	
+\]
+\newpage
+\section*{Exercise 7d}
+Find the argument of the following complex number and write in polar form.
+\[
+	z = -2\sqrt{3}-2i 
+\]
+\begin{align*}
+	r &= |z| = \sqrt{12 + 4} = 4 \\
+	\cos(\theta) &= -2\sqrt{3} /4 = -\sqrt{3}/2 & \sin(\theta) &= -2/4 = -1/2 \\
+	\theta &= 7\pi/6 \\
+	z &= 4(\cos(7\pi/3) + i\sin(7\pi/3))
+\end{align*}
+
+\end{document}
