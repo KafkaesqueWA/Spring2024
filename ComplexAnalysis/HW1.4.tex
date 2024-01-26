@@ -1,0 +1,52 @@
+\documentclass{article}
+\usepackage[margin=2cm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{multicol}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\newtheorem{theorem}{Theorum}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{lemma}[theorem]{Lemma}
+\title{Homework Set 1.4}
+\author{Warren Atkison}
+\date{\today}
+\begin{document}
+
+\maketitle
+
+\section*{Exercise 21}
+Prove that if $n$ is a positive integer, then
+\[
+	\left|\frac{\sin(n\theta/2)}{\sin(\theta/2)}\right| \leq n \quad (\theta \neq 0, \pm 2\pi, \pm 4\pi, \ldots)
+\]
+\begin{proof}	
+	If $z = e^{i\theta}$ $(|z| = 1)$, then
+	\begin{align*}
+		\left|\frac{\sin(n\theta/2)}{\sin(\theta/2)}\right| &= \left|\frac{z^{n/2} - z^{-n/2}}{z^{1/2} - z^{-1/2}}\right| \\
+								    &= \left|\frac{z^{n/2} - z^{-n/2}}{z^{1/2} - z^{-1/2}}\right| \cdot \left|\frac{z^{n/2}}{z^{1/2}}\right| \\
+								    &= \left|\frac{z^n - 1}{z - 1}\right| \\
+								    &= |1 + z + z^2 + \ldots + z^{n-1}| \\ 
+								    &\leq 1 + |z| + |z^2| + \ldots + |z^{n-1}| \\
+								    &= n
+	\end{align*}
+\end{proof}
+\newpage
+\section*{Exercise 4b}
+Write in the form of $re^{i\theta}$
+\[
+	\frac{2 + 2i}{-\sqrt{3} + i}
+\]
+\begin{align*}
+	2 + 2i &= 2\sqrt{2}\text{cis}(\pi/4) & -\sqrt{3} + i &= 2\text{cis}(5\pi/6)  
+\end{align*}
+\begin{align*}
+	\frac{2 + 2i}{-\sqrt{3} + i} &= \frac{2\sqrt{2}\text{cis}(\pi/4)}{2\text{cis}(5\pi/6)} \\
+				     &= \sqrt{2}\text{cis}(-7\pi/12) \\
+				     &= \sqrt{2} e^{-i7\pi/12}
+\end{align*}
+
+
+\end{document}

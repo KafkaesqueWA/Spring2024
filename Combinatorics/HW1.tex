@@ -1,0 +1,77 @@
+\documentclass{article}
+\usepackage[margin=2cm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{multicol}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{lemma}[theorem]{Lemma}
+\title{Homework Set 1}
+\author{Warren Atkison}
+\date{\today}
+\begin{document}
+
+\maketitle
+\section*{Exercise 1.2.2 (1pt)}
+A poker hand consists of five cards from a standard 52 card deck with four suits and thirteen values in each suit; the order of the cards in a hand is irrelevant. How many hands consist of 2 cards with one value and 3 cards of another value (a full house)? How many consist of 5 cards from the same suit (a flush)
+\paragraph*{}
+In a deck of cards, there are $\binom{4}{2} = 6$ ways to make a pair and this permutes over the 13 different values. There $\binom{4}{3} = 4$ ways to make 3 of a kind, but since we need a different value then from the pair, this permutes over 12. Thus there are $13*6*12*4$ ways to make a full house.
+\paragraph*{}
+There are $\binom{13}{5}$ ways to make a flush in a suit, and with 4 different suits this makes $4\binom{13}{5}$ total combinations for a flush.
+
+\section*{Exercise 1.2.3 (3pt)}
+Six men and six women are to be seated around a table, with men and women alternating. The chairs don't matter, only who is next to whom, but right and left are different. How many seating arrangements are possible?
+\paragraph*{}
+Once we place either a man/woman in a chair, it fixes the 2 genders in an alternating pattern. Since we can rotate the chairs (as the actual chairs don't matter), there is only one way to do this. Say we originally place a man, then there are 5 men left and 6 woman. Now, since direction does matter, we are essentially ordering the 5 men and the 6 woman. There are $5!$ ways to order the men \textit{and} $6!$ ways to order the woman, for a total of $5!6!$ possible combinations.
+
+
+
+\section*{Exercise 1.2.4 (2pt)}
+Eight people are to be seated around a table; the chairs don't matter, only who is next to whom, but right and left are different. Two people, X and Y, cannot be seated next to each other. How many seating arrangements are possible?
+\paragraph*{}
+Once we place $X$ (in which there is one way since chairs don't matter), there are 5 more spots $Y$ can be placed since $Y$ can't be in X's spot, left of $X$, or right of $X$. Since the chairs don't matter, we are essentially ordering the other 6 people, in which there are $6!$ ways. The total number of seating arrangements is $6*5!$.
+
+\section*{Exercise 1.2.6 (2pt)}
+Suppose that we want to place 8 non-attacking rooks on a chessboard. In how many ways can we do this if the 16 most `northwest' squares must be empty? How about if only the 4 most `northwest' squares must be empty?
+\paragraph*{}
+In the first file, there is 4 choices for a rook, in the second 3, the third 2, and the fourth file is fixed. For the next 4 files, we then have 4 choices for the 5th rook, 3 for the 6th, 2 for the 7th, and the last rook is also fixed. This gives us $(4!)^2$ total combinations.
+\paragraph*{}
+Similarly, in the 4 square case, there are 6 ways for the first rook, and 5 for the second, and then 6 for the third and so fourth for a total of $6*5*6!$ combinations. 
+
+\section*{Exercise 1.3.4 (1pt)}
+Use a combinatorial argument to prove that $\binom{k}{2} + \binom{n-k}{2} + k(n-k) = \binom{n}{2}$
+\begin{proof} We shall count the left and right side
+	\begin{itemize}
+		\item[]\textbf{RHS:} choose a subset of 2 elements out of an n-element set 
+		\item[]\textbf{LHS:} choose a subset of 2 elements from a k-element subset $(A)$ of an n-element set, or choose a subset of 2 elements from the complement of the k-element subset $(A^c)$, or choose 1 element from $A$ and one element from $A^c$.
+	\end{itemize}
+\end{proof}
+
+\section*{Exercise 1.3.8 (3pt)}
+Verify that $\binom{n+1}{2} + \binom{n}{2} = n^2$.
+\begin{align*}
+	\binom{n+1}{2} + \binom{n}{2} &= \frac{(n+1)!}{2!(n-1)!} + \frac{n!}{2!(n-2)!} \\
+				      &= \frac{(n+1)!}{2(n-1)(n-2)!} + \frac{n!(n-1)}{2(n-1)(n-2)!} \\
+				      &= \frac{(n+1)! + n!(n-1)}{2(n-1)!} \\
+				      &= \frac{(n-1)!(n(n+1) + n(n-1))}{2(n-1)!} \\
+				      &= \frac{n((n+1) + (n-1))}{2} \\
+				      &= \frac{n(2n)}{2} \\
+				      &= n^2
+\end{align*}
+Find a simple expression for $\sum_{i=1}^{n} i^2$ using $ \sum_{k=0}^{n} \binom{k}{i} = \binom{n+1}{i+1} $
+\begin{align*}
+	\sum_{i=0}^{n} i^2 &= \sum_{i=0}^n \binom{i+1}{2} + \sum_{i=0}^n\binom{i}{2} \\
+			   &= \binom{n+2}{3} + \binom{n+1}{3} \\
+			   &= \frac{(n+2)!}{3!(n-1)!} + \frac{(n+1)!}{3!(n-2)!} \\
+			   &= \frac{(n+2)!}{3!(n-1)!} + \frac{(n-1)(n+1)!}{3!(n-1)!} \\
+			   &= \frac{(n+2)! + (n-1)(n+1)!}{3!(n-1)!} \\
+			   &= \frac{n(n+2)(n+1) + n(n+1)(n-1)}{6} \\
+			   &= \frac{n(n+1)((n+2) + (n-1))}{6} \\
+			   &= \frac{n(n+1)(2n+1)}{6}
+\end{align*}
+
+\end{document}

@@ -1,0 +1,11 @@
+##Core LeTeX Files
+*.aux
+*.fbd\_latexmk
+*.fls
+*.log
+*.synctex.gz
+
+##Textbooks
+\(Advances\ in\ Applied\ Mathematics\)\ Robert\ L.\ Devaney\ -\ A\ First\ Course\ In\ Chaotic\ Dynamical\ Systems_\ Theory\ And\ Experiment-Chapman\ and\ Hall_CRC\ \(2020\).pdf
+Edward\ B.\ Saff\,\ Arthur\ David\ Snider\ -\ Fundamentals\ of\ Complex\ Analysis\ with\ Applications\ to\ Engineering\,\ Science\,\ and\ Mathematics_\ Pearson\ New\ International\ Edition-Pearson\ \(2013\).pdf 
+
