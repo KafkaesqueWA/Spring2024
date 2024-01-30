@@ -1,0 +1,102 @@
+---
+title: "Math 247: Homework 2"
+author: "Warren Atkison"
+header-includes:
+  - \usepackage{float}
+  - \floatplacement{figure}{H}
+output:
+  pdf_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo=TRUE,message=FALSE,warning=FALSE, fig.align = 'center', out.width="80%" )
+library(ISIwithR)
+library(mosaic)
+#library(readr)
+```
+
+
+## Buttered toast
+
+If you drop a piece of buttered toast on the floor, is it just as likely to land buttered side up as buttered side down? Suppose that 7 of the last 10 times I dropped toast it landed buttered side down. In order to carry out a statistical analysis, R was used to see whether my toast fell buttered side down a majority (more than 50%) of the time. 
+
+> a. Use R to create a dotplot of of number of toasts that landed butter side down by chance alone. [Hint: Copy/Paste/Tweak the code from Explorations 1.1 and 1.2.]. 
+
+```{r}
+set.seed(1000)
+Bread.sims <- do(1000) * rflip(n = 10, prob = 0.5)
+dotPlot(~heads, data = Bread.sims, width = 1, cex=3, groups = (prop >= 7/10),
+xlab = "Number of times dropped butter side down",
+main = "Distribution of bread landing butter side down")
+```
+```{r}
+p.value <- prop(~(prop >= 7/10), data = Bread.sims)
+p.value
+```
+\newpage
+> b. How many dots are in the dotplot?
+
+1000
+
+> c. What does each dot represent in terms of dropped toast and buttered side down?
+
+Number of times out of 10 toast was dropped butter side down if it was a 50/50 chance
+
+> d. At what number is the dotplot centered? Could you have determined that before running the simulation? Why or why not?
+
+5/10. Yes, since that is the expected value if it were a 50/50 chance. 
+
+> e. Based on 7 of the last 10 slices of toast landing buttered side down and the dotplot, are you convinced that the long-run proportion of times my toast lands buttered side down is greater than 0.50? Explain how you are deciding.
+
+No, since 7/10 times or more wasn't too unlikely, with a p-value of 0.169 which gives us no evidence against the null hypothesis
+
+> f. Does this prove that my long-run proportion of dropping toast buttered side down is 0.50?
+
+No, but it gives no evidence against the null hypothesis.
+
+
+## Sarah the chimpanzee
+
+A chimpanzee named Sarah was the subject in a study of whether chimpanzees can solve problems. Sarah was shown 30-second videos of a human actor struggling with one of several problems (for example, not able to reach bananas hanging from the ceiling). Then Sarah was shown two photographs, one that depicted a solution to the problem (like stepping onto a box) and one that did not match that scenario. Researchers watched Sarah select one of the photos, and they kept track of whether Sarah chose the correct photo depicting a solution to the problem. Sarah chose the correct photo in seven of eight scenarios that she was presented.
+
+We want to run a test of significance to determine whether Sarah understands how to solve problems and will thus pick the photo of the correct solution more often than what would be done by random chance.
+
+> a. Describe the parameter of interest in the context of this study and assign a symbol to denote it.
+
+We are interested in the long-run chance of Sarah picking the right photo, and we shall denote it $\pi$
+
+> b. What is the observed value of the statistic in this case?
+
+$\hat{p} = 7/8$
+
+> c. Write out the null and alternative hypotheses for this first in **words** _and_ then in **symbols**.
+
+Null Hypothesis: The long-run chance of Sarah guessing the right photo is 50% (just guessing). $\pi = 0.5$
+Alternative Hypothesis: The long-run chance of Sarah guessing the right photo is greater than 50%. $\pi > 0.5$
+
+> d. Use R to create a dotplot of of number of times Sarah chose the correct photo by chance alone. [Hint: Copy/Paste/Tweak the code from Explorations 1.1 and 1.2.] Comment on center, shape and spread of the distribution.
+
+```{r}
+set.seed(2000)
+Sarah.sims <- do(1000) * rflip(n = 8, prob = 0.5)
+dotPlot(~heads, data = Sarah.sims, width = 1, cex=3, groups = (prop >= 7/8),
+xlab = "Number of times Sarah guessed right",
+main = "Distribution of bread landing butter side down")
+```
+
+This is a normal distribution, with a center of 4/8.
+
+> d. Based on the null distribution, what is the p-value for the test? Use R to obtain the result
+
+```{r}
+p.value <- prop(~(prop >= 7/8), data = Sarah.sims)
+p.value
+```
+
+> e. Based on your p-value, do you have strong evidence that Sarah understands how to solve problems similar to those she was presented? How are you deciding? Justify.
+
+Yes, we have strong evidence since our p-value is less than 0.05. 
+
+> f. Complete this sentence describing what the **p-value means:** If Sarah doesn’t understand how to solve problems and is just guessing at which picture to select, the probability she would select 7 out of 8 is 0.031
+
+

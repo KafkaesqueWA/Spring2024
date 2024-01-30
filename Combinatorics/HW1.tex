@@ -53,6 +53,8 @@ Use a combinatorial argument to prove that $\binom{k}{2} + \binom{n-k}{2} + k(n-
 
 \section*{Exercise 1.3.8 (3pt)}
 Verify that $\binom{n+1}{2} + \binom{n}{2} = n^2$.
+\begin{multicols}{2}
+	
 \begin{align*}
 	\binom{n+1}{2} + \binom{n}{2} &= \frac{(n+1)!}{2!(n-1)!} + \frac{n!}{2!(n-2)!} \\
 				      &= \frac{(n+1)!}{2(n-1)(n-2)!} + \frac{n!(n-1)}{2(n-1)(n-2)!} \\
@@ -62,6 +64,13 @@ Verify that $\binom{n+1}{2} + \binom{n}{2} = n^2$.
 				      &= \frac{n(2n)}{2} \\
 				      &= n^2
 \end{align*}
+
+This can also be verified combinatorially
+\begin{enumerate}
+	\item[]\textbf{RHS:} choose an element from a $n$-element set and choose an element from that set again. 
+	\item[]\textbf{LHS:} choose a 2 element subset from an $n+1$ element set or choose a 2 element subset from an $n$ element set. (The $n+1$ element set case is for when the same element is chosen on the RHS.)
+\end{enumerate}
+\end{multicols}
 Find a simple expression for $\sum_{i=1}^{n} i^2$ using $ \sum_{k=0}^{n} \binom{k}{i} = \binom{n+1}{i+1} $
 \begin{align*}
 	\sum_{i=0}^{n} i^2 &= \sum_{i=0}^n \binom{i+1}{2} + \sum_{i=0}^n\binom{i}{2} \\
@@ -73,5 +82,6 @@ Find a simple expression for $\sum_{i=1}^{n} i^2$ using $ \sum_{k=0}^{n} \binom{
 			   &= \frac{n(n+1)((n+2) + (n-1))}{6} \\
 			   &= \frac{n(n+1)(2n+1)}{6}
 \end{align*}
+
 
 \end{document}
