@@ -6,10 +6,14 @@
 
 %First, define the function. This is different than before, when we used a
 %function file.  If the function is small, we don't need a separate file:
-logistic=@(x) 3.*x.*(1-x);
+logistic=@(x) x + x.*x;
 
 %Now call the cobweb function.  Notice the input arguments are
 %  Function name, starting point, number of iterates,
 %  interval endpoints:
-cobweb(logistic, 0.2, 5, 0, 1);
 
+cobweb(logistic, 0.1, 12, -2, 2, 'r');
+cobweb(logistic, -1.3, 4, -2, 2, 'm');
+cobweb(logistic, -0.9, 20, -2, 2, 'c');
+
+pause

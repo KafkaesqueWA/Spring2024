@@ -1,4 +1,4 @@
-function cobweb(fcn,x0,N,xmin,xmax)
+function cobweb(fcn,x0,N,xmin,xmax,c)
  
 % fcn is the name of the function, x0 is the starting
 % value, N is the number of iterates, xmin and xmax
@@ -20,5 +20,5 @@ for i=1:N
     YY(2*i+1)=Y(i+1);
 end;
 XX(2*N+1)=Y(N+1);
-plot(XX,YY,'r',x0,0,'r*');
+plot(XX,YY,c,x0,0,'r*');
 
