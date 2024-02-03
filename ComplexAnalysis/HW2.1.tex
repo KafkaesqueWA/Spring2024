@@ -1,0 +1,135 @@
+\documentclass[12pt]{article}
+\linespread{1.2}
+\usepackage[margin=2cm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{multicol}
+\usepackage{amsthm}
+\usepackage{amssymb,scrextend}
+\usepackage{graphicx,tikz,pgfplots}
+\pgfplotsset{compat=1.18}
+\newtheorem{dfn}{Definition}
+\renewcommand{\qed}{\hfill$\blacksquare$}
+\let\newproof\proof
+\renewenvironment{proof}{\vspace{1em}\begin{addmargin}[2em]{0em}\begin{newproof}}{\end{newproof}\end{addmargin}\qed}
+\newenvironment{theorem}[2][Theorem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1} \hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{example}[2][Example]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1} \hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{lemma}[2][Lemma]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1} \hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{exercise}[2][Exercise]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1} \hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{problem}[2][Problem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1} \hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{corollary}[2][Corollary]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1} \hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\usepackage{fancyhdr,enumitem,changepage,url}
+\pagestyle{fancy}
+\author{Warren Atkison}
+\date{\today}
+\setlength{\headheight}{15pt}
+\begin{document}
+\fancyhf{}
+\fancyhead[L]{Warren Atkison}
+\fancyhead[C]{Homework Set 2.1}
+\fancyhead[R]{\today}
+\fancyfoot[R]{\thepage}
+
+\begin{exercise}{4c} 
+	Show that the inversion mapping $w = f(z) = 1/z$ maps the circle $|z - 1| = 1$ onto the verticle line $x = 1/2$
+\begin{proof} Let $z = x + iy$
+	\begin{multicols}{2}	
+	\begin{align*}
+		1 = |z - 1|^2 &= (z - 1)\overline{(z - 1)} \\
+			      &= (z - 1)(\overline{z} - 1) \\
+			      &= z\overline{z} -z -\overline{z} + 1 \\
+			      &= |z|^2 - 2x + 1 \\
+		\implies |z|^2 &= 2x \\
+	\end{align*}
+	\begin{align*}
+		\\
+		w = \frac{1}{x + iy}&= \frac{x - iy}{x^2 + y^2} \\
+				     &= \frac{x}{|z|^2} - \frac{iy}{|z|^2} \\
+								&= \frac{x}{2x} - \frac{iy}{|z|^2} \\
+								&= \frac{1}{2} - \frac{iy}{|z|^2}
+	\end{align*}
+	\end{multicols}
+\end{proof}	
+\end{exercise}
+\begin{exercise}{6c}
+	The \textit{Joukowski mapping} is defined by
+	\[
+		w = J(z) = \frac{1}{2}\left(z + \frac{1}{z}\right).
+	\]
+	Show that $J$ maps the circle $|z| = r$ $(r > 0,~r \neq 1)$ onto the ecliplse
+	\[
+		\dfrac{u^2}{\left[\dfrac{1}{2}\left(r + \dfrac{1}{r}\right)\right]^2} + \dfrac{v^2}{\left[\dfrac{1}{2}\left(r - \dfrac{1}{r}\right)\right]^2} = 1,
+	\]
+	where $J(z) = u + iv$.
+	\begin{proof} Let $z = x + iy$
+		\begin{align*}
+			J(z) &= \frac{1}{2}\left(x + iy + \frac{1}{x + iy}\right) \\
+			     &= \frac{1}{2}\left(x + iy + \frac{x}{r^2} - \frac{iy}{r^2}\right) \\
+			     &= \frac{x}{2}\left(1 + \frac{1}{r^2}\right) + \frac{iy}{2}\left(1 - \frac{1}{r^2}\right) = u + iv
+		\end{align*}
+		\begin{align*}
+			u &= \frac{x}{2}\left(1 + \frac{1}{r^2}\right) & v &= \frac{y}{2}\left(1 - \frac{1}{r^2}\right) \\
+			x &= \dfrac{u}{\dfrac{1}{2}\left(1 + \dfrac{1}{r^2}\right)} & y &= \dfrac{v}{\dfrac{1}{2}\left(1 - \dfrac{1}{r^2}\right)}
+		\end{align*}
+		\begin{align*}
+			|z|^2 = x^2 + y^2 = \dfrac{u^2}{\left[\dfrac{1}{2}\left(1 + \dfrac{1}{r^2}\right)\right]^2} + \dfrac{v^2}{\left[\dfrac{1}{2}\left(1 - \dfrac{1}{r^2}\right)\right]^2} &= r^2 \\		
+			\dfrac{u^2}{r^2\left[\dfrac{1}{2}\left(1 + \dfrac{1}{r^2}\right)\right]^2} + \dfrac{v^2}{r^2\left[\dfrac{1}{2}\left(1 - \dfrac{1}{r^2}\right)\right]^2} &= 1 \\
+			\dfrac{u^2}{\left[\dfrac{1}{2}\left(r + \dfrac{1}{r}\right)\right]^2} + \dfrac{v^2}{\left[\dfrac{1}{2}\left(r - \dfrac{1}{r}\right)\right]^2} &= 1
+		\end{align*}
+	\end{proof}
+\end{exercise}
+\begin{exercise}{8}
+	A function of the form $G(z) = e^{i\phi}z$, where $\phi$ is a real constant, generates a \textit{rotation mapping}. Sketch the image of the semidisk $|z| \le 2$, $\Im z \ge 0$, under $G$ when \textbf{(a)} $\phi= \pi/4$; \textbf{(b)} $\phi = -\pi/4$; \textbf{(c)} $\pi = 3\pi/4$.
+\end{exercise}	
+\begin{center}
+	\begin{tikzpicture}[scale = 0.8]
+		\begin{axis}[xmin = -3, xmax = 3, ymin = -3, ymax = 3, axis x line = middle, axis y line = middle]
+			\addplot[domain=0:2] {(4 - x^2)^(1/2)};		
+			\addplot[domain=-2:0] {(4 - x^2)^(1/2)};
+		\end{axis}
+	\end{tikzpicture}
+\end{center}
+Let $z = re^{i\theta}$, then
+\[
+	G(z) = re^{i(\phi + \theta)}
+\]
+
+\begin{itemize}
+	\begin{multicols}{3}
+	\item[(a)] $G(z) = re^{i(\theta + \pi/4)}$ \\
+		\begin{tikzpicture}[scale = 0.7]
+			\begin{axis}[xmin = -3, xmax = 3, ymin = -3, ymax = 3, axis x line = middle, axis y line = middle]
+				\addplot[domain=0:1.414214] {(4 - x^2)^(1/2)};		
+				\addplot[domain=-2:0] {(4 - x^2)^(1/2)};
+				\addplot[domain=-2:-1.414214] {-(4 - x^2)^(1/2)};
+				\addplot[domain=-1.414214:1.414214] {x};
+			\end{axis}
+		\end{tikzpicture}
+	\item[(b)] $G(z) = re^{i(\theta - \pi/4)}$ \\
+		\begin{tikzpicture}[scale = 0.7]
+			\begin{axis}[xmin = -3, xmax = 3, ymin = -3, ymax = 3, axis x line = middle, axis y line = middle]
+				\addplot[domain=0:2] {(4 - x^2)^(1/2)};		
+				\addplot[domain=-1.414124:0] {(4 - x^2)^(1/2)};
+				\addplot[domain=1.414124:2] {-(4 - x^2)^(1/2)};
+				\addplot[domain=-1.414214:1.414214] {-x};
+			\end{axis}
+		\end{tikzpicture}
+	\item[(c)] $G = re^{i(\theta + 3\pi/4)}$ \\
+		\begin{tikzpicture}[scale = 0.7]
+			\begin{axis}[xmin = -3, xmax = 3, ymin = -3, ymax = 3, axis x line = middle, axis y line = middle]
+				\addplot[domain=0:1.414214] {-(4 - x^2)^(1/2)};		
+				\addplot[domain=-2:0] {-(4 - x^2)^(1/2)};
+				\addplot[domain=-2:-1.414214] {(4 - x^2)^(1/2)};
+				\addplot[domain=-1.414214:1.414214] {-x};
+			\end{axis}
+		\end{tikzpicture}
+	\end{multicols}
+\end{itemize}
+\end{document}

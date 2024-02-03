@@ -1,0 +1,159 @@
+\documentclass[12pt]{article}
+\linespread{1.2}
+\usepackage[margin=2cm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{multicol}
+\usepackage{amsthm}
+\usepackage{amssymb,scrextend}
+\usepackage{graphicx,tikz}
+\newtheorem{dfn}{Definition}
+\renewcommand{\qed}{\hfill$\blacksquare$}
+\let\newproof\proof
+\renewenvironment{proof}{\vspace{1em}\begin{addmargin}[2em]{0em}\begin{newproof}}{\end{newproof}\end{addmargin}\qed}
+\newenvironment{theorem}[2][Theorem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1} \hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{example}[2][Example]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1} \hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{lemma}[2][Lemma]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1} \hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{exercise}[2][Exercise]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1} \hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{problem}[2][Problem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1} \hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{corollary}[2][Corollary]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1} \hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\usepackage{fancyhdr,enumitem,changepage,url}
+\pagestyle{fancy}
+\author{Warren Atkison}
+\date{\today}
+\setlength{\headheight}{15pt}
+\begin{document}
+\fancyhf{}
+\fancyhead[L]{Warren Atkison}
+\fancyhead[C]{Homework Set 2}
+\fancyhead[R]{\today}
+\fancyfoot[R]{\thepage}
+
+\begin{exercise}{1.5.7 (3pt)}
+	You and your spouse each take two gummy vitamins every day. You share a single bottle of 60 vitamins, 30 of one flavor and 30 of another. You each prefer a different flavor, but it seems childish to fish out two of each type (but not to take gummy vitamins). So you just take the first four that fall out and then divide them up according to your preferences. For example, if there are two of each flavor, you and your spouse get the vitamins you prefer, but if three of your preferred flavor come out, you get two of the ones you like and your spouse gets one of each. Of course, you start a new bottle every 15 days. On average, over a 15 day period, how many of the vitamins you take are the flavor you prefer? 
+\end{exercise}
+Let one person prefer gummie $x$ and the other prefer gummie $y$. Imagine we line up all the gummies in a random order, and then take chunks of 4 from that order. There are $\binom{60}{4}$ total ways to make any given combo. There are $2\binom{30}{4}$ ways to make a chunk with a 4 and 0, $2(30\binom{30}{3})$ ways to make a 3 - 1 chunk, and $\binom{30}{2}^2$ ways to make a 2 - 2 chunk. WLOG in half of the 4 chunks, we get 2 $x$'s and in half of the 3 - 1 chunks we get 1 $x$ while the other half we get 2 $x$'s. The total number of gummies over 15 days on average then is
+\[
+	15(\dfrac{2\binom{30}{2}^2 + 3*30\binom{30}{3} + 2\binom{30}{4}}{\binom{60}{4}}) = 24.567
+\]
+\paragraph*{}
+I did write a python script to run some simulations (included with submission) which I know is not really to point of this question or class, however it got me thinking in terms of lining the gummies up and dividing them into chunks as thats how simulated it. I also got an EV of around 24.565 gummies from the simulations.
+%On average we can expect, each event ($2A$, $2B$, $C$) to happen a third of the time, so $C, 2A$ and $2B$ occur 5 times each on average. Because A can't occur 2.5 times and similairly with case B, we shal consider the cases where 2A occurs 3 times and 2B occurs 2 times, vis versa, and where C occurs 6 times. In the first case, we get 10 $x$'s for C, 6 $x$'s for 2B, and 6 $x$'s for 2C for a 
+
+%\begin{exercise}{1.5.5}
+%	Prove that for $m \ge 2$, 
+%	\[
+%		(x_1 + x_2 + \ldots + x_m)^n = \sum \binom{n}{i_1 ~ i_2 ~ \ldots ~ i_m}x_1^{i_1}x_2^{i_2}\ldots x_m^{i_m}
+%	\]
+%	where the sum is over $i_1,\ldots,i_m$ such that $i_1 + \ldots + i_m = n$
+%\end{exercise}
+%\begin{proof}
+%	When we multiply out the LHS, we can choose 1 way to make, $x_j^n$ for $1 \leq j \leq m$, for $x_j^{n-1}x_k$ we can do this $n$ ways. If we want $x_j^{n-2}x_kx_l$
+%\end{proof}
+\begin{exercise}{1.5.1 (3pt)}
+	Suppose a box contains 18 balls numbered 1–6, three balls with each number. When 4 balls are drawn without replacement, how many outcomes are possible? Do this in two ways: assuming that the order in which the balls are drawn matters, and then assuming that order does not matter.
+\end{exercise}
+If order matters, then we have
+\[
+	\binom{18}{3~3~3~3}
+\]
+possible combinations. If order doesn't matter then
+
+\begin{exercise}{Monday 9 (3pt)}
+	Prove that the number of ways of arranging $m$ A's and at most n B's is \
+	\[
+		\binom{m + n + 1}{m + 1}
+	\]
+\end{exercise}	
+\begin{proof}
+	Imagine a string of $m + 1$ A's and $n$ B's. There are $\binom{m + n + 1}{m + 1}$ ways to do this. We shall show a bijection to these strings (call them $A$) and a string of $m$ A's and at most $n$ B's call them $B$. Let $f:B \to A$, be the mapping of adding an A at the end of the string, then adding B's unitl you have $n$ total B's. Clearly this funciton is well defined.
+	\begin{itemize}
+		\item[] One to one: let $f(n) = f(m)$ s.t. $n,m \in B$, then 
+			\[
+				n + AB\ldots = f(n) = f(m) = m + AB\ldots \iff n = m
+			\]
+		\item[] Onto: For all $n \in A$, there exists $m \in B$ s.t. $f(m) = n$, namley $m = n - \ldots B - m$ where we remove all B's unitl we hit an A	
+	\end{itemize}
+\end{proof}
+\begin{exercise}{Monday 7 (3pt)}
+	20 identical sticks are lying in a line. How many ways are there to choose
+6 of them if
+\begin{itemize}
+	\item[(a)] there are no restrictions? \\
+		There are $\binom{20}{6}$ ways.
+	\item[(b)] sticks chosen may not be next to each other. \\
+		If we consider the number of sticks beetween chosen sticks, we get the equation
+		\[
+			x_1 + x_2 + x_3 + x_4 + x_5 + x_6 + x_7 = 20 - 6 = 14
+		\]
+		were $x_i \ge 1$ for $2 \le i \le 6$. Let $y_i = x_i - 1$ for $2 \le i \le 6$. Then
+		\begin{align*}
+			x_1 + y_2 + 1 + y_3 + 1 + y_4 + 1 + y_5 + 1 + y_6 + 1 + x_7 &= 14 \\
+			x_1 + y_2 + y_3 + y_4 + y_5 + y_6 &= 9
+		\end{align*}
+		and we get $\binom{15}{9}$ ways.
+\end{itemize}
+\end{exercise}	
+\begin{exercise}{Monday 10 (2pt)}
+	use our stars and lines formula to solve the following...
+	\begin{itemize}
+		\item[(a)] How many ways are there to write 50 as the sum of 4 even numbers?
+			\begin{align*}
+				2x_1 + 2x_2 + 2x_3 + 2x_4 &= 50 \\
+				x_1 + x_2 + x_3 + x_4 &= 25
+			\end{align*}
+			In which there are $\binom{28}{25}$ ways.
+		\item[(b)] How many ways are there to write 50 as the sum of 4 odd numbers?
+			\begin{align*}
+				2x_1 + 1 + 2x_2 + 1 + 2x_3 + 1 + 2x_4 + 1 &= 50 \\
+				x_1 + x_2 + x_3 + x_4 &= 23
+			\end{align*}
+			In which there are $\binom{26}{23}$ ways.
+		\item[(c)] How many ways are there to write 50 as the sum of 4 distinct num-bers?
+			\begin{align*}
+				x_1 + x_2 + x_3 + x_4 = 50
+			\end{align*}
+			such that $x_1 < x_2 < x_3 < x_4$. Let $y_2 = x_2 - x_1 + 1$, $y_3 = x_3 - x_2 + 1$, and $y_4 = x_4 - x_3 + 1$
+
+			\begin{align*}
+				x_1 + y_2 + x_1 - 1 + y_3 + x_2 - 1 + y_4 + x_3 - 1 &= 50 \\
+				2x_1 + y_2 + y_3 + y_2 + x_1 - 1 + y_3 + x_2 - 1 &= 53 \\
+				3x_3 - 5 + 2y_2 + 2y_3 + y_4 + y_2 + x_1 - 1 &= 55 \\
+				4x_1 + 3y_2 + 2y_3 + y_4 &= 56
+			\end{align*}
+	\end{itemize}
+\end{exercise}
+\begin{exercise}{Wednesday 5 (1pt)}
+	We have a drawer with 3 identical red Tshirts, 4 identical blue Tshirts,
+and 2 identical green Tshirts. In how many orders can we wear the shirts
+over an 8 day period? What about a 7 day period?	
+\end{exercise}	
+We have 9 t-shirts total. Imagine we remove a red t-shirt, then the total combinations is
+\[
+	\binom{8}{2~4~2}
+\]
+Now imagine we remove a blue t-shirt, then the total combinations is
+\[
+	\binom{8}{3~3~2}
+\]
+and if we remove a green t-shirt we get
+\[
+	\binom{8}{3~4~1}
+\]
+combinations. Thus there are a total of
+\[
+	\binom{8}{2~4~2} + \binom{8}{3~3~2} + \binom{8}{3~4~1}
+\]
+combinations in an 8 day period. For a 7 day period, we get
+\[
+	\binom{7}{1~4~2} + \binom{7}{2~3~2} + \binom{7}{2~4~1} + \binom{7}{3~2~2} + \binom{7}{3~3~1} + \binom{7}{3~4~0}
+\]
+combinations by using the same method.
+\end{document}
