@@ -1,0 +1,83 @@
+\documentclass[12pt]{article}
+\linespread{1.2}
+\usepackage[margin=2cm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{multicol}
+\usepackage{amsthm}
+\usepackage{amssymb,scrextend}
+\usepackage{graphicx,tikz,pgfplots}
+\pgfplotsset{compat=1.18}
+\newtheorem{dfn}{Definition}
+\renewcommand{\qed}{\hfill$\blacksquare$}
+\let\newproof\proof
+\renewenvironment{proof}{\vspace{1em}\begin{addmargin}[2em]{0em}\begin{newproof}}{\end{newproof}\end{addmargin}\qed}
+\newenvironment{theorem}[2][Theorem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1} \hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{example}[2][Example]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1} \hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{lemma}[2][Lemma]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1} \hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{exercise}[2][Exercise]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1} \hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{problem}[2][Problem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1} \hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{corollary}[2][Corollary]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1} \hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\usepackage{fancyhdr,enumitem,changepage,url}
+\pagestyle{fancy}
+\author{Warren Atkison}
+\date{\today}
+\setlength{\headheight}{15pt}
+\begin{document}
+\fancyhf{}
+\fancyhead[L]{Warren Atkison}
+\fancyhead[C]{Homework Set 2.2}
+\fancyhead[R]{\today}
+\fancyfoot[R]{\thepage}
+
+\begin{exercise}{2}
+	Sketch the first five terms of the sequence $(2i)^n, n = 1,~2,~3,\ldots$, and describe the divergence of this sequence
+\end{exercise}
+\begin{center}
+	\begin{tikzpicture}
+		\begin{axis}[xmin = -35, xmax = 35, ymin = -35, ymax = 35, axis x line = middle, axis y line = middle]
+			\addplot[mark=*] coordinates {(0,2)};
+			\addplot[mark=*] coordinates {(-4,0)};
+			\addplot[mark=*] coordinates {(0,-8)};
+			\addplot[mark=*] coordinates {(16,0)};
+			\addplot[mark=*] coordinates {(0,32)};
+		\end{axis}	
+	\end{tikzpicture}
+\end{center}
+This sequence doubles in magnitude and rotates $90^{\circ}$ on each iteration, approaching $\pm \infty$ on both the real and imaginary axis.
+\begin{exercise}{8}
+	Use the Definition 2 to prove that $\lim_{z \to 1 + i} (6z - 4) = 2 + 6i$
+\end{exercise}	
+\begin{proof} Let $\delta = \varepsilon/6$. We shall show that for all $\varepsilon > 0$
+	\[
+		|(6z - 4) - (2 + 6i)| < \varepsilon
+	\]
+	whenever $0 < |z - (1 + i)| < \delta$.
+	\begin{align*}
+		|(6z - 4) - (2 + 6i)| &= |6z - 6 - 6i| \\ &= 6|z - (1 + i)| \\
+						      &< 6\delta \\
+				\implies |z - (1 + i)| &< \delta
+	\end{align*}
+\end{proof}
+\begin{exercise}{11c}
+	Find the following limit.
+	\[
+		\lim_{z \to 3i} \frac{z^2 + 9}{z - 3i}
+	\]
+	The function $\dfrac{z^2 + 9}{z - 3i}$ is not continuous at $z = 3i$ as it is not defined there, however for $z \neq 3i$ we get
+	\[
+		\frac{z^2 + 9}{z - 3i} = \frac{(z + 3i)(z - 3i)}{z - 3i} = z + 3i,	
+	\]
+	which is continuous, so
+	\[
+		\lim_{z \to 3i} \frac{z^2 + 9}{z - 3i} = \lim_{z \to 3i} z + 3i = 6i
+	\]
+\end{exercise}	
+\end{document}
