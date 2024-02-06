@@ -1,0 +1,174 @@
+---
+title: "Math 247: Homework 3"
+author: "Your name here "
+header-includes:
+  - \usepackage{float}
+  - \floatplacement{figure}{H}
+output:
+  pdf_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo=TRUE,message=FALSE,warning=FALSE, fig.align = 'center', out.width="80%" )
+library(ISIwithR)
+library(mosaic)
+#library(readr)
+```
+
+
+## Zwerg part 1
+
+An Austrian study was completed to determine if untrained sea lions and sea lionesses could follow various experimenter-given cues when given a choice of two objects. One experimenter-given cue was to point at one of the objects. In one study, sea lioness Zwerg, when given two choices, successfully chose the object pointed at by the experimenter 37 times out of 48 trials. Does this result show that Zwerg can correctly follow this type of direction (“pointing at”) by an experimenter more than 50% of the time?
+
+> a. Define the parameter of interest in the context of the study and assign a symbol to it.
+
+Long term proportion of successes vs failures of Zwerg choosing objects. ($\pi$)
+
+> b. State the null hypothesis and the alternative hypothesis using the symbol defined in part (a).
+
+$H_0:~\pi = 0.5 \\$
+$H_A: \pi > 0.5$
+
+> c. What is the observed proportion of times Zwerg picked the correct object? What symbol should you use to represent this value?
+
+$\hat{p} = 37/48$
+
+> d. Suppose that you were to generate the null distribution of the sample proportion of correct answers, that is, the distribution of possible values of sample proportion of correct identifications if Zwerg always guesses. Where would you anticipate this distribution would center? Also, do you anticipate the SD of the null distribution to be negative, positive, or 0? Why?
+
+The center would be at 24/48 and the standard deviation would be positive since standard deviation represents average distance from the mean, and distance is a positive value. The standard statistic would also be positive as Zwerg guessed more than 24/48 right so she would be above the mean.
+
+> e. Use R to generate the null distribution of sample proportion of correct answers and use it to determine the standardized statistic. What is the shape of this distribution?
+
+```{r}
+set.seed(23)
+Zwerg.null <- do(1000) * rflip(n = 48, prob = 0.5)
+head(Zwerg.null,3)
+dotPlot(~prop, data = Zwerg.null, width = 0.01, pch = 1, groups = (prop >= 37/48), 
+xlab = "Proportion of Successes",
+main = "Distribution of Proportions")
+```
+
+The shape is normal.
+
+> f. Use R to obtain the mean and standard deviation of the distribution you created in part (e) 
+
+```{r}
+round(favstats(~prop, data = Zwerg.null)["mean"],2)
+round(favstats(~prop, data = Zwerg.null)["sd"],3)
+```
+
+
+> g. Use the information from parts (e) and (f) to determine the standardized statistic.
+
+\[
+	z = \dfrac{37/48 - 0.5}{0.072} = 3.76
+\]
+
+> h. Interpret the standardized statistic in the context of the study. (Hint: You need to talk about the value of your observed statistic in terms of standard deviations assuming the Null Hypothesis is true.)
+
+Our statistic of 37/48 is 3.76 standard deviations above the mean.
+
+> i. Based on the standardized statistic, state the conclusion that you would draw about the research question of whether Zwerg does better than randomly guess when the cue is that the experimenter points at the correct object.
+
+We have very strong evidence against the null hypothesis, that is, we have strong evidence that Zwerg was not randomly guessing each time. 
+
+## Zwerg part 2
+
+In a related study, Zwerg, when given two choices, successfully chose the object indicated by a “marker” 26 out of 48 times. Does this result show that Zwerg can correctly follow this type of direction (“placing a marker”) by an experimenter more than 50% of the time?
+
+> a. Define the parameter of interest in the context of the study and assign a symbol to it.
+
+Long run proportion of Zweg successfully picking the indicated object by marker. $\pi$
+
+> b. State the null hypothesis and the alternative hypothesis using the symbol defined in part (a).
+
+$H_0: \pi = 0.5 \\$
+$H_A: \pi > 0.5$
+
+> c. What is the observed proportion of times Zwerg picked the correct object? What symbol should you use to represent this value?
+
+$\hat{p} = 26/48$
+
+> d. Suppose that you were to generate the null distribution of the sample proportion of correct answers, that is, the distribution of possible values of sample proportion of correct identifications if Zwerg always guesses. Where would you anticipate this distribution would center? Also, do you anticipate the SD of the null distribution to be negative, positive, or 0? Why?
+
+The null distribution would be normal centered at 24/48. The standard deviation would be positive and so would the standardized statistic as our statistic is greater than the mean.
+
+> e. Use R to generate the null distribution of sample proportion of correct answers and use its characteristics to determine the standardized statistic.
+
+```{r}
+dotPlot(~prop, data = Zwerg.null, width = 0.01, pch = 1, groups = (prop >= 26/48), 
+xlab = "Proportion of Successes",
+main = "Distribution of Proportions")
+```
+
+```{r}
+round(favstats(~prop, data = Zwerg.null)["mean"],2)
+round(favstats(~prop, data = Zwerg.null)["sd"],3)
+```
+
+```{r}
+cat(z = (26/48 - 0.5)/0.072)
+```
+
+
+> f. Interpret the standardized statistic in the context of the study. (Hint: You need to talk about the value of your observed statistic in terms of standard deviations assuming null hypothesis is true.)
+
+Our statistic is 0.58 standard deviations above the mean.
+
+> g. Based on the standardized statistic, state the conclusion that you would draw about the research question of whether Zwerg does better than randomly guess when the cue is that the experimenter places a marker in front of the correct object.
+
+We do not have strong evidence against the null hypothesis, Zwerg could have been randomly guessing.
+
+## Two-sided alternative hypotheses
+
+Read FAQ 1.4.1 (posted on Canvas) about two-sided alternative hypotheses and answer (a)–(b).
+
+a. Why don’t we first take a sample and use the observed sample proportion to help us decide which direction the alternative hypothesis should go? For example if we get a sample proportion greater than 0.50 then we will test to see whether the parameter is greater than 0.50.
+
+Because there is an equal chance of the observed statistic landing on either side of the mean, so we have to consider greater than and less than
+
+b. What is a downside of doing a two-sided test?
+
+The p-value doubles, so you might not get any evidence against the null hypothesis.
+
+
+## Stop light
+
+Suppose you ride to school with a friend and often arrive at a certain stop light when it is red. One day she states, “It seems like this light is green only 10% of the time when we get here.” You think it is more often than 10% and want to test this. You keep track of the color (green/not green) the next 20 times you go to school and find that 4 times (4/20 = 20%) the light is green when you arrive. You wish to see whether your sample provides strong evidence that the true proportion of times the light is green is greater than 10%. 
+
+> a. State the null and alternative hypotheses for the long-run proportion of times the light is green.
+
+$H_0: \pi = 0.10 \\$
+$H_A: \pi > 0.10$
+
+Two different approaches were taken in order to yield a p-value:
+
+**Option 1**. A simulation-based test was done and found a p-value of 0.128, showing weak evidence against the null.
+
+```{r, echo=FALSE}
+set.rseed(42) 
+Green.null <- do(1000) * rflip(n = 20 , prob = 0.1)
+dotPlot(~ prop, data = Green.null, width = 0.001, cex=3, groups = (prop >= 0.2))
+#round(favstats(~prop, data=Green.null)[c("mean", "sd")],3)
+```
+
+```{r, echo=FALSE}
+p.value<-prop(~(prop >= 0.2), data = Green.null)
+#print(p.value)# calculates the p-value
+cat( "the p-value is ",p.value)
+```
+
+
+**Option 2**. A one-proportion z-test was conducted and found a p-value of 0.065, yielding moderate evidence against the null.
+
+```{r, echo=FALSE}
+z <- (0.2 - 0.1)/0.066
+p.value<-round(pnorm(z, mean=0, sd=1, lower.tail = FALSE),3)
+p.value
+```
+
+
+> b. Which test gives a more valid p-value? Give one or two sentences why you picked the option you did.
+
+The simulated test gives a more valid p-value, as we did not have more than 10 successes AND more than 10 failures, so the central limit theorem would not apply. 
+
