@@ -1,0 +1,89 @@
+\documentclass[12pt]{article}
+\linespread{1.2}
+\usepackage[margin=2cm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{multicol}
+\usepackage{amsthm}
+\usepackage{amssymb,scrextend}
+\usepackage{graphicx,tikz}
+\newtheorem{dfn}{Definition}
+\renewcommand{\qed}{\hfill$\blacksquare$}
+\let\newproof\proof
+\renewenvironment{proof}{\vspace{1em}\begin{addmargin}[2em]{0em}\begin{newproof}}{\end{newproof}\end{addmargin}\qed}
+\newenvironment{theorem}[2][Theorem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1} \hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{example}[2][Example]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1} \hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{lemma}[2][Lemma]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1} \hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{exercise}[2][Exercise]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1} \hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{problem}[2][Problem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1} \hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{corollary}[2][Corollary]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1} \hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\usepackage{fancyhdr,enumitem,changepage,url}
+\pagestyle{fancy}
+\author{Warren Atkison}
+\date{\today}
+\setlength{\headheight}{15pt}
+\begin{document}
+\fancyhf{}
+\fancyhead[L]{Warren Atkison}
+\fancyhead[C]{Homework Set 2.4}
+\fancyhead[R]{\today}
+\fancyfoot[R]{\thepage}
+
+\begin{exercise}{2}
+	Show that $h(z) = x^3 + 3xy^2 - 3x + i(y^3 + 3x^2y - 3y)$ is differentiable on the coordinate axes but is nowhere analytic.
+\end{exercise}
+\begin{proof} Let $h(z) = u(x,y) + iv(x,y)$
+	\begin{align*}
+		u(x,y) &= x^3 + 3xy^2 - 3x & v(x,y) = y^3 + 3x^2y - 3y \\
+		\frac{\partial u}{\partial x} &= 3x^2 + 3y^2 - 3 & \frac{\partial v}{\partial x} &= 6xy \\
+		\frac{\partial u}{\partial y} &= 6xy & \frac{\partial v}{\partial y} &= 3y^2 + 3x^2 - 3
+	\end{align*}	
+	In order for $h(z)$ to be analytic, there must be a domian in which the Cauchy-Riemann equations hold.
+	\begin{align*}
+		\frac{\partial u}{\partial x} &= \frac{\partial v}{\partial y} \text{ for all } z \\
+		\frac{\partial u}{\partial y} &= -\frac{\partial v}{\partial x} \implies 6xy = -6xy \implies x = 0 \text{ or } y = 0
+	\end{align*}
+	Therfore $h(z)$ is differentiable on the coordinate axes, however there is no domain contained by the coordinate axes as we can not draw a disc around any point on the coordinate axes which contains only points on the coordinate axes. Thus $h(z)$ is nowhere analytic.
+	\end{proof}
+\begin{exercise}{8}
+	Show that if $f$ is analytic in a domain $D$ and either $\Re f(z)$ or $\Im f(z)$ is constant in $D$, then $f(z)$ must be constant in $D$.
+\end{exercise}
+\begin{proof}
+	WLOG Let $\Re f(z)$ be constant in $D$. Then for all $z \in D$
+	\begin{align*}
+		\Re f^{'}(z) &= 0 \implies \frac{\partial u}{\partial x} = 0 = \frac{\partial u}{\partial y}
+	\end{align*}
+	and since $f$ is analytic on $D$, by the Cauchy-Riemann equations we have
+	\begin{align*}
+		\frac{\partial v}{\partial y} = \frac{\partial u}{\partial x} = \frac{\partial u}{\partial y} = -\frac{\partial v}{\partial x} = 0.
+	\end{align*}
+	Therfore
+	\[
+		f'(z) = \frac{\partial u}{\partial x} + i\frac{\partial v}{\partial x} = 0 \text{ for all } z \in D
+	\]
+	and $f(z)$ is constant in $D$.
+\end{proof}
+\newpage
+\begin{exercise}{11}
+	Suppose that $f(z)$ and $\overline{f(z)}$ are analytic in a domain $D$. Show that $f(z)$ is constant in $D$.
+\end{exercise}
+\begin{proof} Let $f(z) = u(x,y) + iv(x,y)$. Then $\overline{f(z)} = u(x,y) - iv(x,y)$ and $z \in D$. By the Cauchy-Riemann equations we have
+	\begin{align*}
+		\frac{\partial u}{\partial x} &= \frac{\partial v}{\partial y} & \frac{\partial u}{\partial x} &= -\frac{\partial v}{\partial y} \\
+		\frac{\partial u}{\partial y} &= -\frac{\partial v}{\partial x} & \frac{\partial u}{\partial y} &= \frac{\partial v}{\partial y}
+	\end{align*}
+	so
+	\begin{align*}
+		\frac{\partial v}{\partial y} = -\frac{\partial v}{\partial y} \implies \frac{\partial v}{\partial y} &= 0 ~ \text{ and } ~ \frac{\partial v}{\partial x} = -\frac{\partial v}{\partial x} \implies \frac{\partial v}{\partial x} = 0 \\
+					      &\implies \Im f^{'}(z) = 0
+	\end{align*}
+	Therfore $\Im f(z)$ is constant in $D$ and by the previous exercise $f(z)$ is constant in $D$.
+\end{proof}
+\end{document}

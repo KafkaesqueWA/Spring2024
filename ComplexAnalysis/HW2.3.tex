@@ -1,0 +1,81 @@
+\documentclass[12pt]{article}
+\linespread{1.2}
+\usepackage[margin=2cm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{multicol}
+\usepackage{amsthm}
+\usepackage{amssymb,scrextend}
+\usepackage{graphicx,tikz}
+\newtheorem{dfn}{Definition}
+\renewcommand{\qed}{\hfill$\blacksquare$}
+\let\newproof\proof
+\renewenvironment{proof}{\vspace{1em}\begin{addmargin}[2em]{0em}\begin{newproof}}{\end{newproof}\end{addmargin}\qed}
+\newenvironment{theorem}[2][Theorem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1} \hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{example}[2][Example]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1} \hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{lemma}[2][Lemma]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1} \hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{exercise}[2][Exercise]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1} \hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{problem}[2][Problem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1} \hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{corollary}[2][Corollary]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1} \hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\usepackage{fancyhdr,enumitem,changepage,url}
+\pagestyle{fancy}
+\author{Warren Atkison}
+\date{\today}
+\setlength{\headheight}{15pt}
+\begin{document}
+\fancyhf{}
+\fancyhead[L]{Warren Atkison}
+\fancyhead[C]{Homework Set 2.3}
+\fancyhead[R]{\today}
+\fancyfoot[R]{\thepage}
+
+\begin{exercise}{11e}
+	Discuss the analyticicity of each of the following functions
+	\begin{itemize}
+		\item[(e)] $x^2 + y^2 + y - 2 + ix$.  
+			Let $z = x + iy$
+			\begin{align*}
+				x^2 + y^2 + y - 2 + ix &= \frac{(z + \overline{z})^2}{4} + \frac{(z - \overline{z})^2}{-4} + \frac{z - \overline{z}}{2i} - 2 + i\left(\frac{z + \overline{z}}{2}\right) \\
+						       &= \frac{(z + \overline{z})^2 - (z - \overline{z})^2 - 2i(z - \overline{z}) - 8 + 2i(z + \overline{z})}{4} \\
+						       &= \frac{4z\overline{z} - 2i(z - \overline{z} - (z + \overline{z})) - 8}{4} \\
+						       &= z\overline{z} + i\overline{z} - 2 \\
+						       &= \overline{z}\left(z + i\right) - 2
+			\end{align*}
+			Since we are multiplying by $\overline{z}$, this function is not analytical.
+		\item[(f)] $\left(x + \dfrac{x}{x^2 + y^2}\right) + i\left(y - \dfrac{y}{x^2 + y^2}\right)$.	
+			Let $z = x + iy$
+			\begin{align*}
+				\left(x + \dfrac{x}{x^2 + y^2}\right) + i\left(y - \dfrac{y}{x^2 + y^2}\right) &= \left(\frac{z +\overline{z}}{2} + \dfrac{z + \overline{z}}{2z\overline{z}}\right) + i\left(\dfrac{z - \overline{z}}{2i} - \dfrac{z - \overline{z}}{2iz\overline{z}}\right) \\
+													       &= \frac{(z\overline{z})(z + \overline{z}) + z + \overline{z}}{2z\overline{z}} + \frac{(z\overline{z})(z - \overline{z}) - z + \overline{z}}{2z\overline{z}} \\
+													       &= \frac{(z\overline{z})(2z) + 2\overline{z}}{2z\overline{z}} \\
+													       &= z + \frac{1}{z}
+			\end{align*}
+			This function is analytical, since we can write it in terms of $z$ alone.	
+	\end{itemize}
+\end{exercise}
+\newpage
+\begin{theorem}{Quotient Rule}
+	\[ 
+		\dfrac{d}{dz} \left(\dfrac{f(z)}{g(z)}\right) = \dfrac{g(z)f^{'}(z) - f(z)g^{'}(z)}{g(z)^2}
+	\]
+	For differentiable functions $f(z)$ and $g(z)$ where $g(z) \neq 0$ 
+\end{theorem}
+\begin{proof}
+	\begin{align*}
+	\lim_{z \to z_0} \frac{(f(z)/g(z)) - (f(z_0)/g(z_0))}{z - z_0} &= \lim_{z \to z_0} \dfrac{f(z)g(z_0) - f(z_0)g(z)}{(z - z_0)} \cdot \lim_{z \to z_0} \frac{1}{g(z)g(z_0)} \\
+												&= \lim_{z \to z_0} \frac{f(z)g(z_0) - f(z)g(z) - f(z_0)g(z) + f(z)g(z)}{z - z_0} \cdot \frac{1}{g(z)^2} \\
+												&= \lim_{z \to z_0} \frac{f(z)(g(z_0) - g(z)) - g(z)(f(z_0) - f(z))}{g(z)^2(z - z_0)} \\
+												&= \lim_{z \to z_0} \frac{-f(z)(g(z) - g(z_0)) + g(z)(f(z) - f(z_0))}{g(z)^2(z - z_0)} \\
+												&= \lim_{z \to z_0}\frac{g(z)(f(z) - f(z_0)) - f(z)(g(z) - g(z_0))}{g(z)^2(z - z_0)} \\
+												&= \frac{g(z)f^{'}(z) - f(z)g^{'}(z)}{g(z)^2}
+	\end{align*}	
+	Note: we can evalute $\lim_{z\to z_0} \frac{1}{g(z)g(z_0)} = \frac{1}{g(z)^2}$ since we know $g(z)$ is continuous. 
+\end{proof}
+\end{document}
