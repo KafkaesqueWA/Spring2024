@@ -1,0 +1,129 @@
+---
+title: "Math 247: Homework 4"
+author: "Warren Atkison"
+header-includes:
+  - \usepackage{float}
+  - \floatplacement{figure}{H}
+output:
+  pdf_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo=TRUE,message=FALSE,warning=FALSE, fig.align = 'center', out.width="80%" )
+library(ISIwithR)
+library(mosaic)
+#library(readr)
+```
+
+
+## Rock-paper-scissors
+
+In Example 1.2, we investigated some results of the game rock-paper-scissors. In the article referenced in the example, the researchers had 119 people play rock-paper-scissors against a computer. They found 66 players (55.5%) started with rock, 39 (32.8%) started with paper, and 14 (11.8%) started with scissors. We want to see whether players start with scissors with a long-term probability that is different than 1/3.
+
+a. State the appropriate null and alternative hypotheses in the context of this study, first in words and then in symbols.
+
+Null: The long-term probability that a player chooses scissors is 1/3, $\pi = 1/3$
+Alternate: The long-term probability that a player chooses scissors is not 1/3, $\pi \neq 1/3$
+
+b. Using R, find the p-value using a theory-based test (one-proportion z-test; normal approximation). Hint: use R code from exploration 1.5
+
+```{r}
+n <- 119
+pi <- 1/3
+p.hat <- 14/119
+SD.Theory.null <- sqrt(pi*(1-pi)/n)
+z <- (p.hat - pi)/SD.Theory.null
+one.sided.p.value <- round(pnorm(z, mean=0, sd = 1, lower.tail = TRUE),10)
+two.sided.p.value <- 2*one.sided.p.value
+cat("Sample size = ", n, 
+"\nPopulation proportion =", pi,
+"\nStandard Deviation of the theory-based null distribution = ", SD.Theory.null,
+"\nThe standardized statistic z using theory is ", z,
+"\nThe theory based p.value is", two.sided.p.value)
+```
+
+c. Summarize your conclusion from your p-value.
+
+We have very strong evidence against the null hypotheses.
+
+d. What is the value of the standardized statistic? What does it measure?
+
+$z = -5.75$, our statistic is 5.75 standard deviations above the mean.
+
+e. Are validity conditions for using a normal approximation satisfied? Explain
+
+Yes, because we have at least 10 players who started with scissors and at least 10 who didn't.
+
+## Haircuts
+
+Students in a statistics class were asked the cost of their last haircut. The dataset can be found on the textbook website as `HaircutCosts`. 
+
+```{r}
+data(HaircutCosts)#load the data
+head(HaircutCosts, n=2)# print the two first rows of the data
+```
+
+> a. Create a histogram of the cost of their last haircut.Is the distribution of haircut costs symmetric, skewed to the left, skewed to the right, or something else?
+
+```{r}
+histogram(~cost, data=HaircutCosts)
+```
+
+It appears to be skewed right.
+
+> b. Would you think the mean haircut cost is about the same as the median, higher than the median, or lower than the median? Why?
+
+Higher than the median since our data is skewed right.
+
+> c. Find and report both the mean and median haircut costs. Were you correct in your answer to part (b)?
+
+```{r}
+favstats(~cost, data=HaircutCosts)[c("mean","median")]
+```
+
+> d. The highest haircut cost is $150 and there were three of these. Suppose one of the students who reported $150 actually had a haircut cost of $300 but reported it to be $150. If this student’s haircut value were changed, how, if at all, would it change the mean haircut cost for the class? How, if at all, would it change the median? 
+
+The mean would increase, but the median would stay the same
+
+## True or False?
+
+> a. Random samples only generate unbiased estimates of long-run proportions, not long-run means.
+
+False
+
+> b. Nonrandom samples are always biased.
+
+False
+
+> c. There is no way that a sample of 100 people can be representative of all adults living in the United States.
+
+False
+
+## Notation
+
+> a. What symbol is used for a population proportion (parameter)?
+
+\[\pi\]
+
+> b. What symbol is used for sample proportion?
+
+\[\hat{p}\]
+
+> c. What symbol is used for sample mean?
+
+\[\overline{x}\]
+
+> d. what symbol is used for population mean?
+
+\[\mu\]
+
+> e. What symbol is used for sample standard deviation?
+
+\[s\]
+
+> f. What symbol is used for population standard deviation?
+
+\[\sigma\]
+
+
+
