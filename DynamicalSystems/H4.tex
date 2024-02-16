@@ -1,0 +1,96 @@
+\documentclass[12pt]{article}
+\linespread{1.2}
+\usepackage[margin=2cm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{multicol}
+\usepackage{amsthm}
+\usepackage{amssymb,scrextend}
+\usepackage{graphicx,tikz}
+\newtheorem{dfn}{Definition}
+\renewcommand{\qed}{\hfill$\blacksquare$}
+\let\newproof\proof
+\renewenvironment{proof}{\vspace{1em}\begin{addmargin}[2em]{0em}\begin{newproof}}{\end{newproof}\end{addmargin}\qed}
+\newenvironment{theorem}[2][Theorem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1} \hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{example}[2][Example]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1} \hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{lemma}[2][Lemma]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1} \hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{exercise}[2][Exercise]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1} \hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{problem}[2][Problem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1} \hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{corollary}[2][Corollary]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1} \hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\usepackage{fancyhdr,enumitem,changepage,url}
+\pagestyle{fancy}
+\author{Warren Atkison}
+\date{\today}
+\setlength{\headheight}{15pt}
+\begin{document}
+\fancyhf{}
+\fancyhead[L]{Warren Atkison}
+\fancyhead[C]{Homework Set 4}
+\fancyhead[R]{\today}
+\fancyfoot[R]{\thepage}
+\section*{Chapter 7: The Quadratic Family}
+\begin{exercise}{2}
+	Compute the sum of the lengths of all of the intervals that are removed
+from the interval $[0,~1]$ in the construction of the Cantor middle-thirds set.
+What does this say about the total length of the Cantor middle-thirds set
+itself?
+\end{exercise}
+The total length removed can be represented as the following sum:
+\begin{align*}
+	\frac{1}{3} + \frac{2}{3^2} + \frac{2^2}{3^3} + \frac{2^3}{3^4} +  \ldots &= \sum_{i = i}^{\infty} \frac{2^{i-1}}{3^i} = \frac{1}{2}\sum_{i=1}^{\infty} \left(\frac{2}{3}\right)^i
+							     = \left(\dfrac{1}{2}\right)\left(\dfrac{\dfrac{2}{3}}{1 - \dfrac{2}{3}}\right)
+							     = 1
+\end{align*}
+This suggests that the length of the Cantor middle-thirds set is 0.
+\begin{exercise}{5}
+	Find the rational number whos ternary expansion is given by $0.0022\overline{2}$
+\end{exercise}
+\begin{align*}
+	s &= 0.0022\overline{2} \\
+	3s &= 0.022\overline{2} \\
+	2s &= 0.02 = \frac{2}{9} \\
+	s &= \frac{1}{9}
+\end{align*}
+\begin{exercise}{23}
+	A point in the Cantor middle-thirds set is an called an “endpoint” if it
+is one of the points on the boundary of one of the removed open intervals in
+$[0,~1]$. In the previous exercise, which of these points are endpoints?
+\end{exercise}
+Boundary points are also the points contained in the Cantor set, as we are removing open intervals, so all endpoints are contained in the cantor set and these points are of the form $\dfrac{k}{3^n}$ for any integers $k$ and $n$. 
+\begin{exercise}{24}
+	How do you determine which point in the Cantor middle-thirds set is an endpoint and which point is not an endpoint?
+\end{exercise}
+If the point is for the form $\dfrac{k}{3^n}$, or if it can be expressed as a finite ternary decimal, then it is an endpoint. If it cannot be expressed as a finite ternary decimal, it is not an endpoint but still in the cantor set.
+\begin{exercise} {25}
+	The Cantor middle-thirds set can be divided into two distinct subsets, the set of endpoints and the set of non-endpoints. Which of these sets is the “larger” set? And why is this the case?
+\end{exercise}
+	The set of ternary numbers with finite decimals are countable, while the set of ternary numbers with and infinite amount of decimals is uncountable, so the set of non-endpoints is ``larger".
+\newpage
+\section*{Chapter 8: Transition to Chaos}
+\begin{exercise}{4}
+	Use the computer to sketch the orbit diagram for $1 \le \lambda \le 2\pi$, $|x| \le 2\pi$
+using 0 as the critical point (again available at the above website). Describe
+what you see.
+\end{exercise}
+It looks similar to the logistic family, but the top of the period 2 section between $3 < \lambda < 4$ seems to be missing, and so it becomes a period 1 section. 
+\begin{exercise}{5}
+	Explain the dramatic bifurcation that occurs at $\lambda = 2.96 \ldots$
+\end{exercise}
+	There is an abrupt change to orbits with no pattern to fixed points, where we would expect to see period 2 points. 
+\begin{exercise}{6}
+	Explain the dramatic bifurcation that occurs at $\lambda = 4.188 \ldots$	
+\end{exercise}
+We abruptly go from orbits within the interval of $[-4.2,-2.2]$ to orbits in the interval $[-4.2,4.2]$.
+\begin{exercise}{8}
+	What happens if we let $\lambda > 2\pi$? Discuss other dramatic bifurcations that
+occur.
+\end{exercise}
+The intervlas which orbits lie expand, but the periods of fixed points seem to be repeating within iterations of $2\pi$. This makes sense as we are dealing with a periodic function. Another dramatic birfurcation occurs at around $\lambda = 6.2$, which is similar at the one at $2.96$, only it occurs on the top half of the diagram instead of the bottom.
+\end{document}

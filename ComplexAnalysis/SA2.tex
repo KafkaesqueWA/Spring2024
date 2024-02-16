@@ -1,0 +1,130 @@
+\documentclass[12pt]{article}
+\linespread{1.2}
+\usepackage[margin=2cm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{multicol}
+\usepackage{amsthm}
+\usepackage{amssymb,scrextend}
+\usepackage{graphicx,tikz}
+\newtheorem{dfn}{Definition}
+\renewcommand{\qed}{\hfill$\blacksquare$}
+\let\newproof\proof
+\renewenvironment{proof}{\vspace{1em}\begin{addmargin}[2em]{0em}\begin{newproof}}{\end{newproof}\end{addmargin}\qed}
+\newenvironment{theorem}[2][Theorem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1} \hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{example}[2][Example]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1} \hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{lemma}[2][Lemma]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1} \hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{exercise}[2][Exercise]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1} \hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{problem}[2][Problem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1} \hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{corollary}[2][Corollary]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1} \hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\usepackage{fancyhdr,enumitem,changepage,url}
+\pagestyle{fancy}
+\author{Warren Atkison}
+\date{\today}
+\setlength{\headheight}{15pt}
+\begin{document}
+\fancyhf{}
+\fancyhead[L]{Warren Atkison}
+\fancyhead[C]{Special Assignment 2}
+\fancyhead[R]{\today}
+\fancyfoot[R]{\thepage}
+
+\begin{exercise}{2.3.12}
+	Let $P_n(z) = (z - z_1)(z - z_2)\cdots(z - z_n)$. Show by induction on $n$ that
+	\[
+		\frac{P_n'(z)}{P_n(z)} = \frac{1}{z - z_1} + \frac{1}{z - z_2} + \ldots + \frac{1}{z - z_n}
+	\]
+	[NOTE: $P'(z)/P(z)$ is called the \textit{logarithmic derivation} of $P(z)$.]
+\end{exercise}
+\begin{proof}
+	Base case, $n = 1$. $P_1(z) = z - z_1$. Clearly then
+	\begin{align*}
+		\frac{P_1'(z)}{P_1(z)} &= \frac{1}{z - z_1}.
+	\end{align*}
+	Let $\dfrac{P_k(z)}{P_k(z)} = \dfrac{1}{z - z_1} + \dfrac{1}{z - z_2} + \ldots + \dfrac{z}{z - z_k}$. Then
+	\begin{align*}
+		\dfrac{P_{k+1}'(z)}{P_{k+1}(z)} &= \dfrac{\dfrac{d}{dz}(P_k(z)(z - z_{k+1}))}{P_k(z)(z - z_{k+1})} \\
+						&= \dfrac{P_k'(z)(z - z_{k+1}) + P_k(z)}{P_k(z)(z - z_{k+1})} \\
+						&= \frac{P_k'(z)}{P_k(z)} + \frac{1}{z - z_{k+1}} \\
+						&= \frac{1}{z - z_1} + \frac{1}{z - z_2} + \ldots + \frac{1}{z - z_k} + \frac{1}{z - z_{k+1}}.
+	\end{align*}
+\end{proof}
+\begin{problem}{2}
+	Verify that if $f(z) = u(r,\theta) + iv(r,\theta)$, then
+	\[
+		\frac{\partial u}{\partial r} = \frac{1}{r} \cdot \frac{\partial v}{\partial \theta} \text{ and } \frac{\partial u}{\partial \theta} = -r \cdot \frac{\partial v}{\partial r}
+	\]
+	To show this we shall evaluate the following limit
+	\begin{align*}
+		f'(z_0) = \lim_{(r,\theta) \to (r_0,\theta_0)} \frac{(u(r,\theta) + iv(r,\theta)) - (u(r_0,\theta_0) + iv(r_0,\theta_0))}{re^{i\theta} - r_0e^{i\theta_0}}
+	\end{align*}
+	First we evaluate the limit as $r \to r_0$. Geometrically, this approaches $z_0$ on the ray given by the angle $\theta_0$.
+	\begin{align*}
+		f'(z_0) &= \lim_{(r,\theta_0) \to (r_0,\theta_0)} \frac{(u(r,\theta_0) + iv(r,\theta_0)) - (u(r_0,\theta_0) + iv(r_0,\theta_0))}{re^{i\theta_0} - r_0e^{i\theta_0}} \\
+			&= \lim_{(r,\theta_0) \to (r_0,\theta_0)} \left[\left(\frac{u(r,\theta_0) - u(r_0,\theta_0)}{e^{i\theta_0}(r - r_0)}\right) + i\left(\frac{v(r,\theta_0) - v(r_0,\theta_0)}{e^{i\theta}(r - r_0)}\right)\right] \\
+			&= e^{-i\theta_0}\left[\lim_{(r,\theta_0) \to (r_0,\theta_0)} \left(\frac{u(r,\theta_0) - u(r_0,\theta_0)}{(r - r_0)}\right) + i\lim_{(r,\theta_0) \to (r_0,\theta_0)} \left(\frac{v(r,\theta_0) - v(r_0,\theta_0)}{(r - r_0)}\right)\right] \\ 
+			&= e^{-i\theta_0}\left(\frac{\partial u}{\partial r} + i\frac{\partial v}{\partial r}\right)
+	\end{align*}
+	Now we evaluate the limit as $\theta \to \theta_0$. Geometrically, this approaches $z_0$ on the circle of radius $r$ centered at the origin.
+	\begin{align*}
+		f'(z_0) &= \lim_{(r_0,\theta) \to (r_0,\theta_0)} \frac{(u(r_0,\theta) + iv(r_0,\theta)) - (u(r_0,\theta_0) + iv(r_0,\theta_0))}{r_0e^{i\theta} - r_0e^{i\theta_0}} \\
+			&= \lim_{(r_0,\theta) \to (r_0,\theta_0)} \frac{(u(r_0,\theta) + iv(r_0,\theta)) - (u(r_0,\theta_0) + iv(r_0,\theta_0))}{r_0(e^{i\theta} - e^{i\theta_0})} \cdot \frac{\theta - \theta_0}{\theta - \theta_0} \\
+			&= \lim_{(r_0,\theta) \to (r_0,\theta_0)} \left[\left(\frac{u(r_0,\theta) - u(r_0,\theta_0)}{r_0(\theta - \theta_0)} + i\frac{v(r_0,\theta) - v(r_0,\theta_0)}{r_0(\theta - \theta_0)}\right)\left(\frac{\theta - \theta_0}{e^{i\theta} - e^{i\theta_0}}\right)\right] \\
+			&= \frac{1}{r_0}\left[\lim_{(r_0,\theta) \to (r_0,\theta_0)} \left(\frac{u(r_0,\theta) - u(r_0,\theta_0)}{(\theta - \theta_0)} + i\frac{v(r_0,\theta) - v(r_0,\theta_0)}{(\theta - \theta_0)}\right)\right]\lim_{(r_0,\theta_0) \to (r_0,\theta_0)} \left(\frac{e^{i\theta} - e^{i\theta_0}}{\theta - \theta_0}\right)^{-1} \\
+			&= \frac{1}{r_0}\left(\frac{\partial u}{\partial \theta} + i\frac{\partial v}{\partial \theta}\right)\left(\lim_{(r_0,\theta) \to (r_0,\theta_0)}\frac{e^{i\theta} - e^{i\theta_0}}{\theta - \theta_0}\right)^{-1} \\
+			&= \frac{1}{r_0}\left(\frac{\partial u}{\partial \theta} + i\frac{\partial v}{\partial \theta}\right)\left(\frac{de^{i\theta}}{d\theta}(\theta_0)\right)^{-1} \\
+			&= \frac{e^{-i\theta_0}}{ir_0}\left(\frac{\partial u}{\partial \theta} + i\frac{\partial v}{\partial \theta}\right) \\
+			&= \frac{e^{-i\theta_0}}{r_0}\left(\frac{\partial v}{\partial \theta} - i\frac{\partial u}{\partial \theta}\right)
+	\end{align*}
+	Setting both limits equal to each other then yields the desired results.
+	\begin{align*}
+		e^{-i\theta}\left(\frac{\partial u}{\partial r} + i\frac{\partial v}{\partial r}\right) &= \frac{e^{-i\theta}}{r}\left(\frac{\partial v}{\partial \theta} - i\frac{\partial u}{\partial \theta}\right) \\
+		\frac{\partial u}{\partial r} + i\frac{\partial v}{\partial r} &= \frac{1}{r}\left(\frac{\partial v}{\partial \theta} - i\frac{\partial u}{\partial \theta}\right) \\
+		\implies \frac{\partial u}{\partial r} = \frac{1}{r} \cdot \frac{\partial v}{\partial \theta} &\text{ and } \frac{\partial u}{\partial \theta} = -r \cdot \frac{\partial v}{\partial r}
+	\end{align*}
+\end{problem}
+\begin{problem}{3}
+	Suppose that $f$ is analytic and nonzero in a domain $D$. Prove that $\phi(x,y) = \ln(|f(z)|)$ is harmonic in $D$.
+\end{problem}
+\begin{proof} Let $z = x + iy$ and $f(z) = u(x,y) + iv(x,y)$. Then
+	\begin{align*}
+		\phi(x,y) = \ln(|f(z)|) &= \ln((u^2 + v^2)^{1/2}) \\
+			    &= \frac{1}{2}\ln(u^2 + v^2)
+	\end{align*}
+	First we take the first derivative with respect to $x$.
+	\begin{align*}
+		\frac{\partial}{\partial x} \left(\frac{1}{2}\ln(u^2 + v^2)\right) &= \frac{1}{2}\left(\dfrac{1}{u^2 + v^2}\right)\left(2u\frac{\partial u}{\partial x} + 2v\frac{\partial v}{\partial x}\right) \\
+										   &= \dfrac{u\dfrac{\partial u}{\partial x} + v\dfrac{\partial v}{\partial x}}{u^2 + v^2}
+	\end{align*}
+	Then we take the second derivative with respect to $x$.
+	\begin{align*}
+		\frac{\partial^2 \phi}{\partial x^2} &= 
+		\frac{\partial}{\partial x}\left(\dfrac{u\dfrac{\partial u}{\partial x} + v\dfrac{\partial v}{\partial x}}{u^2 + v^2} \right) \\
+										       &= \dfrac{(u^2 + v^2)\left[u\dfrac{\partial^2 u}{\partial x^2} + \left(\dfrac{\partial u}{\partial x}\right)^2 + v\dfrac{\partial^2 v}{\partial x^2} + \left(\dfrac{\partial v}{\partial x} \right)^2\right] - 2\left(u\dfrac{\partial u}{\partial x} + v\dfrac{\partial v}{\partial x}\right)^2}{\left(u^2 + v^2\right)^2}
+	\end{align*}
+	Now we can take the second derivative with respect to $y$, which will be the same except our partials will be with respect to $y$ instead of $x$.
+	\begin{align*}
+		\frac{\partial^2 \phi}{\partial y^2} = \dfrac{(u^2 + v^2)\left[u\dfrac{\partial^2 u}{\partial y^2} + \left(\dfrac{\partial u}{\partial y}\right)^2 + v\dfrac{\partial^2 v}{\partial y^2} + \left(\dfrac{\partial v}{\partial y} \right)^2\right] - 2\left(u\dfrac{\partial u}{\partial y} + v\dfrac{\partial v}{\partial y}\right)^2}{\left(u^2 + v^2\right)^2}
+	\end{align*}
+	Finally we add the second partials together and use the Cauchy-Riemann equations as well as the fact that $u$ and $v$ are harmonic to simplify.
+	\begin{align*}
+		&\left(u^2 + v^2\right)^2\left(\frac{\partial^2 \phi}{\partial x^2} + \frac{\partial^2 \phi}{\partial y^2}\right) \\ &= (u^2 + v^2)\left[u\left(\frac{\partial^2 u}{\partial x^2} + \frac{\partial^2 u}{\partial y^2}\right) + v\left(\frac{\partial^2 v}{\partial x^2} + \frac{\partial^2 v}{\partial y^2}\right) + 2\left(\frac{\partial u}{\partial x}\right)^2 + 2\left(\frac{\partial u}{\partial y}\right)^2\right] - \\
+		&2\left[\left(u\dfrac{\partial u}{\partial x} - v\dfrac{\partial u}{\partial y}\right)^2 + \left(u\dfrac{\partial u}{\partial y} + v\dfrac{\partial u}{\partial x}\right)^2\right] \\
+		&= 2(u^2 + v^2)\left[\left(\frac{\partial u}{\partial x}\right)^2 + \left(\frac{\partial u}{\partial y}\right)^2\right] - 2\left\{u^2\left[\left(\frac{\partial u}{\partial x}\right)^2 + \left(\frac{\partial u}{\partial y}\right)^2\right] + v^2\left[\left(\frac{\partial u}{\partial y}\right)^2 + \left(\frac{\partial u}{\partial x}\right)^2\right]\right\} \\
+		&= 2(u^2 + v^2)\left[\left(\frac{\partial u}{\partial x}\right)^2 + \left(\frac{\partial u}{\partial y}\right)^2\right] - 2(u^2 + v^2)\left[\left(\frac{\partial u}{\partial x}\right)^2 + \left(\frac{\partial u}{\partial y}\right)^2\right] \\
+		&= 0
+	\end{align*}
+	Since $f(z)$ is nonzero, so is $u^2 + v^2$
+	\[
+		\implies \frac{\partial^2 \phi}{\partial x^2} + \frac{\partial^2 \phi}{\partial y^2} = 0
+	\]
+	and thus $\phi(x,y)$ is harmonic in $D$.
+\end{proof}
+\end{document}
