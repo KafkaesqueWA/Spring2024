@@ -1,0 +1,132 @@
+---
+title: "Math 247: Homework 5"
+author: "Warren Atkison"
+header-includes:
+  - \usepackage{float}
+  - \floatplacement{figure}{H}
+output:
+  pdf_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo=TRUE,message=FALSE,warning=FALSE, fig.align = 'center', out.width="80%" )
+library(ISIwithR)
+library(mosaic)
+#library(readr)
+```
+
+## Needles!
+
+Consider a manufacturing process that is producing hypodermic needles that will be used for blood donations. These needles need to have a diameter of 1.65 mm—too big and they would hurt the donor (even more than usual), too small and they would rupture the red blood cells, rendering the donated blood useless. Thus, the manufacturing process would have to be closely monitored to detect any significant departures from the desired diameter. During every shift, quality control personnel take a random sample of several needles and measure their diameters. If they discover a problem, they will stop the manufacturing process until it is corrected. For now, suppose that a “problem” is when the sample average diameter turns out to be statistically significantly different from the target of 1.65 mm.
+
+> 1. Identify the variable of interest and whether the variable is categorical or quantitative.
+
+Diameter of needles, categorical.
+
+> 2. Write the appropriate hypotheses using appropriate symbols to test whether the average diameter of needles from the manufacturing process is different from the desired value.
+
+Null: The average diameter of a needle is 1.65mm. $\mu = 1.65 \\$
+Alternate: The average of a needle is not 1.65mm. $\mu \neq 1.65$
+
+> 3. Suppose that the most recent random sample of 35 needles have an average diameter of 1.64 mm and a standard deviation of 0.07 mm. Assign appropriate symbols to these numbers.
+
+$\overline{x} = 1.64mm$, $s = 0.07mm$
+
+> 4. Suppose that the diameters of needles produced by this manufacturing process have a bell-shaped distribution. Describe the distribution of the average diameter of samples of 35 needles, assuming that the process is not malfunctioning.
+
+The distribution is normal and symmetric, centered at $1.65$.
+
+> 5. Recall that the most recent random sample of 35 needles have an average diameter of 1.64 mm and a standard deviation of 0.07 mm. Use the Theory-Based approach in R to find and report a standardized statistic (t-statistic) and a p-value to investigate whether the average diameter of needles produced by this manufacturing process is different from 1.65 mm. 
+
+Remove **eval=FALSE** after running the code.
+
+```{r}
+
+#provide a value of sample mean
+sample.mean<-1.64
+
+# provide a value of a sample standard deviation  
+sample.sd<-0.07 
+
+# provide a value of a population mean   
+population.mean<-1.65
+  
+# provide a value of a sample size
+n<-35
+
+#############################################################
+  
+#Calculating a t-statistic  
+t<-((sample.mean-population.mean)/(sample.sd/sqrt(n)))
+cat("the standardized statistic t is",t)
+```
+
+```{r}
+
+#finding a left-tailed p-value
+df=n-1
+p.value=pt(t,df,lower.tail=TRUE) #left-tailed test
+cat("The left-tailed p-value is",round(p.value,3))
+
+# If you need to find the two-sided p-value multiply an appropriate one-tailed p-value by 2.
+cat("two-sided p.value", 2*p.value)
+```
+
+> 6. Based on your p-value, write out a conclusion, being sure to include justification.
+
+Since you t-statistic was negative, we multiply the left-tailed p-value by 2 to find our two-sided p value of 0.4. Based on this we do not have any evidence against the null hypotheses.
+
+> 7. Were the validity conditions for a theory-based test satisfied? why or why not? Be specific.
+
+Yes, since we had a normal distribution of the population and a sample size greater than 20.
+
+
+## Types of Errors
+
+Read **Section 2.3.3 FAQ** in the textbook (also posted on Canvas) to learn about **Type I** and **Type II errors** in order to be able to complete the exercise below.
+
+$H_0$ : New treatment is not better than current treatment.
+ 
+$H_A$ : New treatment is better than current treatment.
+
+> a. Describe what Type I error means in **this context**. Be specific.
+
+New treatment is not better than current treatment, however data rejects this.
+
+> b. Describe what Type II error means in **this context**. Be specific
+
+New treatment is better than current treatment, however data did not reject the null hypotheses.
+
+## Bootstrapping
+
+1. When developing a bootstrap sampling distribution, we repeatedly take random samples: (**Bold** the correct response)
+
+> A. With replacement from the population.
+
+> B. Without replacement from the population.
+
+> C. **With replacement from the original sample.**
+
+> D. Without replacement from the original sample.
+
+2. When developing a bootstrap sampling distribution, we repeatedly take samples that are: (**Bold** the correct response)
+
+> A. Smaller than the original sample size.
+
+> B. **The same size as the original sample.**
+
+> C. Larger than the original sample.
+
+> D. It does not matter. Just take lots of samples.
+
+3. What is the primary reason why we create a bootstrap sampling distribution? (**Bold** the correct response)
+
+> A. To see where the distribution is centered
+
+> B. To see what shape the distribution will have
+
+> C. To see how the means or medians vary by finding the SD of the sampling distribution
+
+> D. **All of A–C.**
+
+

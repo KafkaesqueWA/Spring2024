@@ -1,0 +1,126 @@
+\documentclass[12pt]{article}
+\linespread{1.2}
+\usepackage[margin=2cm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{multicol}
+\usepackage{amsthm}
+\usepackage{amssymb,scrextend}
+\usepackage{graphicx,tikz}
+\newtheorem{dfn}{Definition}
+\renewcommand{\qed}{\hfill$\blacksquare$}
+\let\newproof\proof
+\renewenvironment{proof}{\vspace{1em}\begin{addmargin}[2em]{0em}\begin{newproof}}{\end{newproof}\end{addmargin}\qed}
+\newenvironment{theorem}[2][Theorem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1} \hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{example}[2][Example]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1} \hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{lemma}[2][Lemma]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1} \hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{exercise}[2][Exercise]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1} \hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{problem}[2][Problem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1} \hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{corollary}[2][Corollary]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1} \hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\usepackage{fancyhdr,enumitem,changepage,url}
+\DeclareRobustCommand{\stirling}{\genfrac[]{0pt}{}}
+\DeclareRobustCommand{\Stirling}{\genfrac\{\}{0pt}{}}
+\pagestyle{fancy}
+\author{Warren Atkison}
+\date{\today}
+\setlength{\headheight}{15pt}
+\begin{document}
+\fancyhf{}
+\fancyhead[L]{Warren Atkison}
+\fancyhead[C]{Homework Set 4}
+\fancyhead[R]{\today}
+\fancyfoot[R]{\thepage}
+
+\begin{exercise}{1.8.5 (2pt)}
+	Show that $x^{\underline{n}} = \prod_{k=0}^{n-1} (x - k) = \sum_{i = 0}^n s(n,i)x^i$, $n \ge 1$. Find a similar identity for $x^{\overline{n}} = \prod_{k=0}^{n-1} (x +k)$.
+\end{exercise}
+\begin{proof} We shall use induction on $n$. Base case, $n = 1$ and $n = 2$.
+	\begin{align*}
+		\prod_{k=0}^{0}(x - k) = x = \sum_{i=0}^1 s(1,0)x^i = 0 + x \\
+		\prod_{k=0}^{1}(x - k) = x(x - 1) = \sum_{i=0}^2 s(2,0)x^i = 0 + x - x^2
+	\end{align*}
+	Let $x^{\underline{n}} = \sum_{i = 0}^n s(n,i)x^i$, then
+	\begin{align*}
+		x^{\underline{n+1}} = \prod_{k=0}^n (x - k) &= \left(\prod_{k=0}^{n-1} (x-k)\right)(x - n) \\
+							    &= \left(\sum_{i=0}^n s(n,i)x^i\right)(x - n) \\
+							    &= \sum_{i=0}^n s(n,i)x^{i+1} - ns(n,i)x^i \\
+							    &= \sum_{i=1}^{n+1} s(n,i-1)x^i - \sum_{i=0}^n ns(n,i)x^i \\
+							    &= \sum_{i=0}^{n+1} (s(n,i-1) - ns(n,i))x^i \\
+							    &= \sum_{i=0}^{n+1}s(n+1,i)x^i
+	\end{align*}
+\end{proof} \\
+For the rising factorial, we just just want the unsigned stirling numbers since we are adding, so
+\[
+	x^{\overline{n}} = \prod_{k=0}^{n-1} (x+k) = \sum_{i = 0}^n \stirling{n}{i}x^i
+\]
+\begin{exercise}{1.8.6 (2pt)}
+	Show that $\sum_{k=0}^n \Stirling{n}{k} x^{\underline{k}} = x^n$
+\end{exercise}
+\begin{proof}
+	\begin{align*}
+		\sum_{k=0}^n \Stirling{n}{k} x^{\underline{k}} &= \sum_{k = 0}^n \Stirling{n}{k} \sum_{i=0}^k s(k,i)x^i \\
+							       &= \sum_{k=0}^n \sum_{i=0}^n S(k,n)S(n,i)x^i
+	\end{align*}
+	Applying Theorem 1.8.6
+	\begin{align*}
+		\sum_{k=0}^n \sum_{i=0}^n S(n,k)S(k,i)x^i &= \sum_{k=0}^n \delta_{n,k}x^i \\
+							  &= x^n
+	\end{align*}
+\end{proof}
+\begin{exercise}{2.2.2 (2pt)}
+	Prove $D_n$ is even if and only if $n$ is odd.	
+\end{exercise}	
+\begin{proof}
+	Let $n = 2m$, that is $n$ is even. Then
+	\begin{align*}
+		D_n &= nD_{n-1} + (-1)^n \\
+		    &= 2mD_{2m-1} + 1
+	\end{align*}
+	and $D_n$ must be odd. Now let $n= 2m + 1$, that is $n$ is odd. Then
+	\begin{align*}
+		D_n &= (2m + 1)D_{2m} - 1
+	\end{align*}
+	and $D_{2m}$ must be odd since $2m$ is even. Since an odd number times an odd number is odd, and an odd number minus 1 must be even, $D_n$ must be even.
+\end{proof}
+\begin{exercise}{2.2.11 (2pt)}
+	Suppose $n$ people are seated in $m\ge n$ chairs in a room. At some point there is a break, and everyone leaves the room. When they return, in how many ways can they be seated so that no person occupies the same chair as before the break? 
+\end{exercise}
+Suppose we pick person at random, call them $P_0$. There are $m-1$ ways to sit $P_0$ so they don't sit in their seat. Suppose $P_0$ picks an legal seat, then call the person originally sitting there $P_1$. They also have $m-1$ seats to choose from, their original seat is occupied by $P_0$. Wherever $P_1$ sits, let $P_2$ be the person originally occupying $P_1$, and they will have $m-2$ ways to choose their seats. In general person $P_k$ has $m - k$ ways to choose a seat for $k \ge 1$ for a total of
+\[
+	(m-1)(m-1)(m-2)\cdots(m-(n-1)) = \frac{(m-1)(m-1)!}{(m-n)!}
+\]
+possible combinations.
+\begin{problem}{9 (3pt)}
+	In a small town, $n$ married couples attend a town hall meeting. Each of
+the $2n$ people wants to speak exactly once. In how many ways can we
+schedule the participants if no married couple can take two consecutive
+slots?
+\end{problem}
+We are essentially ordering people, in which there are $(2n)!$ total ways. If every couple speaks consecutively then there $2^{n}n!$ total ways, since there are $n!$ ways to order each couple, and 2 possible ways to arrange each couple. If all but one couple speaks consecutively, there are $2^{n-1}(n+1)!$ ways to do that, as we are ordering $n+1$ objects and we can arrange $n-1$ of them in 2 ways. If all but 2 couples speak back to back, there are $2^{n-2}(n+2)!$. In general, if all but $k$ couples speak, there are $2^{n-k}(n+k)!$ ways to arrange them. In total, there are
+\begin{align*}
+	(2n)! - \sum_{k=0}^{n-1} 2^{n-k}(n+k)!
+\end{align*}
+\begin{exercise}{2.2.1 (1pt)}
+	Prove that $D_n = nD_{n-1} + (-1)^n$ when $n \ge 1$, by induction on $n$.
+\end{exercise}
+\begin{proof}
+	Base case: $n = 1$. 
+	\[
+		D_1 = 1D_0 + 1 = 1 - 1 = 0 = \sum_{k=0}^1 (-1)^k \frac{1}{k!} = 1 - 1 = 0
+	\]
+	Let $D_n = nD_{n-1} + (-1)^n$
+	\begin{align*}
+		D_{n+1} &= (n+1)!\sum_{k=0}^{n+1}(-1)^k \frac{1}{k!} \\
+			&= (n+1)\left(n!\sum_{k=0}^n (-1)^k \frac{1}{k!} + (-1)^{n+1}\frac{n!}{(n+1)!}\right) \\
+			&= (n+1)(D_n + (-1)^{n+1}\frac{1}{n+1}) \\
+			&= (n+1)D_n + (-1)^{n+1}
+	\end{align*}
+\end{proof}
+\end{document}
