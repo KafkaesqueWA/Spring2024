@@ -1,0 +1,68 @@
+\documentclass[12pt]{article}
+\linespread{1.2}
+\usepackage[margin=2cm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{multicol}
+\usepackage{amsthm}
+\usepackage{amssymb,scrextend}
+\usepackage{graphicx,tikz}
+\newtheorem{dfn}{Definition}
+\renewcommand{\qed}{\hfill$\blacksquare$}
+\let\newproof\proof
+\renewenvironment{proof}{\vspace{1em}\begin{addmargin}[2em]{0em}\begin{newproof}}{\end{newproof}\end{addmargin}\qed}
+\newenvironment{theorem}[2][Theorem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1} \hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{example}[2][Example]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1} \hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{lemma}[2][Lemma]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1} \hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{exercise}[2][Exercise]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1} \hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{problem}[2][Problem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1} \hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{corollary}[2][Corollary]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1} \hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\usepackage{fancyhdr,enumitem,changepage,url}
+\pagestyle{fancy}
+\author{Warren Atkison}
+\date{\today}
+\setlength{\headheight}{15pt}
+\begin{document}
+\fancyhf{}
+\fancyhead[L]{Warren Atkison}
+\fancyhead[C]{Homework Set 3.1}
+\fancyhead[R]{\today}
+\fancyfoot[R]{\thepage}
+
+\begin{exercise}{10}
+	Show that if $p_n(z)$ has degree $n$, then for all $z$ with $|z|$ sufficiently large, there are positive constants $c_1$ and $c_2$ such that $c_1|z|^n < |p_n(z)| < c_2|z|^n$.
+\end{exercise}
+\begin{proof}
+	Let $p_n(z) = a_nz^n + a_{n-1}z^{n-1} + \ldots a_1z + a_0$. Then 
+	\begin{align*}
+		p_n(z) = z^n(a_n + \frac{a_{n-1}}{z} + \frac{a_{n-2}}{z^2} + \ldots + \frac{a_0}{z^n}).	
+	\end{align*}
+	Since
+	\[
+		\lim_{z \to \infty} \left|\frac{a_{n-1}}{z} + \frac{a_{n-2}}{z^2} + \ldots + \frac{a_0}{z^n}\right| = 0,
+	\]
+	there exists $\rho>1$ such that
+	\[
+		\left|\frac{a_{n-1}}{z} + \frac{a_{n-2}}{z^2} + \ldots + \frac{a_0}{z^n}\right| < \frac{|a_n|}{2}
+	\]
+	whenever $|z| \ge \rho$. Then
+	\begin{align*}
+		|p_n(z)| &= |z^n|\left|a_n + \left(\frac{a_{n-1}}{z} + \frac{a_{n-2}}{z^2} + \ldots + \frac{a_0}{z^n}\right)\right| \\
+			 &\ge |z^n|\left(|a_n| - \left|\frac{a_{n-1}}{z} + \frac{a_{n-2}}{z^2} + \ldots + \frac{a_0}{z^n}\right| \right) \\
+			 &> |z|^n \cdot \frac{|a_n|}{2}
+	\end{align*}
+	and
+	\begin{align*}
+		|p_n(z)| &= |z^n|\left|a_n + \left(\frac{a_{n-1}}{z} + \frac{a_{n-2}}{z^2} + \ldots + \frac{a_0}{z^n}\right)\right| \\
+			 &\le |z^n|\left(|a_n| + \left|\frac{a_{n-1}}{z} + \frac{a_{n-2}}{z^2} + \ldots + \frac{a_0}{z^n}\right| \right) \\
+			 &< |z|^n \cdot \frac{3|a_n|}{2}	
+	\end{align*}
+\end{proof}
+\end{document}
