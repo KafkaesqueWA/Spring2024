@@ -65,4 +65,41 @@
 			 &< |z|^n \cdot \frac{3|a_n|}{2}	
 	\end{align*}
 \end{proof}
+\newpage
+\begin{exercise}{16}
+	Show that if $R_{m,n}(z)$ is a rational function numerator degree $m$ and denominator degree $n$, then for all $|z|$ sufficiently large, there are positive constants $c_1$ and $c_2$ such then $c_1|z|^{m-n} < |R_{m,n}(z)| < c_2|z|^{m-n}$.
+	\begin{proof}
+		Let $R_{m,n} = \dfrac{p_m(z)}{p_n(z)}$. By the results from exercise 10, we have
+		\begin{align*}
+			c_1|z|^m < |p_m(z)| < c_2|z|^m &&\text{and}&& c_3|z|^n < |p_n(z)| < c_4|z|^n
+		\end{align*}
+		for any $|z| \ge \rho_1 > 1$ and any $|z| \ge \rho_2 > 1$ respectively where $c_i$ is positive. Then, for any $|z| \ge \text{max}(\rho_1,\rho_2)$, we can divide the two inequalities whcich yields the desired result.
+		\begin{align*}
+			\frac{c_1|z|^m}{c_3|z|^n} &< \frac{|p_m(z)|}{|p_n(z)|} < \frac{c_2|z|^m}{c_4|z|^n} \\
+			\frac{c_1}{c_3}|z|^{m-n} &< |R_{m,n}(z)| < \frac{c_2}{c_4}|z|^{m-n}
+		\end{align*}
+	\end{proof}
+\end{exercise}
+\begin{problem}{1}
+	Find the partial fraction decomposition for $R(z) = \dfrac{z^2 + 2iz + 3 + i}{z^4 + iz^3}$.	
+	\begin{align*}
+		R(z) = \frac{z^2 + 2iz + 3 + i}{z^3(z + i)} = \frac{A_0^1}{z^3} + \frac{A_1^1}{z^2} + \frac{A_2^1}{z} + \frac{A_0^2}{z+i}
+	\end{align*}
+	We can the use equation (21) which is as follows.
+	\[
+		A_s^{(j)} = \lim_{z \to \zeta_j} \frac{1}{s!} \frac{d^s}{dz^s}[(z - \zeta_j)^{d_j}R_{m,n}(z)].
+	\]
+	\begin{align*}
+		A_0^1 &= \lim_{z \to 0} z^3 R(z) = \lim_{z\to 0} \frac{z^2 + 2iz + 3 + i}{z + i} = \frac{3 + i}{i} = 1 - 3i \\
+		A_1^1 &= \lim_{z \to 0} \frac{d}{dz}(z^3 R(z)) = \lim_{z \to 0} \frac{d}{dz}\left(\frac{z^2 + 2iz + 3 + i}{z + i}\right) = \lim_{z \to 0} \frac{(z + i)(2z + 2i) - (z^2 + 2iz + 3 + i)}{(z + i)^2} \\
+		      &= \frac{i(2i) - (3 + i)}{i^2} = 5 + i \\
+		A_2^1 &= \lim_{z \to 0} \frac{1}{2} \frac{d^2}{dz^2}(z^3 R(z)) = \lim_{z \to 0} \frac{1}{2} \frac{d}{dz} \left(\frac{z^2 + 2iz - 5 - i}{(z+i)^2}\right) \\
+		      &= \lim_{z \to 0} \frac{(z+i)^2(2z + 2i) - (z + 2iz - 5 - i)(2z + 2i)}{2(z + i)^4} = \frac{i^2(2i) - (-5 -i)(2i)}{2i(i^3)} = \frac{4 + i}{-i} = -1 + 4i \\
+		A_0^2 &= \lim_{z \to -i} (z + i)R(z) = \lim_{z \to -i} \frac{z^2 + 2iz + 3 + i}{z^3} = \frac{4 + i}{i} = 1 - 4i
+	\end{align*}
+	Which gives a our partial fraction decomposition
+	\[
+		R(z) = \frac{1-3i}{z^3} + \frac{5+i}{z^2} + \frac{-1+4i}{z} + \frac{1 - 4i}{z + i}
+	\]
+\end{problem}
 \end{document}
