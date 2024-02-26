@@ -1,0 +1,79 @@
+\documentclass[12pt]{article}
+\linespread{1.2}
+\usepackage[margin=2cm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{multicol}
+\usepackage{amsthm}
+\usepackage{amssymb,scrextend}
+\usepackage{graphicx,tikz}
+\newtheorem{dfn}{Definition}
+\renewcommand{\qed}{\hfill$\blacksquare$}
+\let\newproof\proof
+\renewenvironment{proof}{\vspace{1em}\begin{addmargin}[2em]{0em}\begin{newproof}}{\end{newproof}\end{addmargin}\qed}
+\newenvironment{theorem}[2][Theorem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1} \hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{example}[2][Example]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1} \hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{lemma}[2][Lemma]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1} \hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{exercise}[2][Exercise]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1} \hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{problem}[2][Problem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1} \hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{corollary}[2][Corollary]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1} \hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\usepackage{fancyhdr,enumitem,changepage,url}
+\pagestyle{fancy}
+\author{Warren Atkison}
+\date{\today}
+\setlength{\headheight}{15pt}
+\begin{document}
+\fancyhf{}
+\fancyhead[L]{Warren Atkison}
+\fancyhead[C]{Homework Set 3.2}
+\fancyhead[R]{\today}
+\fancyfoot[R]{\thepage}
+
+\begin{exercise}{8}
+	Verify that
+	\begin{align*}
+		\frac{d}{dz}\sinh z &= \cosh z, &\text{and}&& \frac{d}{dz}\cosh z &= \sinh z.
+	\end{align*}
+\end{exercise}
+\begin{align*}
+	&\frac{d}{dz} \sinh z = \frac{d}{dz}\left(\frac{e^z - e^{-z}}{2}\right) = \frac{e^z - (-e^{-z})}{2} = \cosh z \\
+	&\frac{d}{dz} \cosh z = \frac{d}{dz}\left(\frac{e^z + e^{-z}}{2}\right) = \frac{e^z - e^{-z}}{2} = \sinh z
+\end{align*}
+\begin{exercise}{11}
+	Explain why the function $\text{Re}\left(\dfrac{\cos z}{e^z}\right)$ is harmonic in the whole plane.
+\end{exercise}
+Since $1/e^z$ and $\cos z$ are entire, or analytic on the whole complex plane, their product must also be entire. Therefore, the real and imaginery parts of $\dfrac{\cos z}{e^z}$ are harmonic in the whole complex plane.
+Let $z = x + iy$, then writing Re$\left(\dfrac{\cos z}{e^z}\right)$ in $u(x,y)$ yields
+\begin{align*}
+	\text{Re}\left(\frac{\cos z}{e^z}\right) &= \text{Re}\left(\frac{e^{i(x + iy)} + e^{-i(x + iy)}}{2e^{x + iy}}\right) \\
+						 &= \text{Re}\left(\frac{e^{-y}e^{ix} + e^{y}e^{-ix}}{2e^xe^{iy}} \cdot \frac{e^{-iy}}{e^{-iy}}\right) \\
+						 &= \text{Re}\left(\frac{e^{-y}e^{i(x - y)} + e^{y}e^{-i(x + y)}}{2e^x}\right) \\
+						 &= \frac{e^{-y}\cos(x - y) + e^{y}\cos(x + y)}{2e^x}
+\end{align*}
+\begin{exercise}{12c}
+	Establish the following hyperbolic identity by using the relations (14) and other corresponding trigonometric identities.
+	\[
+		\cosh(z_1 + z_2) = \cosh z_1 \cosh z_2 + \sinh z_1 \sinh z_2
+	\]
+\end{exercise}
+\begin{align*}
+	\cosh(z_1 + z_2) &= \cos (iz_1 + iz_2) = \cos iz_1 \cos iz_2 - \sin iz_1 \sin iz_2 \\
+			 &= \cosh z_1 \cosh z_2 - i^2\sinh z_1 \sinh z_2 \\
+			 &= \cosh z_1 \cosh z_2 + \sinh z_1 \sinh z_2
+\end{align*}
+\begin{exercise}{14b}
+	Prove that $\tan z$ is periodic with period $\pi$.
+\end{exercise}	
+\begin{proof} It suffices to show that $\tan(z \pm \pi) = \tan z$.
+	\begin{align*}
+		\tan(z \pm \pi) = \frac{\sin(z \pm \pi)}{\cos(z \pm \pi)} = \frac{\sin z \cos \pi \pm \sin \pi \cos z}{\cos z \cos \pi \mp \sin z \sin \pi} = \frac{-\sin z}{-\cos z} = \tan z
+	\end{align*}
+\end{proof}
+\end{document}
