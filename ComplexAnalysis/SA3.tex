@@ -1,0 +1,117 @@
+\documentclass[12pt]{article}
+\linespread{1.2}
+\usepackage[margin=2cm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{multicol}
+\usepackage{amsthm}
+\usepackage{amssymb,scrextend}
+\usepackage{graphicx,tikz}
+\newtheorem{dfn}{Definition}
+\renewcommand{\qed}{\hfill$\blacksquare$}
+\let\newproof\proof
+\renewenvironment{proof}{\vspace{1em}\begin{addmargin}[2em]{0em}\begin{newproof}}{\end{newproof}\end{addmargin}\qed}
+\newenvironment{theorem}[2][Theorem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1} \hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{example}[2][Example]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1} \hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{lemma}[2][Lemma]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1} \hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{exercise}[2][Exercise]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1} \hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{problem}[2][Problem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1} \hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{corollary}[2][Corollary]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1} \hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\usepackage{fancyhdr,enumitem,changepage,url}
+\pagestyle{fancy}
+\author{Warren Atkison}
+\date{\today}
+\setlength{\headheight}{15pt}
+\begin{document}
+\fancyhf{}
+\fancyhead[L]{Warren Atkison}
+\fancyhead[C]{Special Assignment 3}
+\fancyhead[R]{\today}
+\fancyfoot[R]{\thepage}
+
+\begin{problem}{1}
+	Verify that
+	\[
+		-\frac{1}{2}\ln(\tan(x/2)) = \sum_{n=0}^{\infty} \frac{\cos((2n + 1)x)}{2n+1}.
+	\]
+\end{problem}
+\begin{align*}
+	\sum_{n=0}^{\infty} \frac{\cos((2n + 1)x)}{2n + 1} &= \text{Re}\left(\sum_{n=0}^{\infty} \frac{(e^{ix})^{2n + 1}}{2n+1}\right) = \text{Re}\left(\frac{1}{2}\ln\left[\frac{1 + e^{ix}}{1 - e^{ix}}\right]\right) \\
+							   &= -\frac{1}{2}\text{Re}\left(\ln\left[\frac{1 - e^{ix}}{1 + e^{ix}}\right]\right) = -\frac{1}{2}\text{Re}\left(\ln\left[\frac{e^{ix/2}(e^{-ix/2} - e^{ix/2})}{e^{ix/2}(e^{-ix/2} + e^{ix/2})}\right]\right) \\
+							   &= -\frac{1}{2}\text{Re}\left(\ln\left[\frac{-(e^{ix/2} - e^{-ix/2})}{e^{ix/2} + e^{-ix/2}}\right]\right) = -\frac{1}{2}\text{Re}\left(\ln\left[\frac{e^{ix/2} - e^{-ix/2}}{i^2(e^{ix/2} + e^{-ix/2})}\right]\right) \\
+							   &= -\frac{1}{2}\text{Re}\left(\ln(\tan(x/2)) - \ln(i)\right) = -\frac{1}{2}\ln(\tan(x/2))
+\end{align*}
+for all $0< x < \pi$. Note that we have found a fourier series for $-\dfrac{1}{2}\ln(\tan(x/2))$ without any integration, just by stepping into the complex plane and then stepping back out.
+\begin{exercise}{3.1.18}
+	Show that if
+	\[
+		R(z) = \frac{d_1}{z - z_1} + \frac{d_2}{z - z_2} + \ldots + \frac{d_r}{z - z_r}
+	\]
+	where each $d_i$ is real and positive and each $z_i$ lies in the upper half-plane $\text{Im } z > 0$, then $R(z)$ has no zeros in the lower half-plane $\text{Im } z < 0$.
+\begin{proof}
+	Let $R(z_0) = 0$ where $z_0 \neq z_i$. Then $\overline{R(z_0)} = 0$ and
+	\begin{align*}
+		\frac{d_1(z_0 - z_1)}{|z_0 - z_1|^2} + \frac{d_2(z_0 - z_2)}{|z_0 + z_2|^2} + \ldots + \frac{d_r(z_0 - z_r)}{|z_0 - z_r|^2} = 0.
+	\end{align*}
+	Let
+	\[
+		c_i = \frac{d_i}{|z_0 - z_i|^2}.
+	\]
+	Since $z_0 \neq z_i$, $|z_0 - z_i|^2 > 0$. Also, since $d_i > 0$, $c_i > 0$. Then
+	\begin{align*}
+		c_1(z_0 - z_1) + c_2(z_0 - z_2) + \ldots + c_r(z_0 - z_r) &= 0 \\
+		(c_1 + c_2 + \ldots + c_r)z_0 &= c_1z_1 + c_2z_2 + \ldots + c_rz_r \\
+		z_0 &= \frac{c_1z_1 + c_2z_2 + \ldots + c_rz_r}{c_1 + c_2 + \ldots + c_r}
+	\end{align*}
+	\begin{align*}
+		\text{Im}(z_0) &= \text{Im}\left(\frac{c_1z_1 + c_2z_2 + \ldots + c_rz_r}{c_1 + c_2 + \ldots + c_r}
+\right) = \frac{c_1\text{Im } z_1 + c_2\text{Im } z_2 + \ldots + c_r\text{Im } z_r}{c_1 + c_2 + \ldots + c_r}
+	\end{align*}
+	Since $\text{Im } z_i > 0$ and $c_i >0$, $\text{Im } z_0 > 0$.
+\end{proof}
+\end{exercise}	
+\begin{exercise}{3.2.22}
+	Prove that for any $m$ distinct complex numbers $\lambda_1,\lambda_2,\ldots,\lambda_m~(\lambda_i \neq \lambda_j \text{ for } i\neq j)$, the functions $e^{\lambda_1z},e^{\lambda_2z},\ldots,e^{\lambda_mz}$ are linearly independant on $\mathbb{C}$.
+\end{exercise}	
+\begin{proof}
+	Base case, $m = 1$. Clearly then
+	\[
+		ce^{\lambda z} = 0 \implies c = 0
+	\]
+	since $e^{\lambda z}$ is never 0. Let $c_1e^{\lambda_1z} + c_2e^{\lambda_2z} + \ldots + c_me^{\lambda_mz} = 0$ for all $z$ only if $c_1 = c_2 = \ldots = c_m = 0$. Now let
+	\begin{align*}
+		f(z) = c_1e^{\lambda_1z} + c_2e^{\lambda_2z} + \ldots + c_me^{\lambda_mz} + c_{m+1}e^{\lambda_{m+1}z} = 0
+	\end{align*}
+	for all $z$. Then
+	\begin{align*}
+		c_1e^{\lambda_1z} + c_2e^{\lambda_2z} + \ldots + c_me^{\lambda_mz} = -c_{m+1}e^{\lambda_{m+1}z}.
+	\end{align*}
+	When $z = 0$, then
+	\begin{align*}
+		c_1 + c_2 + \ldots + c_m &= -c_{m+1} 
+	\end{align*}
+	so
+	\begin{align*}
+		f(z) &= c_1e^{\lambda_1z} + c_2e^{\lambda_2z} + \ldots + c_me{\lambda_mz} - (c_1 + c_2 + \ldots + c_m)e^{\lambda_{m+1}z} = 0\\
+		f'(z)&= c_1\lambda_1e^{\lambda_1z} + c_2\lambda_2e^{\lambda_2z} + \ldots c_m\lambda_me^{\lambda_mz} - \lambda_{m+1}(c_1 + c_2 + \ldots c_m)e^{\lambda_{m+1}z} \\
+		     &= c_1(\lambda_1e^{\lambda_1z} - \lambda_{m+1}e^{\lambda_{m+1}z}) + c_2(\lambda_2e^{\lambda_2z} - \lambda_{m+1}e^{\lambda_{m+1}z}) + \ldots + c_m(\lambda_me^{\lambda_mz} - \lambda_{m+1}e^{\lambda_{m+1}z}) \\
+		     &= c_1\left(\lambda_1 - \lambda_{m+1}e^{(\lambda_{m+1} - \lambda_1)z}\right)e^{\lambda_1z} + \ldots + c_m\left(\lambda_m - \lambda_{m+1}e^{(\lambda_{m+1} - \lambda_m)z}\right)e^{\lambda_mz} = 0.
+	\end{align*}
+	By our induction hypothesis, we have
+	\begin{align*}
+		c_i\left(\lambda_i - \lambda_{m+1}e^{(\lambda_{m+1} - \lambda_i)z}\right) = 0	
+	\end{align*}
+	for all $z$ and $1 \le i \le m$. When $z = 0$, then
+	\[
+		c_i(\lambda_i - \lambda_{m+1}) = 0
+	\]
+	and since $\lambda_i \neq \lambda_j$, $c_i = 0$ for $1 \le i \le m$. Thus, by our previous equality, $c_{m+1} = 0$.
+	\end{proof}
+\end{document}
