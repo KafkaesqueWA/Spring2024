@@ -1,0 +1,257 @@
+\documentclass[12pt]{article}
+\linespread{1.2}
+\usepackage[margin=1.7cm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{multicol}
+\usepackage{amsthm}
+\usepackage{amssymb,scrextend}
+\usepackage{graphicx,tikz}
+\newtheorem{dfn}{Definition}
+\renewcommand{\qed}{\hfill$\blacksquare$}
+\let\newproof\proof
+\renewenvironment{proof}{\vspace{1em}\begin{addmargin}[2em]{0em}\begin{newproof}}{\end{newproof}\end{addmargin}\qed}
+\newenvironment{theorem}[2][Theorem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1} \hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{example}[2][Example]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1} \hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{lemma}[2][Lemma]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1} \hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{exercise}[2][Exercise]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1} \hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{problem}[2][Problem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1} \hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{corollary}[2][Corollary]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1} \hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\usepackage{fancyhdr,enumitem,changepage,url}
+\pagestyle{fancy}
+\author{Warren Atkison}
+\date{\today}
+\setlength{\headheight}{15pt}
+\begin{document}
+\fancyhf{}
+\fancyhead[L]{Warren Atkison}
+\fancyhead[C]{Homework Set 5}
+\fancyhead[R]{\today}
+\fancyfoot[R]{\thepage}
+
+\begin{exercise}{3.1.8 (3pt)}
+	Use generating functions to show that every positive integer can be written in exactly one way as a sum of distinct powers of 2.
+\end{exercise}
+\begin{proof} First we can write any number as the following sum
+	\begin{align*}
+		x_1 + x_2 + x_3 + \ldots = n
+	\end{align*}
+	where $x_i$ is a distinct power of 2. A generating function for the above equation is as follows,
+	\[
+		(1 + x)(1 + x^2)(1 + x^{2^2})\cdots(1 + x^{2^k})\cdots
+	\]	
+	since we can either have a certain power of 2 in our sum or not. Consider
+	\begin{align*}
+		(1 - x)(1 + x)(1 + x^2)(1 + x^{2^2}) \cdots &= (1 - x^2)(1 + x^2)(1 + x^{2^2})\cdots \\
+							    &= (1 - x^{2^2})(1 + x^{2^2})(1 + x^{2^3})\cdots \\
+							    &~\vdots \\
+							    &= (1 - x^{2^m})(1 + x^{2^m})(x + 2^{m+1})\cdots \\
+							    &~\vdots \\
+							    &= 1
+	\end{align*}
+	This converges to 1 since every coefficent for $x^{2^{m-1}}$ becomes zero and we are left with $x^0$, in which case the coefficent is 1. We can then choose $m$ to be as large as we want so all coefficents of above $x^0$ go to zero. Then by dividing by $x - 1$ we get
+	\[
+		(1 + x)(1 + x^2)(1 + x^{2^2})\cdots = \frac{1}{1 - x} = 1 + x + x^2 + x^3 + \ldots
+	\]
+	so there is exavtly one way to write a sum of distinct powers of 2.
+\end{proof}
+\begin{exercise}{3.4.6 (3pt)}
+	Find the generating function for the solutions to $h_n = 9h_{n-1} - 26h_{n-2} + 24h_{n-3}, h_0 = 0, h_1 = 1, h_2 = -1$ and use it to find a formula for $h_n$.	
+\end{exercise}	
+Let
+\[
+	A(x) = h_0 + h_1x + h_2x^2 + \ldots.
+\]
+Then
+\begin{align*}
+	A(x) &= h_0 + h_1x + h_2x^2 + (9h_2 - 26h_1 + 24h_{0})x^3 + (9h_3 - 26h_2 + 24h_1)x^4 + \ldots \\
+	     &= h_0 + h_1x + h_2x^2 + (9h_2x^3 + 9h_3x^4 + \ldots) - (26h_1x^3 + 26h_2x^4 + \ldots) + (24h_0x^3 + 24h_1x^4 + \ldots) \\
+	     &= h_0 + h_1x + h_2x^2 + 9x(A(x) - h_0 - h_1x) - 26x^2(A(x) - h_0) + 24x^3A(x) \\
+	     &= A(x)(24x^3 - 26x^2 + 9x) + h_0(26x^2 - 9x + 1) - h_1(9x^2 - x) + h_2x^2
+\end{align*}
+\begin{align*}
+	A(x)(-24x^3 + 26x^2 - 9x + 1) &= x - 10x^2 \\
+	A(x) &= \frac{10x^2 - x}{24x^3 - 26x^2 + 9x - 1}
+\end{align*}
+Using a computer to find the zeros of the demoninator,
+\begin{align*}
+	A(x) &= \frac{10x^2 - x}{(4x - 1)(3x - 1)(2x - 1)} \\
+	     &= \frac{A}{4x - 1} + \frac{B}{3x - 1} + \frac{C}{2x - 1} \\
+\end{align*}
+Using the cover up method, we get
+\begin{align*}
+	A &= \frac{10(1/4)^2 - (1/4)}{(3(1/4) - 1)(2(1/4) - 1)} & B &= \frac{10(1/3)^2 - (1/3)}{(4(1/3) - 1)(2(1/3) - 1)} & C &= \frac{10(1/2)^2 - (1/2)}{(4(1/3) - 1)(3(1/2) - 1)} \\
+	  &= 3 & &= -7 & &= 4
+\end{align*}
+so
+\begin{align*}
+	A(x) &= \frac{3}{4x - 1} - \frac{7}{3x - 1} + \frac{4}{2x - 1} = -\frac{3}{1 - 4x} + \frac{7}{1 - 3x} - \frac{4}{1 - 2x}\\
+	     &= -3(1 + 4x + (4x)^2 + \ldots) + 7(1 + 3x + (3x)^2 + \ldots) -4(1 + 2x + (2x)^2 + \ldots)
+\end{align*}
+Using this, we can determine
+\[
+	h_n = -3\cdot4^n + 7\cdot3^n -4 \cdot 2^n
+\]
+\begin{exercise}{3.4.7 (2pt)}
+	Find the generating function for the solution to $h_n = 3h_{n-1} + 4h_{n-2}$, $h_0 = 0$, $h_1 = 1$, and use it to find a formula for $h_n$.
+\end{exercise}	
+let 
+\[
+	A(x) = h_0 + h_1x + h_2x^2 + \ldots
+\]
+Then
+\begin{align*}
+	A(x) &= h_0 + h_1x + (3h_1 + 4h_0)x^2 + (3h_2 + 4h_1)x^3 + \ldots \\
+	     &= h_0 + h_1x + (3h_1x^2 + 3h_2x^3 + \ldots) + (4h_0x^2 + 4h_1x^3 + \ldots) \\
+	     &= h_0 + h_1x + 3x(A(x) - h_0) + 4x^2A(x) \\
+	     &= A(x)(4x^2 + 3x) + h_0(-3x + 1) + h_1x \\
+	A(x)(-4x^2 -3x + 1) &= x \\
+	A(x) &= \frac{x}{-4x^2 - 3x + 1} = \frac{x}{(-4x + 1)(x + 1)} = \frac{A}{1 - 4x} + \frac{B}{x + 1}
+\end{align*}
+Using the cover up method, we get
+\begin{align*}
+	A &= \frac{(1/4)}{1 + (1/4)} = \frac{1}{5} & B &= \frac{(-1)}{-4(-1) + 1} = \frac{-1}{5}
+\end{align*}
+so
+\begin{align*}
+	A(x) &= \frac{1}{5(-4x + 1)} - \frac{1}{5(x + 1)} = \frac{1}{5(1 - 4x)} - \frac{1}{5(1 - (-x))} \\
+	     &= \frac{1}{5}(1 + 4x + (4x)^2 + \ldots) - \frac{1}{5}(1 - x + x^2 + (-x)^3 + \ldots)
+\end{align*}
+Using this we can determine
+\[
+	h_n = \frac{4^n - (-1)^n}{5}
+\]
+\begin{exercise}{3.4.5 (2pt)}
+	Find the generating function for the solution to $h_{n-1} + h_{n-2}$, $h_0 = 1$, $h_1 = 3$ and use it to find a formula for $h_n$.
+\end{exercise}	
+Let
+\[
+	A(x) = h_0 + h_1x + h_2x^2 + \ldots
+\]
+Then
+\begin{align*}
+	A(x) &= h_0 + h_1x + (h_1 + h_0)x^2 + (h_2 + h_1)x^3 + \ldots \\
+	     &= h_0 + h_1x + (h_1x^2 + h_2x^3 + \ldots) + (h_0x^2 + h_1x^3 + \ldots) \\
+	     &= h_0 + h_1x + x(A(x) - h_0) + x^2A(x) \\
+	     &= A(x)(x^2 + x) + h_0(1 - x) + h_1x \\
+	A(x)(-x^2 - x + 1) &= 1 + 2x \\
+	A(x) &= \dfrac{1 + 2x}{-x^2 - x + 1} = \dfrac{1 + 2x}{\left(-x + \dfrac{-1 - \sqrt{5}}{2}\right)\left(x - \dfrac{-1 + \sqrt{5}}{2}\right)}
+\end{align*}
+Let $a = \dfrac{-1 - \sqrt{5}}{2}$ and $b = \dfrac{-1 + \sqrt{5}}{2}$
+Then
+\[
+	A(x) = \frac{1 + 2x}{(-x + a)(x - b)} = \frac{A}{a - x} + \frac{B}{x - b}
+\]
+Using the cover up method we get
+\begin{align*}
+	A &= \frac{1 + 2a}{a - b} & B &= \frac{1 + 2b}{a - b}
+\end{align*}
+so
+\begin{align*}
+	A(x) = \frac{A}{a}\cdot\frac{1}{1 - x/a} + \frac{B}{b}\cdot\frac{1}{1 - x/b}
+\end{align*}
+Using this we can determine
+\[
+	h_n = \frac{A}{a}\left(\frac{1}{a}\right)^n + \frac{B}{b}\left(\frac{1}{b}\right)^n
+\]
+\begin{exercise}{3.4.3 (2pt)}
+	Find the generating function for the solutions to $h_n = 2h_{n-1} + 3^n$, $h_0 = 0$
+\end{exercise}	
+Let 
+\[
+	A(x) = h_0 + h_1x + h_2x^2 + \ldots
+\]
+Then
+\begin{align*}
+	A(x) &= h_0 + (2h_0 + 3^n)x + (2h_1 + 3^n)x^2 + \ldots \\
+	     &= h_0 + (2h_0x + 2h_1x^2 + \ldots) + 3^n(x + x^2 + \ldots) \\
+	     &= h_0 + 2xA(x) + \frac{3^nx}{1-x} \\
+	A(x)(1 - 2x) &= h_0 + \frac{3^nx}{1-x} \\
+	A(x) &= \frac{h_0}{1 - 2x} + \frac{3^nx}{(1-2x)(1-x)} \\
+	     &= \frac{3^nx}{(1-2x)(1-x)} = \frac{A}{1-2x} + \frac{B}{1-x}
+\end{align*}
+Using the cover up method
+\begin{align*}
+	A(x) &= \frac{(1/2)3^n}{1 - (1/2)} = 3^n & B(x) &= \frac{3^n}{1 - 2} = -3^n
+\end{align*}
+so
+\begin{align*}
+	A(x) = \frac{3^n}{1 - 2x} - \frac{3^n}{1 -x}
+\end{align*}
+Using this, we get
+\[
+	h_n = 3^n2^n - 3^n = 6^n - 3^n
+\]
+\begin{exercise}{3.4.8 (2pt)}
+	Find a recursion for the number of ways to place flags on an $n$ foot pole, where we have red flags that are 2 feet high, blue flags that are 1 foot high, and yellow flags that are 1 foot high; the heights of the flags must add up to $n$. Solve the recursion. 
+\end{exercise}	
+If we have a $1ft$ pole, then there are $2$ ways to do this, so $h_1 = 2$. For a $2ft$ Pole, there are $5$ ways to do this so $h_2 = 5$. From there we can either add a blue or yellow flag to a pole of lenght $n-1$ or we can add a red flag from a pole of lenght $n - 2$, so
+\[
+	h_n = 2h_{n-1} + h_{n-2}
+\]
+Let
+\[
+	A(x) = h_1 + h_2x + h_3x^2 + \ldots
+\]
+Then
+\begin{align*}
+	A(x) &= h_1 + h_2x + (2h_2 + h_1)x^2 + (2h_3 + h_2)x^3 + \ldots \\
+	     &= h_1 + h_2x + (2h_2x^2 + 2h_3x^2 + \ldots) + (h_1x^2 + h_2x^3 + \ldots) \\
+	     &= h_1 + h_2x + 2x(A(x) - h_1) + x^2A(x) \\
+	     &= A(x)(x^2 + 2x) h_1(-2x + 1) + h_2x \\
+	A(x)(-x^2 - 2x + 1) &= -4x + 2 + 5x \\
+	A(x) &= \frac{x + 2}{(-x^2 -2x +1)} = \frac{-x - 2}{x^2 + 2x - 1} = \frac{-x - 2}{(x + 1 + \sqrt{2})(x + 1 - \sqrt{2})}
+\end{align*}
+Let $a = -1 - \sqrt{2}$ and $b = -1 + \sqrt{2}$. Then
+\begin{align*}
+	A(x) = \frac{-x -2}{(x - a)(x - b)} = \frac{x + 2}{(a - x)(b - x)} = \frac{A}{a - x} + \frac{B}{a - x}
+\end{align*}
+Using the cover up method
+\begin{align*}
+	A &= \frac{a + 2}{b - a} & B &= \frac{b + 2}{a - b}
+\end{align*}
+so
+\begin{align*}
+	A(x) = \frac{A}{a}\cdot\frac{1}{1 - x/a} + \frac{B}{b}\cdot\frac{1}{1 - x/b}
+\end{align*}
+Using this we can determine
+\[
+	h_n = \frac{A}{a}\left(\frac{1}{a}\right)^n + \frac{B}{b}\left(\frac{1}{b}\right)^n
+\]
+\begin{exercise}{3.4.2 (1pt)}
+	Find the generating function for the solutions to $h_n = 3h_{n-1} + 4h_{n-2}$, $h_0 = h_1 = 1$. and use it to find a formula for $h_n$.
+\end{exercise}	
+Let 
+\[
+	A(x) = h_0  + h_1x + h_2x^2 + \ldots
+\]
+Then
+\begin{align*}
+	A(x) &= h_0 + h_1x + (3h_1 + 4h_0)x^2 + (3h_2 + 4h_1)x^3 + \ldots \\
+	     &= h_0 + h_1x + (3h_1x^2 + 3h_2x^3 + \ldots) + (4h_0x^2 + 4h_1x^3 + \ldots) \\
+	     &= h_0 + h_1x + 3x(A(x) - h_0) + 4x^2A(x) \\
+	     &= A(x)(4x^2 + 3x) h_0(-3x + 1) + h_1x \\
+	A(x)(-4x^2 -3x + 1) &= -3x + 1 + x \\
+	A(x) &= \frac{-2x + 1}{-4x^2 -3x + 1} = \frac{2x - 1}{(4x -1)(x + 1)} = \frac{A}{4x - 1} + \frac{B}{x + 1}
+\end{align*}
+Using the cover up method
+\begin{align*}
+	A &= \frac{2(1/4) - 1}{(1/4) + 1} = \frac{-2}{5} & B &= \frac{-2 - 1}{-4 - 1} = \frac{3}{5}
+\end{align*}
+so
+\begin{align*}
+	A(x) &= \frac{3}{5(x+1)} - \frac{2}{5(4x - 1)} = \frac{3}{5(1 - (-x))} + \frac{2}{5(1 - 4x)} \\
+	     &= \frac{3}{5}(1 - x + x^2 +(-x)^3 + \ldots) + \frac{2}{5}(1 + 4x + (4x)^2 + \ldots)
+\end{align*}
+Using this
+\[
+	h_n = \frac{3}{5}(-1)^n + \frac{2}{5}4^n
+\]
+\end{document}
