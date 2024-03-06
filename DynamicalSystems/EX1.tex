@@ -1,0 +1,172 @@
+\documentclass[12pt]{article}
+\linespread{1.2}
+\usepackage[margin=2cm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{multicol}
+\usepackage{amsthm}
+\usepackage{amssymb,scrextend}
+\usepackage{graphicx,tikz,pgfplots}
+\pgfplotsset{compat=1.18}
+\usetikzlibrary{arrows}
+\newtheorem{dfn}{Definition}
+\renewcommand{\qed}{\hfill$\blacksquare$}
+\let\newproof\proof
+\renewenvironment{proof}{\vspace{1em}\begin{addmargin}[2em]{0em}\begin{newproof}}{\end{newproof}\end{addmargin}\qed}
+\newenvironment{theorem}[2][Theorem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1} \hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{example}[2][Example]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1} \hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{lemma}[2][Lemma]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1} \hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{exercise}[2][Exercise]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1} \hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{problem}[2][Problem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1} \hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{corollary}[2][Corollary]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1} \hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\usepackage{fancyhdr,enumitem,changepage,url}
+\pagestyle{fancy}
+\author{Warren Atkison}
+\date{\today}
+\setlength{\headheight}{15pt}
+\begin{document}
+\fancyhf{}
+\fancyhead[L]{Warren Atkison}
+\fancyhead[C]{Exam 1}
+\fancyhead[R]{\today}
+\fancyfoot[R]{\thepage}
+
+\begin{problem}{1}
+
+\end{problem}
+\begin{itemize}
+	\item[(a)] The set of $\{f^{i}(x) ~|~ i \ge 0\}$
+	\item[(b)] The orbit \textit{begins} to repeat itself after $n$ iterations, that is $x_n = x_0$ and $x_n \neq x_i$ for all $0 \le i \le n - 1$
+	\item[(c)] $|f'(x_0) | < 1$ 
+	\item[(d)] Every point in $B$ is either dense in $A$ or a limit of $A$.
+\end{itemize}	
+\begin{problem}{2}
+	
+\end{problem}
+\begin{itemize}
+	\item[(a)]
+		\[
+			11111\ldots - 001111\ldots = 110000\ldots
+		\]
+	\item[(b)] We took every string of length $n$, and appended it to our point in $\Sigma$.
+		\[
+			0~1~00~01~10~11~000~001~010~011~100~101~110~111~0000\ldots	
+		\]
+\end{itemize}
+\begin{problem}{3}
+	
+\end{problem}
+\begin{itemize}
+	\item[(a)] True
+		\begin{align*}
+			s &= 0.0222\ldots \\
+			3s &= 0.2222\ldots \\
+			2s &= 0.2 \\
+			s &= 0.1
+		\end{align*}
+	\item[(b)] True, for example the rationals in $[0,1]$ have length 0 and are dense in the real interval $[0,1]$. 
+	\item[(c)] False, $1/9 \le 1/6 \le 2/9$.
+	\item[(d)] False, $p_{+}$ and $p_{-}$ are fixed.
+\end{itemize}
+\begin{problem}{4}
+
+\end{problem}
+\begin{itemize}
+	\item[(a)]
+		\begin{itemize}
+			\item Periodic points are dense in $\Lambda$
+			\item All orbits are transitive
+			\item The system is sensitive to initial conditions (implied by the first 2).
+		\end{itemize}
+	\item[(b)]
+		\begin{itemize}
+			\item There is only one periodic point at $x = 0$, which is not dense in $\lambda$.
+			\item $x = 0$ is an attracting fixed point, so orbits aren't transitive. For example, the orbit of $x_0 = 1$ will not visit the neighborhood of anything greater than 1.
+			\item Every point goes to 0, so the system is not sensitive under initial conditions.
+		\end{itemize}
+\end{itemize}
+\begin{problem}{5}
+	
+\end{problem}
+\begin{align*}
+	x = \frac{1}{2}(x^3 + x) \implies 2x = x^3 + x \implies x^3 - x = 0 \implies x(x^2 - 1) = 0
+\end{align*}
+So $x = 0,1,-1$ are our fixed points.
+\[
+	f'(x) = \frac{3}{2}x^2 + \frac{1}{2}
+\]
+$|f'(0)| = 1/2$ so $x = 0$ is attracting, $|f'(1)| = 2$ so $x = 1$ is repelling, and $|f'(-1)| = 2$ so $x = -1$ is also repelling.
+\begin{problem}{6}
+	
+\end{problem}
+$f(0) = 1,~f(1) = 2,~= f(2) = 0$, so the orbit of 0 is a period 3 orbit.
+\[
+	f'(x) = -3x + 5/2
+\]
+\begin{align*}
+	|f^3(0)| = |f'(0)\cdot f'(1)\cdot f'(2)| = |(5/2)(-1/2)(-7/2)| = |35/2| > 1
+\end{align*}
+so the period 3 orbit of $x = 0$ is repelling.
+\begin{problem}{7}
+	
+\end{problem}
+\[
+	h \circ f = g \circ h
+\]
+Let $h(x) = cx$, then
+\begin{align*}
+	h(f(x)) &= cx^3 & g(h(x)) = \frac{c^3}{4}x^3
+\end{align*}
+\begin{align*}
+	4c = c^3 \implies c^3 - 4c = 0 \implies c(c^2 - 4) = 0
+\end{align*}
+so $c = 0,2,-2$. Let $c = 2$. Then
+\[
+	h \circ f = 2x^3 = \frac{2^3}{4}x^3 = g \circ h
+\]
+\begin{problem}{8}
+	This is a saddle node bifurcation, since a fixed point pops into existence and then there are 2 fixed points from that point on. A graph of the diagram looks as follows.
+	\begin{center}
+		\begin{tikzpicture}[scale=1.5]
+  % Axes
+  \draw[->] (-2,0) -- (2,0) node[right] {$\lambda$};
+  \draw[->] (0,-2) -- (0,2) node[above] {$x$};
+  
+  % Parabola
+  \draw[domain=-1.5:1.5,smooth,variable=\y,blue] plot ({- \y*\y}, {\y});
+  
+  % Label
+\end{tikzpicture}
+	\end{center}
+\end{problem}
+\begin{problem}{9}
+	There is a fixed point at $x = 0$, and 2 period 2 points at $x = \pm1$. When $x_0 < -1$, the orbit diverges to $-\infty$. When $-1 < x_0 < 1$ and $x_0 \neq 0$, the orbit converges to 0. When $x > 1$, the orbit diverges to $\infty$. 
+\begin{center}
+				\begin{tikzpicture}[scale = 2]
+				\draw[latex-] (-2.5,0) -- (2.5,0) ;
+				\draw[-latex] (-2.5,0) -- (2.5,0) ;
+				\foreach \x in  {-2,-1,0,1,2}
+				\draw[shift={(\x,0)},color=black] (0pt,3pt) -- (0pt,-3pt);
+				\foreach \x in {-2,-1,0,1,2}
+				\draw[shift={(\x,0)},color=black] (0pt,0pt) -- (0pt,-3pt) node[below] 
+				{$\x$};
+				\draw[*-] (-0.04,0) -- (1,0);
+				\draw[*-] (-1.04,0) -- (1,0);
+				\draw[*-] (1.04,0) -- (-1,0);
+				\draw[latex-] (0.5,0) -- (1,0);
+				\draw[latex-] (1.75,0) -- (-1,0);
+				\draw[latex-] (-0.5,0) -- (-2,0);
+				\draw[latex-] (-1.75,0) -- (1,0);
+
+				
+			\end{tikzpicture}
+		\end{center}
+\end{problem}
+\end{document}

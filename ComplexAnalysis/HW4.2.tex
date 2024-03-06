@@ -1,0 +1,90 @@
+\documentclass[12pt]{article}
+\linespread{1.2}
+\usepackage[margin=2cm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{multicol}
+\usepackage{amsthm}
+\usepackage{amssymb,scrextend}
+\usepackage{graphicx,tikz}
+\usepackage{esint}
+\newtheorem{dfn}{Definition}
+\renewcommand{\qed}{\hfill$\blacksquare$}
+\let\newproof\proof
+\renewenvironment{proof}{\vspace{1em}\begin{addmargin}[2em]{0em}\begin{newproof}}{\end{newproof}\end{addmargin}\qed}
+\newenvironment{theorem}[2][Theorem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1} \hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{example}[2][Example]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1} \hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{lemma}[2][Lemma]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1} \hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{exercise}[2][Exercise]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1} \hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{problem}[2][Problem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1} \hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{corollary}[2][Corollary]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1} \hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\usepackage{fancyhdr,enumitem,changepage,url}
+\pagestyle{fancy}
+\author{Warren Atkison}
+\date{\today}
+\setlength{\headheight}{15pt}
+\begin{document}
+\fancyhf{}
+\fancyhead[L]{Warren Atkison}
+\fancyhead[C]{Homework Set 4.2}
+\fancyhead[R]{\today}
+\fancyfoot[R]{\thepage}
+
+\begin{exercise}{6c}
+	Compute $\int_{\Gamma}\bar{z}dz$, where $\Gamma$ is the circle $|z| = 2$ traversed three times clockwise.
+\end{exercise}
+We can paramatize $\Gamma$ as follows,
+\[
+	z(t) = -2\cos(t) + 2i\sin(t) \text{ for } 0 \le t \le 6\pi.
+\]
+Then
+\begin{align*}
+	\oint_{\Gamma} \bar{z}dz &= \int_{0}^{6\pi} \overline{(-2\cos(t) + i\sin(t))}(2\sin(t) + 2i\cos(t))dt \\
+				&= \int_{0}^{6\pi} -2(\cos(t) + i\sin(t))2i(\cos(t) - i\sin(t)) \\
+				&= -4i\int_{0}^{6\pi} (\cos^2(t) + \sin^2(t)) dt = -4i\int_{0}^{6\pi} dt = -24i\pi
+\end{align*}
+\begin{exercise}{8}
+	Let $C$ be the perimeter of the square with vertices at the points $z = 0$, $z = 1$, $z = 1 + i$, and $z = i$ traversed once in that order. Show that
+	\[
+		\oint_{C} e^zdz = 0
+	\]
+\end{exercise}
+\begin{proof}
+	We can split $C$ into 4 smooth curves as follows,
+	\begin{align*}
+		&c_1: \quad z_1(t) = t & 0 \le t \le 1 \\
+		&c_2: \quad z_2(t) = 1 + it & 0 \le t \le 1 \\
+		&c_3: \quad z_3(t) = 1 - t + i & 0 \le t \le 1 \\
+		&c_4: \quad z_4(t) = i(1 - t) & 0 \le t \le 1
+	\end{align*}
+	Then,
+	\begin{align*}
+		\oint_{C}e^zdz &= \int_{c_1}e^zdz + \int_{c_2}e^zdz + \int_{c_3}e^zdz + \int_{c_4}e^zdz \\
+			       &= \int_{0}^{1} e^tdt + \int_{0}^{1} ie^{1 + it}dt + \int_{0}^{1} -e^{1 - t + i}dt + \int_{0}^{1} -ie^{i(1 - t)}dt \\
+			       &= \left[e^t\right]_{0}^{1} + ie\left[\frac{1}{i}e^{it}\right]_{0}^{1} - e^{1+i}\left[-e^{-t}\right]_{0}^{1} - ie^{i}\left[-\frac{1}{i}e^{-it}\right]_{0}^{1} \\
+			       &= (e - 1) + ie\left(\frac{e^{i} - 1}{i}\right) - e^{i+1}\left(\frac{-1}{e} + 1\right) - ie^{i}\left(\frac{-1}{ie^{i}} + \frac{1}{i}\right) \\
+			       &= e - 1 + e^{i+1} - e + e^i - e^{i+1} + 1 - e^{i} \\
+			       &= 0
+	\end{align*}
+\end{proof}
+\begin{exercise}{10}
+	Compute $\int_{C} \bar{z}^2 dz$ along the perimeter of the square in Ex. 8.
+\end{exercise}	
+We can use the paramaterization of $C$ as given in Ex. 8. So,
+\begin{align*}
+	\oint_{C}\bar{z}^2 dz &= \int_{c_1} \bar{z}^2 dz + \int_{c_2} \bar{z}^2 dz + \int_{c_3} \bar{z}^2dz + \int_{c_4} \bar{z}^2dz \\
+			      &= \int_{0}^{1} t^2 dt + \int_{0}^{1} i(1 - it)^2 dt + \int_{0}^{1} -(1 - t - i)^2 dt + \int_{0}^{1} -i(i(t - 1))^2dt \\
+			      &= \left[\frac{t^3}{3}\right]_{0}^{1} + i\int_{0}^{1} (1 -2it -t^2)dt - \int_{0}^{1} (t^2 - (2 - 2i)t - 2i)dt -i\int_{0}^{1} -(t^2 - 2t + 1)dt \\
+			      &= \frac{1}{3} + i\left[t - it^2 - \frac{t^3}{3}\right]_{0}^{1} - \left[\frac{t^3}{3} - (1 -i)t^2 - 2it\right] + i\left[\frac{t^3}{3} - t^2 + t\right]_{0}^{1} \\
+			      &= \frac{1}{3} + i\left(1 - i - \frac{1}{3}\right) - \left(\frac{1}{3} - (1 - i) - 2i\right) + i\left(\frac{1}{3} - 1 + 1\right) \\
+			      &= \frac{1}{3} + i + 1 - \frac{i}{3} - \frac{1}{3} + 1 - i + 2i + \frac{i}{3} \\
+			      &= 2 + 2i
+\end{align*}
+\end{document}
