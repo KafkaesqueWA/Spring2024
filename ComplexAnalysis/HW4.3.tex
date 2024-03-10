@@ -1,0 +1,105 @@
+\documentclass[12pt]{article}
+\linespread{1.2}
+\usepackage[margin=2cm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{multicol}
+\usepackage{amsthm}
+\usepackage{amssymb,scrextend}
+\usepackage{graphicx,tikz}
+\newtheorem{dfn}{Definition}
+\renewcommand{\qed}{\hfill$\blacksquare$}
+\let\newproof\proof
+\renewenvironment{proof}{\vspace{1em}\begin{addmargin}[2em]{0em}\begin{newproof}}{\end{newproof}\end{addmargin}\qed}
+\newenvironment{theorem}[2][Theorem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1} \hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{example}[2][Example]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1} \hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{lemma}[2][Lemma]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1} \hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{exercise}[2][Exercise]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1} \hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{problem}[2][Problem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1} \hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{corollary}[2][Corollary]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1} \hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\usepackage{fancyhdr,enumitem,changepage,url}
+\pagestyle{fancy}
+\author{Warren Atkison}
+\date{\today}
+\setlength{\headheight}{15pt}
+\begin{document}
+\fancyhf{}
+\fancyhead[L]{Warren Atkison}
+\fancyhead[C]{Homework Set 4.3}
+\fancyhead[R]{\today}
+\fancyfoot[R]{\thepage}
+
+\begin{exercise}{1}
+	Calculate each of the following integrals along the inducated contours. Observe that a standard table of integrals can be used. Explain why.
+\end{exercise}
+Because the following functions are continuous in $\mathbb{C}$ have antiderivatives in $\mathbb{C}$, then for any contour in $\mathbb{C}$
+\[
+	\int_{\Gamma}f(z)dz = F(z_T) - F(z_1)
+\]
+where $z_1$ is the initail point of a contour and $z_T$ is the terminal point of a contour.
+\begin{itemize}
+	\item[(a)] $\int_{\Gamma} (3z^2 - 5z + i)dz$ along the line segment from $z = i$ to $z = 1$.
+		\begin{align*}
+			\int_{\Gamma} (3z^2 - 5z + i) &= \left[z^3 - \frac{5}{2}z^2 + iz\right]_{i}^{1} \\
+						      &= \left(1 - \frac{5}{2} + i\right) - \left(-i + \frac{5}{2} - 1\right) \\
+						      &= -3 + 2i 
+		\end{align*}
+	\item[(e)] $\int_{\Gamma} \sin^2 z\cos(z)dz$ along the contour in Fig. 4.24. \\
+		Let $u = \sin(z)$, then $du = \cos(z)dz$.
+		\begin{align*}
+			\int_{\Gamma} \sin^2(z)\cos(z)dz &= \int_{\Gamma} u^2du \\
+							 &= \left[\frac{u^3}{3}\right]_{\sin(\pi)}^{\sin(i)} \\
+							 &= \frac{\sin^3(i)}{3} \\
+							 &= -\frac{i}{3}\sinh^3(1)
+		\end{align*}
+\end{itemize}
+\begin{exercise}{7}
+	Show that if $C$ is a positevely oriented circle and $z_0$ lies outside $C$, then
+	\[
+		\int_{C}\frac{dz}{z - z_0} = 0
+	\]
+\end{exercise}	
+\begin{proof}
+	Let $s$ be the line from $z_0$ passing through center of $C$ and extending onward. Since $z_0$ lies outside of $C$, this line always exists and has a direction. Now let $-s$ be the line from $z_0$ in the opposite direction of $s$ extending forever. Then $D = \mathbb{C} - (-s)$ forms a domain in which $\dfrac{1}{z - z_0}$ is continuous and has an antiderivative, namely $\log(z - z_0)$ with branch cut $-s$. Also, clearly $C \in D$, so by Theorem 7 the integral of $C$.
+\end{proof}
+\begin{center}
+	\begin{tikzpicture}
+
+% Axis
+\draw[->] (-4,0) -- (4,0) node[right] {$\text{Re}$};
+\draw[->] (0,-3) -- (0,4) node[above] {$\text{Im}$};
+
+% Circle
+\draw[blue] (-3,2) circle (1);
+
+% Center
+\filldraw[black] (-3,2) circle (2pt) node[anchor=south east] {$C$};
+\filldraw[black] (2,-1) circle (2pt) node[anchor=south east] {$z_0$};
+\draw[red, ->] (2,-1) -- (5.333,-3);
+
+\end{tikzpicture}
+\end{center}
+\begin{exercise}{12}
+	Let $f$ be an analytic function with a continuous derivative satisfying $|f'(z)| \le M$ for all $z$ in the disk $D: |z| <1$. Show that
+	\[
+		|f(z_2) - f(z_1)| \le M|z_2 - z_1| \quad (z_1,z_2 \in D).
+	\]
+\end{exercise}	
+\begin{proof}
+	Let $\Gamma$ be the sine segment from $z_1$ to $z_2$, then
+	\begin{align*}
+		|f(z_2) - f(z_1)| &= \left|\int_{\Gamma} f'(z) dz \right| \\
+				  &\le \int_{\Gamma} |f'(z)| dz \\
+				  &\le  \int_{\Gamma} M dz \\
+				  &= M(z_2 - z_1) \\
+				  &\le M|z_2 - z_1|
+	\end{align*}
+\end{proof}
+\end{document}
