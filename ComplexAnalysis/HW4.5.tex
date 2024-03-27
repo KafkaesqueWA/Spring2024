@@ -1,0 +1,86 @@
+\documentclass[12pt]{article}
+\linespread{1.2}
+\usepackage[margin=2cm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{multicol}
+\usepackage{amsthm}
+\usepackage{amssymb,scrextend}
+\usepackage{graphicx,tikz}
+\usepackage{esint}
+\newtheorem{dfn}{Definition}
+\renewcommand{\qed}{\hfill$\blacksquare$}
+\let\newproof\proof
+\renewenvironment{proof}{\vspace{1em}\begin{addmargin}[2em]{0em}\begin{newproof}}{\end{newproof}\end{addmargin}\qed}
+\newenvironment{theorem}[2][Theorem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1} \hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{example}[2][Example]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1} \hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{lemma}[2][Lemma]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1} \hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{exercise}[2][Exercise]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1} \hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{problem}[2][Problem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1} \hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{corollary}[2][Corollary]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1} \hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\usepackage{fancyhdr,enumitem,changepage,url}
+\pagestyle{fancy}
+\author{Warren Atkison}
+\date{\today}
+\setlength{\headheight}{15pt}
+\begin{document}
+\fancyhf{}
+\fancyhead[L]{Warren Atkison}
+\fancyhead[C]{Homework Set 4.5}
+\fancyhead[R]{\today}
+\fancyfoot[R]{\thepage}
+
+\begin{exercise}{3d}
+	Let $C$ be the circle $|z| = 2$ traversed once in the positive sense. Compute the following integral.
+	\[
+		\int_{C} \frac{5z^2 + 2z + 1}{(z - i)^3}dz
+	\]
+\end{exercise}
+Observe that $f(z) = 5z^2 + 2z + 1$ is analytic inside and on $C$. Therefore from Eq. (14) with $z_0 = i$, which is inside $C$, and $m = 3$ we have
+\begin{align*}
+	\int_{C} \frac{5z^2 + 2z + 1}{(z - i)^3}dz &= \frac{2\pi if''(i)}{2!} = 10\pi i
+\end{align*}
+\begin{exercise}{6}
+	Evaluate
+	\[
+		\int_{\Gamma} \frac{e^{iz}}{\left(z^2 + 1\right)^2}dz
+	\]
+	where $\Gamma$ is the circle $|z| = 3$ traversed once counterclockwise.
+\end{exercise}
+Observe that
+\[
+	\left(z^2 + 1\right)^2 = \left[(z + i)(z - i)\right]^2 = (z + i)^2(z - i)^2
+\]
+and
+\[
+	\frac{1}{(z+i)^2(z-i)^2} = \frac{A}{z + i} + \frac{B}{(z + i)^2} + \frac{C}{z - i} + \frac{D}{(z - i)^2}.
+\]
+Since the coeffecient for $z^3$ in the numerator is 0, we know that $A + C = 0$. Also
+\begin{align*}
+	A &= \lim_{z \to -i} \frac{d}{dz}\left(\frac{1}{(z - i)^2}\right) = \lim_{z \to -i} \frac{-2(z - i)}{(z - i)^4} = \frac{4i}{(-2i)^4} = \frac{i}{4} \\
+	\implies C &= -\frac{i}{4}
+\end{align*}
+and to find $B$ and $D$ we can use the cover up method.
+\begin{align*}
+	B &= \frac{1}{(-2i)^2} = -\frac{1}{4} & D &= \frac{1}{(2i)^2} = -\frac{1}{4}
+\end{align*}
+Then
+\begin{align*}
+	\int_{\Gamma} \frac{e^{iz}}{\left(z^2 + 1\right)^2}dz &= \int_{\Gamma} e^{iz}\left(\frac{1}{(z + i)^2(z - i)^2}\right)dz \\
+							      &= \int_{\Gamma} \left(\frac{ie^{iz}}{4(z + i)} - \frac{e^{iz}}{4(z + i)^2} - \frac{ie^{iz}}{4(z - i)} - \frac{e^{iz}}{4(z - i)^2}\right)dz.
+\end{align*}
+Let $C_0$ be a small circle around $z = -i$ and $C_1$ be a small circle around $z = i$. Since our function we are integrating is analytic everywhere except for these 2 points and both points are in $\Gamma$, we can rewrite our integral as the sum of two integrals around $C_0$ and $C_1$ going counterclockwise. We can then use Eq. (14) with the appropriate $z_0$ and $m$ for each integral
+\begin{align*}
+	&= \ointctrclockwise_{C_0} \left(\frac{ie^{iz}}{4(z + i)} - \frac{e^{iz}}{4(z + i)^2}\right)dz - \ointctrclockwise_{C_1} \left(\frac{ie^{iz}}{4(z - i)} + \frac{e^{iz}}{4(z - i)^2}\right)dz \\
+	&= \frac{1}{4}[2\pi i(ie^{-i^2}) - 2\pi i(ie^{-i^2}) - 2\pi i(ie^{i^2}) - 2\pi i (ie^{i^2})] \\
+	&= -\pi i^2 e^{i^2} \\
+	&= \frac{\pi}{e}
+\end{align*}
+\end{document}
