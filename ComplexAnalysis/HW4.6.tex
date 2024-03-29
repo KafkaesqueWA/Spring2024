@@ -1,0 +1,75 @@
+\documentclass[12pt]{article}
+\linespread{1.2}
+\usepackage[margin=2cm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{multicol}
+\usepackage{amsthm}
+\usepackage{amssymb,scrextend}
+\usepackage{graphicx,tikz}
+\newtheorem{dfn}{Definition}
+\renewcommand{\qed}{\hfill$\blacksquare$}
+\let\newproof\proof
+\renewenvironment{proof}{\vspace{1em}\begin{addmargin}[2em]{0em}\begin{newproof}}{\end{newproof}\end{addmargin}\qed}
+\newenvironment{theorem}[2][Theorem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1} \hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{example}[2][Example]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1} \hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{lemma}[2][Lemma]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1} \hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{exercise}[2][Exercise]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1} \hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{problem}[2][Problem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1} \hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{corollary}[2][Corollary]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1} \hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\usepackage{fancyhdr,enumitem,changepage,url}
+\pagestyle{fancy}
+\author{Warren Atkison}
+\date{\today}
+\setlength{\headheight}{15pt}
+\begin{document}
+\fancyhf{}
+\fancyhead[L]{Warren Atkison}
+\fancyhead[C]{Homework Set 4.6}
+\fancyhead[R]{\today}
+\fancyfoot[R]{\thepage}
+
+\begin{exercise}{17}
+	Find $\text{max}_{|z| \le 1}$ $|(z-1)(z+1/2)|$.
+\end{exercise}
+By the triangle inequality we get
+\begin{align*}
+	\left|(z-1)\left(z+1/2\right)\right| &= \left|z^2 - z/2 - 1/2\right| \\
+					     &\le  |z^2| + |z/2| + |1/2| \le 2.
+\end{align*}
+However, because we are taking the modulus of a product of analytic functions on the disc $|z| = 1$, the maximun must occur on the boundary of the disc, so let $z = e^{it}$, $0 \le t \le 2\pi$. Then
+\begin{align*}
+	\left|z^2 - z/2 - 1/2\right|^2 &= \left(e^{i2t} - \frac{e^{it}}{2} - \frac{1}{2}\right)\left(e^{-i2t} - \frac{e^{-it}}{2} - \frac{1}{2} \right) \\
+				       &= 1 - \frac{e^{it}}{2} - \frac{e^{2it}}{2} - \frac{e^{-it}}{2} + \frac{1}{4} + \frac{e^{it}}{4} - \frac{e^{-2it}}{2} + \frac{e^{-it}}{4} + \frac{1}{4} \\
+				       &= \frac{3}{2} - \frac{e^{it} + e^{-it}}{2} - \frac{e^{2it} + e^{-2it}}{2} + \frac{e^{it}+e^{-it}}{4} \\
+				       &= \frac{3}{2} - \cos(t) - \cos(2t) + \cos(t)/2 \\
+				       &= \frac{3}{2} - \cos(t)/2 - \cos(2t).
+\end{align*}
+We shall use calculus to find the maximun of this function. First we find the critical points.
+\begin{align*}
+	\frac{d}{dt}\left(\frac{3}{2} - \cos(t)/2 - \cos(2t)\right) = \sin(t)/2 + 2\sin(2t) &= 0 \\
+	\sin(t)(1/2 + 4\cos(t)) &= 0 \\
+	\sin(t) &= 0 & 4\cos(t) &= -1/2 \\
+	t &= \arcsin(0) & \cos(t) &= -1/8 \\
+	t &= 0,\pi,2\pi & t &= \arccos(-1/8)
+\end{align*}
+To determine if a critical point is a max or min, we can check the sign of the second derivative at that point.
+\begin{align*}
+	\frac{d^2}{dt^2} \left(\sin(t)/2 + 2\sin(2t)\right) &= \cos(t)/2 + 4\cos(2t) \\
+	\cos(\arcsin(0))/2 + 4\cos(2\arcsin(0)) &= 9/2 > 0 \\
+	\cos(\arccos(-1/8)) + 4\cos(2\arccos(-1/8)) &= -1/8 - 4c < 0
+\end{align*}
+when $t = \arcsin(0)$, the second derivative is positive so we have a minimum, and when $t = \arccos(-1/8)$ the second derivative is negative so we have a maximun. Thus our max is
+\[
+	\sqrt{\dfrac{3}{2} + \frac{1}{16} - \cos(2\arccos(-1/8))} \approx 1.591
+\]
+and occurs at $z = e^{i\arccos(-1/8)}$ for $0 \le \arccos(-1/8) \le 2\pi$ of which there are 2 values: $$z \approx e^{i1.696},~e^{i4.587}$$
+
+\end{document}

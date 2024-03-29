@@ -1,0 +1,115 @@
+\documentclass[12pt]{article}
+\linespread{1.2}
+\usepackage[margin=2cm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{multicol}
+\usepackage{amsthm}
+\usepackage{amssymb,scrextend}
+\usepackage{graphicx,tikz}
+\newtheorem{dfn}{Definition}
+\renewcommand{\qed}{\hfill$\blacksquare$}
+\let\newproof\proof
+\renewenvironment{proof}{\vspace{1em}\begin{addmargin}[2em]{0em}\begin{newproof}}{\end{newproof}\end{addmargin}\qed}
+\newenvironment{theorem}[2][Theorem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1} \hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{example}[2][Example]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1} \hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{lemma}[2][Lemma]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1} \hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{exercise}[2][Exercise]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1} \hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{problem}[2][Problem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1} \hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{corollary}[2][Corollary]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1} \hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\usepackage{fancyhdr,enumitem,changepage,url}
+\pagestyle{fancy}
+\author{Warren Atkison}
+\date{\today}
+\setlength{\headheight}{15pt}
+\begin{document}
+\fancyhf{}
+\fancyhead[L]{Warren Atkison}
+\fancyhead[C]{Special Assignment 4}
+\fancyhead[R]{\today}
+\fancyfoot[R]{\thepage}
+
+\begin{problem}{1}
+	This problem refers to Example 4 in Section 4.2. Explain why
+	\[
+		\int_{\Gamma} \bar{z}^2dz = \int_{\Gamma}(z^2 - 4xyi)dz = -4i\int_{\Gamma}xydz
+	\]
+	and evaluate the last integral using the parametrization given by the author.
+\end{problem}
+Let $z = x + iy$
+\begin{align*}
+	\int_{\Gamma} \bar{z}^2dz &= \int_{\Gamma} (x - iy)^2dz \\
+				  &= \int_{\Gamma} (x^2 - y^2 - 2xyi)dz \\
+				  &= \int_{\Gamma} [(x + iy)^2 - 4xyi]dz \\
+				  &= \int_{\Gamma} (z^2 - 4xyi)dz \\
+				  &= \int_{\Gamma} z^2dz -4i\int_{\Gamma} xydz
+\end{align*}
+Since $z^2$ is continous on $\mathbb{C}$, has an antiderivative throughout $\mathbb{C}$, and $\Gamma$ is a closed loop, by corollary 2 of Theorem 6 we know the our first integral is 0, leaving us with the desired result.
+\[
+	= -4i\int_{\Gamma} xydz
+\]
+The given parametrization for the 3 line segments of $\Gamma$ are
+\begin{align*}
+	\gamma_1: \quad z_1(t) &= x_1(t) + iy_1(t) = t & &(0 \le t \le 2), \\
+	\gamma_2: \quad z_2(t) &= x_2(t) + iy_2(t) = 2 + ti & &(0 \le t \le 2), \\
+	\gamma_3: \quad z_3(t) &= x_3(t) + iy_3(t) = -t(1 + i) & &(-2 \le t \le 0),
+\end{align*}
+so we have
+\begin{align*}
+	-4i\int_{\Gamma}xydz &= -4i\left(\int_{\gamma_1} xydz + \int_{\gamma_2} xydz + \int_{\gamma_3} xydz\right) \\
+			     &= -4i\left(\int_0^2 x_1(t)y_1(t)z_1'(t)dt + \int_0^2 x_2(t)y_2(t)z_2'(t)dt + \int_{-2}^0 x_3(t)y_3(t)z_3'(t)dt\right) \\
+			     &= -4i\left(0 + \int_0^2 2tidt + \int_{-2}^0 (-t)^2(-1 - i)dt\right) \\
+			     &= -4i\left(2i\int_0^2 tdt - (1 + i)\int_{-2}^0 t^2dt\right) \\
+			     &= -4i\left(2i\left[\frac{t^2}{2}\right]_0^2 - (1 + i)\left[\frac{t^3}{3}\right]_{-2}^0\right) \\
+			     &= -4i\left(4i - (1 + i)\cdot\frac{8}{3}\right) \\
+			     &= 16 + \frac{32i}{3} - \frac{32}{3} \\
+			     &= \frac{16}{3} + \frac{32i}{3}
+\end{align*}
+\begin{problem}{2}
+	Using the result from Exercise 6 in Section 4.3, we know that $\int_{C} \dfrac{1}{z - 1}dz = 2\pi i$, where $C$ is the circle $|z| = 2$ traversed once in the positive direction. By considering real and imaginary parts, use this result to evaluate
+	\[
+		\int_0^{2\pi} \frac{2 - \cos t}{5 - 4\cos t}dt
+	\]
+\end{problem}
+Let $z = 2e^{it}$ for $0 \le t \le 2\pi$, then $dz = 2ie^{it}dt$ and
+\begin{align*}
+	\int_{C} \frac{1}{z - 1}dz &= \int_{0}^{2\pi} \frac{2ie^{it}}{2e^{it} - 1}dt \\
+				   &= \int_0^{2\pi} \frac{2ie^{it}}{2e^{it} - 1} \cdot \frac{2e^{-it} - 1}{2e^{-it} - 1}dt \\
+				   &= \int_0^{2\pi} \frac{4i - 2ie^{it}}{5 - 2e^{it} - 2e^{-it}}dt \\
+				   &= \int_0^{2\pi} \frac{4i - 2i(\cos(t) + i\sin(t))}{5 - 4\cos(t)} \\
+				   &= \int_0^{2\pi} \frac{2\sin(t)}{5 - 4\cos t}dt + 2i\int_{0}^{2\pi} \frac{2 - \cos t}{5 - 4\cos t}dt = 2\pi i \\
+	\implies \int_0^{2\pi} \frac{2 - \cos t}{5 - 4\cos t}dt &= \pi
+\end{align*}
+
+\begin{problem}{3}
+	Use partial fractions and the result of Exercise 4.3.6 to evaluate
+	\[
+		\int_{C} \frac{3z + 1}{(z - 1)(z^2 + 1)}dz
+	\]
+	where $C$ is the circle $|z-i| = \sqrt{3}$ traversed once in the positive direction.
+\end{problem}
+First we find the partial fractions of our function.
+\begin{align*}
+	\frac{3z + 1}{(z-1)(z+i)(z-i)} = \frac{A}{z-1} + \frac{B}{z+i} + \frac{C}{z-i}
+\end{align*}
+\begin{align*}
+	A &= \frac{3(1) + 1}{1^2 + 1} = \frac{4}{2} = 2 \\
+	B &= \frac{3(-i) + 1}{(-i-1)(-i-i)} = \frac{1 - 3i}{-2 + 2i} \cdot \frac{-2 - 2i}{-2 - 2i} = \frac{-8 + 4i}{8} = \frac{-2 + i}{2} \\
+	C &= \frac{3(i) + 1}{(i-1)(i+i)} = \frac{1 + 3i}{-2 - 2i} \cdot \frac{-2 + 2i}{-2 + 2i} = \frac{-8 - 4i}{8} = \frac{-2 -i}{2}
+\end{align*}
+Since $|1 - i| = \sqrt{2} < \sqrt{3}$ and $|i - i| = 0 < \sqrt{3}$, both $z = 1$ and $z = i$ are in $C$, however $|-i - i| = 2 > \sqrt{3}$, so $z = -i$ is not in $C$. Therefore we only integrate around the points $z = 1$ and $z = i$. Let $C_0$ be a small circle around $z = 1$ and $C_1$ be the circle around $z = i$. Now we can evaluate our integral using our partial fraction decomposition and integrating around our small circles in the positive direction (which Theorem 13 allows us to do). 
+\begin{align*}
+	\int_{C} \frac{3z + 1}{(z - 1)(z^2 + 1)}dz &= \int_{C} \frac{3z + 1}{(z - 1)(z + i)(z - i)}dz \\
+						   &= \int_{C_0} \frac{2}{z - 1}dz + \int_{C} \frac{-2 + i}{2(z + i)}dz + \int_{C_1} \frac{-2 -i}{2(z-i)}dz \\
+						   &= 4\pi i + 0 + \pi i(-2 - i) \\
+						   &= \pi + 2\pi i \\ 
+						   &= \pi(1 + 2i)
+\end{align*}
+\end{document}
