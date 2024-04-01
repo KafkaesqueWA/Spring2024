@@ -1,0 +1,60 @@
+\documentclass[12pt]{article}
+\linespread{1.2}
+\usepackage[margin=2cm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{multicol}
+\usepackage{amsthm}
+\usepackage{amssymb,scrextend}
+\usepackage{graphicx,tikz}
+\newtheorem{dfn}{Definition}
+\renewcommand{\qed}{\hfill$\blacksquare$}
+\let\newproof\proof
+\renewenvironment{proof}{\vspace{1em}\begin{addmargin}[2em]{0em}\begin{newproof}}{\end{newproof}\end{addmargin}\qed}
+\newenvironment{theorem}[2][Theorem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1} \hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{example}[2][Example]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1} \hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{lemma}[2][Lemma]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1} \hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{exercise}[2][Exercise]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1} \hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{problem}[2][Problem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1} \hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{corollary}[2][Corollary]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1} \hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\usepackage{fancyhdr,enumitem,changepage,url}
+\pagestyle{fancy}
+\author{Warren Atkison}
+\date{\today}
+\setlength{\headheight}{15pt}
+\begin{document}
+\fancyhf{}
+\fancyhead[L]{Warren Atkison}
+\fancyhead[C]{Homework Set 5.1}
+\fancyhead[R]{\today}
+\fancyfoot[R]{\thepage}
+
+\begin{exercise}{10}
+	Show that the sequence of functions $F_n(z) = z^n/(z^n - 3^n)$, $n = 1,2,\ldots$, converges to zero for $|z| < 3$ and to 1 for $|z| > 3$.
+\end{exercise}
+\begin{proof} Consider that
+	\[
+		\left|\frac{3}{z}\right| = \frac{3}{|z|}.
+	\]
+	Also
+	\begin{align*}
+		F_n(z) = \frac{z^n}{z^n-3^n} &= \dfrac{z^n}{z^n\left(1 - \dfrac{3^n}{z^n}\right)} = \dfrac{1}{1 - \left(\dfrac{3}{z}\right)^n}
+	\end{align*}
+	When $|z| < 3$, then $3/|z| = |3/z| > 1$, so
+	\[
+		\lim_{n \to \infty} \dfrac{1}{1 - \left(\dfrac{3}{z}\right)^n} = 0
+	\]
+	since the magnitide of the denominator gets abritrarily large. When $|z| > 3$, then $3/|z| = |3/z| < 1$, so
+	\[
+		\lim_{n \to \infty} \dfrac{1}{1 - \left(\dfrac{3}{z}\right)^n} = \frac{1}{1 - 0} =  1
+	\]
+	since the magnitide of $\left(\dfrac{3}{z}\right)^n$ goes to zero.
+\end{proof}
+\end{document}
