@@ -1,0 +1,78 @@
+\documentclass[12pt]{article}
+\linespread{1.2}
+\usepackage[margin=2cm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{multicol}
+\usepackage{amsthm}
+\usepackage{amssymb,scrextend}
+\usepackage{graphicx,tikz}
+\newtheorem{dfn}{Definition}
+\renewcommand{\qed}{\hfill$\blacksquare$}
+\let\newproof\proof
+\renewenvironment{proof}{\vspace{1em}\begin{addmargin}[2em]{0em}\begin{newproof}}{\end{newproof}\end{addmargin}\qed}
+\newenvironment{theorem}[2][Theorem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1} \hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{example}[2][Example]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1} \hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{lemma}[2][Lemma]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1} \hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{exercise}[2][Exercise]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1} \hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{problem}[2][Problem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1} \hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{corollary}[2][Corollary]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1} \hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\usepackage{fancyhdr,enumitem,changepage,url}
+\pagestyle{fancy}
+\author{Warren Atkison}
+\date{\today}
+\setlength{\headheight}{15pt}
+\begin{document}
+\fancyhf{}
+\fancyhead[L]{Warren Atkison}
+\fancyhead[C]{Homework Set 5.3}
+\fancyhead[R]{\today}
+\fancyfoot[R]{\thepage}
+
+\begin{exercise}{4}
+	Does there exist a power series $\sum_{j=0}^{\infty} a_jz^j$ that converges at $z = 2 + 3i$ and diverges at $z = 3-i$?
+\end{exercise}
+
+No. From Theorem 10 we know that if a power series converges at a point then it must converge everyhwere inside the circle where the point lies. Since $3 - i$ is inside the circle $|z| \le |2 + 3i|$, then if a power series converges at $2 + 3i$ it must converge at $3 - i$.
+
+\begin{exercise}{13a}
+	The following initial-value problem has a unique solution that is analytic at the origin. Find the power series expansion $\sum_{j=0}^{\infty} a_jz^j$ of the solution by determining a recurrence relation for the coefficients $a_j$.
+	\[
+		\begin{cases}
+			\dfrac{d^2f}{dz^2} - z\dfrac{df}{dz} - f = 0 \\
+			f(0) = 1, \quad f'(0) = 0
+		\end{cases}
+	\]
+\end{exercise}
+First we have
+\begin{align*}
+	f''(0) &= zf'(0) + f(0) = 1 \\
+	f'''(0) &= zf''(0) + 2f'(0) = 0 \\
+	f^{(4)}(0) &= zf^{(3)}(0) + 3f^{(2)}(0) = 3 \\
+	f^{(5)}(0) &= zf^{(4)}(0) + 4f^{(3)}(0) = 0 \\
+	f^{(6)}(0) &= zf^{(5)}(0) + 5f^{(4)}(0) = 15 \\
+		   &~ ~\vdots
+\end{align*}
+and in general
+\[
+	f^{(j)}(0) = (j-1)f^{(j-2)}(0) = \begin{cases}
+		1 \cdot 3 \cdot 5 \cdot \ldots \cdot (j-1) & \text{when $j$ is even} \\
+		0 & \text{when $j$ is odd}
+	\end{cases}.
+\]
+Note that:
+\[
+	\prod_{k=0}^j (2k - 1) = \frac{(2j)!}{2^jj!}.
+\]
+Thus, using the Maclaurin series we have
+\[
+	f(z) = \sum_{j=0}^{\infty} \frac{(2j)!}{2^jj!}\cdot\frac{z^{2j}}{(2j)!} = \sum_{j=0}^{\infty} \frac{(z^2/2)^j}{j!} = e^{z^2/2}
+\]
+\end{document}
