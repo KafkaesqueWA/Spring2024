@@ -1,0 +1,103 @@
+\documentclass[12pt]{article}
+\linespread{1.2}
+\usepackage[margin=2cm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{multicol}
+\usepackage{amsthm}
+\usepackage{amssymb,scrextend}
+\usepackage{graphicx,tikz}
+\newtheorem{dfn}{Definition}
+\renewcommand{\qed}{\hfill$\blacksquare$}
+\let\newproof\proof
+\renewenvironment{proof}{\vspace{1em}\begin{addmargin}[2em]{0em}\begin{newproof}}{\end{newproof}\end{addmargin}\qed}
+\newenvironment{theorem}[2][Theorem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1} \hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{example}[2][Example]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1} \hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{lemma}[2][Lemma]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1} \hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{exercise}[2][Exercise]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1} \hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{problem}[2][Problem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1} \hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{corollary}[2][Corollary]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1} \hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\usepackage{fancyhdr,enumitem,changepage,url}
+\pagestyle{fancy}
+\author{Warren Atkison}
+\date{\today}
+\setlength{\headheight}{15pt}
+\begin{document}
+\fancyhf{}
+\fancyhead[L]{Warren Atkison}
+\fancyhead[C]{Special Assignment 5}
+\fancyhead[R]{\today}
+\fancyfoot[R]{\thepage}
+
+\begin{exercise}{4.6.14}
+	Prove the \textit{minimum modulus principle:} Let $f$ be analytic in a bounded domain $D$ and continuous up to and including its boundary. Then \textit{if f is nonzero in} $D$, the modulus $|f(z)|$ attains its minimum value on the boundary of $D$. Give an example to show why the italicized condition is essential.
+\end{exercise}
+\begin{proof}
+	Consider $g(z) = 1/f(z)$. Because $f(z)$ is analytic, continuous up to and including its boundary, and nonzero on $D$, then so is $g(z)$. By Theorem 24 $|g(z)|$ must have it's maximum at some point $z_0$ on the boundary of $D$. $|g(z)|$ acheives a maximum when $|f(z)|$ is a minimum, so $|f(z_0)|$ is a minimum of $|f(z)|$.
+\end{proof} \\
+Consider the function $f(z) = z$ on $|z| \le 1$. $|f(z)|$ acheives it's minimum at $z = 0$, which is not on the boundary. However, if we cut out the open circle $|z| < 0.5$ which contains all the zero's of $f(z)$, then $|f(z)|$ contains its minimum on the circle $|z| = 0.5$, which is a boundary of our domain.
+\begin{exercise}{4.6.16}
+	Show that $\max_{|z| \le 1} |az^n + b| = |a| + |b|$
+\end{exercise}
+\begin{proof}
+	Since $az^n + b$ is entire, we know the maximum must occur on the boundary. Let $z = e^{i\theta}$, $a = re^{i\phi}$ and $b = \rho e^{i\psi}$. Then
+	\begin{align*}
+		|az^n + b|^2 &= |re^{i(\phi + n\theta)} + \rho e^{i\psi}|^2 \\
+			     &= (re^{i(\phi + n\theta)} + \rho e^{i\psi})(re^{-i(\phi + n\theta)} + \rho e^{-i\psi}) \\
+			     &= r^2 + r\rho e^{i(\phi - \psi + n\theta)} + r\rho e^{-i(\phi - \psi + n\theta)} + \rho^2 \\
+			     &= r^2 + 2r\rho \cos(\phi - \psi + n\theta) + \rho^2
+	\end{align*}
+	Which has a max when $\cos(\phi - \psi + n\theta) = 1$. This happens at $\theta = \dfrac{\psi - \phi + 2\pi k}{n}$ for $k=0,\pm1,\pm2,\ldots$. Therefore
+	\begin{align*}
+		\max (r^2 + 2r\rho \cos(\phi - \psi + n\theta) + \rho^2) &= r^2 + 2r\rho + \rho^2 \\
+									 &= (r + \rho)^2 \\
+									 &= (|a| + |b|)^2
+	\end{align*}
+	and we have
+	\[
+		\max_{|z| \le 1} |az^n + b|^2 = (|a| + |b|)^2 \implies \max_{|z| \le 1} |az^n + b| = |a| + |b|
+	\]
+\end{proof}
+\begin{exercise}{5.2.18}
+	Establish each of the following error estimates: for $|z| \le 1$,
+	\begin{itemize}
+		\item[(a)] $\left|e^z - \sum\limits_{k=0}^n \dfrac{z^k}{k!}\right| \le \dfrac{1}{(n+1)!}\cdot\left(1 + \dfrac{1}{n+1}\right)$ \\
+			Since $e^z - \sum\limits_{k=0}^n \dfrac{z^k}{k!}$ is analytic and continuous on and up to the disk $|z| \le 1$, the maximum modulus must occor when $|z| = 1$.
+			\begin{align*}
+				\left|e^z - \sum_{k=0}^n \frac{z^k}{k!}\right| &= \left|\sum_{k=0}^{\infty} \frac{z^k}{k!} - \sum_{k=0}^n \frac{z^k}{k!}\right| \\
+										 &= \left|\sum_{k=n+1}^{\infty} \frac{z^k}{k!}\right| \\
+										 &\le \sum_{k=n+1}^{\infty} \frac{|z|^k}{k!} \\
+										 &\le \sum_{k=n+1}^{\infty} \frac{1}{k!} \\
+										 &= \frac{1}{(n+1)!}\left(1 + \frac{1}{(n+2)} + \frac{1}{(n+2)(n+3)} + \ldots\right) \\
+										 &\le \frac{1}{(n+1)!}\left(1 + \frac{1}{(n+2)} + \frac{1}{(n+2)^2} + \ldots\right) \\
+										 &= \frac{1}{(n+1)!}\sum_{k=0}^{\infty} \left(\frac{1}{n+2}\right)^k \\
+										 &= \frac{1}{(n+1)!}\left(\dfrac{1}{1 - \dfrac{1}{n+2}}\right) \\
+										 &= \frac{1}{(n+1)!}\left(\frac{n+2}{n+1}\right) \\
+										 &= \frac{1}{(n+1)!}\left(1 + \frac{1}{n+1}\right)
+			\end{align*}
+		\item[(b)] $\left|\sin z - \sum\limits_{k=0}^n \dfrac{(-1)^kz^{2k+1}}{(2k+1)!}\right| \le \dfrac{1}{(2n+3)!}\left(\dfrac{4n^2 + 18n + 20}{4n^2 + 18n + 19}\right)$
+	\end{itemize}
+	Again, since our function $\sin z - \sum\limits_{k=0}^n \dfrac{(-1)^kz^{2k+1}}{(2k+1)!}$ is analytic and continuous on and up to the disk $|z| \le 1$, the maximum modulus must occurs when $|z| = 1$.
+	\begin{align*}
+		\left|\sin z - \sum_{k=0}^n \frac{(-1)^kz^{2k+1}}{(2k+1)!}\right| &= \left|\sum_{k=0}^{\infty} \frac{(-1)^kz^{2k+1}}{(2k+1)!} - \sum_{k=0}^n \frac{(-1)^kz^{2k+1}}{(2k+1)!}\right| \\
+										  &= \left|\sum_{k=n+1}^{\infty} \frac{(-1)^kz^{2k+1}}{(2k+1)!}\right| \\
+										  &\le \sum_{k=n+1}^{\infty} \frac{|z|^{2k+1}}{(2k+1)!} \\
+										  &\le \sum_{k=n+1}^{\infty} \frac{1}{(2k+1)!} \\
+										  &= \frac{1}{(2n + 3)!}\left(1 + \frac{1}{(2n + 5)(2n + 4)} + \frac{1}{(2n + 7)(2n + 6)(2n + 5)(2n + 4)} + \ldots\right) \\
+										  &\le \frac{1}{(2n+3)!}\left(1 + \frac{1}{(2n + 5)(2n + 4)} + \frac{1}{(2n + 5)^2(2n + 4)^2} + \ldots\right) \\
+										  &= \frac{1}{(2n + 3)!}\sum_{k=0}^{\infty} \left(\frac{1}{(2n + 5)(2n + 4)}\right)^k \\
+										  &= \frac{1}{(n+1)!} + \frac{1}{(n+2)!} + \ldots \\
+										  &= \frac{1}{(2n + 3)!}\left(\dfrac{1}{1 - \dfrac{1}{(2n + 5)(2n + 4)}}\right) \\
+										  &= \frac{1}{(2n + 3)!}\left(\frac{(2n + 5)(2n + 5)}{(2n + 5)(2n + 4) - 1}\right) \\
+										  &= \frac{1}{(2n + 3)!}\left(\frac{4n^2 + 18n + 20}{4n^2 + 18n + 19}\right)
+	\end{align*}
+\end{exercise}	
+\end{document}
+
