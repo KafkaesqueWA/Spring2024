@@ -1,0 +1,89 @@
+\documentclass[12pt]{article}
+\linespread{1.2}
+\usepackage[margin=2cm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{multicol}
+\usepackage{amsthm}
+\usepackage{amssymb,scrextend}
+\usepackage{graphicx,tikz}
+\newtheorem{dfn}{Definition}
+\renewcommand{\qed}{\hfill$\blacksquare$}
+\let\newproof\proof
+\renewenvironment{proof}{\vspace{1em}\begin{addmargin}[2em]{0em}\begin{newproof}}{\end{newproof}\end{addmargin}\qed}
+\newenvironment{theorem}[2][Theorem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1} \hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{example}[2][Example]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1} \hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{lemma}[2][Lemma]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1} \hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{exercise}[2][Exercise]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1} \hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{problem}[2][Problem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1} \hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{corollary}[2][Corollary]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1} \hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\usepackage{fancyhdr,enumitem,changepage,url}
+\pagestyle{fancy}
+\author{Warren Atkison}
+\date{\today}
+\setlength{\headheight}{15pt}
+\begin{document}
+\fancyhf{}
+\fancyhead[L]{Warren Atkison}
+\fancyhead[C]{Homework Set 5.6}
+\fancyhead[R]{\today}
+\fancyfoot[R]{\thepage}
+
+\begin{exercise}{2}
+	What is the order of the pole of
+	\[
+		f(z) = \frac{1}{\left(2\cos z - 2 + z^2\right)^2}
+	\]
+	at $z = 0$?
+\end{exercise}
+Consider
+\[
+	\frac{1}{f(z)} = \left(2\cos z - 2 + z^2\right)^2.
+\]
+Since
+\[
+	\cos(z) = 1 - \frac{1}{2}z^2 + \frac{1}{24}z^4 - \ldots,
+\]
+we have
+\begin{align*}
+	\frac{1}{f(z)} &= \left(2\left(1 - \frac{1}{2}z^2 + \frac{1}{24}z^4 - \ldots\right) - 2 + z^2\right)^2 \\
+		       &= \left(\frac{1}{12}z^4 - \frac{2}{6!}z^6 + \ldots \right)^2 \\
+		       &= z^8\left(\frac{1}{12^2} - \frac{2^2}{(6!)^2}z^4 + \ldots\right).
+\end{align*}
+Let $g(z) = \dfrac{1}{1/12^2 - 2^2/(6!)^2 + \ldots}$, which as analytic around $z = 0$. Then
+\[
+	f(z) = \frac{g(z)}{z^8}
+\]
+and since $g(0) \neq 0$, by Lemma 7 $z = 0$ is a pole of order 8.
+\begin{exercise}{12}
+	Prove that if $f(z)$ has a pole of order $m$ at $z_0$, then $g(z) := f'(z)/f(z)$ has a simple pole at $z_0$. What is the coefficient of $(z - z_0)^{-1}$ in the Laurent expansion for $g(z)$?
+\end{exercise}	
+\begin{proof}
+	Becuase $f(z)$ has a pole of order $m$ at $z_0$, by Lemma 7 we can write
+	\[
+		f(z) = \frac{h(z)}{(z - z_0)^m}
+	\]
+	where $h(z)$ is analytic on the punctured neighborhood of $z_0$ and $h(z_0) \neq 0$. Then
+	\begin{align*}
+		g(z) = \frac{f'(z)}{f(z)} &= \frac{(z-z_0)^mh'(z) - m(z - z_0)^{m-1}h(z)}{(z - z_0)^{2m}}\cdot \frac{(z-z_0)^m}{h(z)} \\
+					  &= \frac{(z-z_0)^{m-1}((z-z_0)h'(z)-mh(z))}{h(z)(z-z_0)^m} \\
+					  &= \frac{(z-z_0)h'(z) - mh(z)}{h(z)(z-z_0)}.
+	\end{align*}
+	Let
+	\[
+		l(z) = \frac{(z-z_0)h'(z) - mh(z)}{h(z)}
+	\]
+	so
+	\[
+		g(z) = \frac{l(z)}{z-z_0}.	
+	\]
+	Clearly $l(z)$ is analytic around $z_0$, and $l(z_0) = -m \neq 0$. Therefore $z_0$ is a simple pole of $g(z)$ and the coefficient of $(z - z_0)^{-1}$ in the laurent expansion for $g(z)$ is $-m$.
+\end{proof}
+\end{document}
