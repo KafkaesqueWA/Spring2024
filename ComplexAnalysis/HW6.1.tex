@@ -1,0 +1,84 @@
+\documentclass[12pt]{article}
+\linespread{1.2}
+\usepackage[margin=2cm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{multicol}
+\usepackage{amsthm}
+\usepackage{amssymb,scrextend}
+\usepackage{graphicx,tikz,esint}
+\newtheorem{dfn}{Definition}
+\renewcommand{\qed}{\hfill$\blacksquare$}
+\let\newproof\proof
+\renewenvironment{proof}{\vspace{1em}\begin{addmargin}[2em]{0em}\begin{newproof}}{\end{newproof}\end{addmargin}\qed}
+\newenvironment{theorem}[2][Theorem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1} \hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{example}[2][Example]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1} \hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{lemma}[2][Lemma]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1} \hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{exercise}[2][Exercise]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1} \hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{problem}[2][Problem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1} \hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{corollary}[2][Corollary]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1} \hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\usepackage{fancyhdr,enumitem,changepage,url}
+\pagestyle{fancy}
+\author{Warren Atkison}
+\date{\today}
+\setlength{\headheight}{15pt}
+\begin{document}
+\fancyhf{}
+\fancyhead[L]{Warren Atkison}
+\fancyhead[C]{Homework Set 6.1}
+\fancyhead[R]{\today}
+\fancyfoot[R]{\thepage}
+
+\begin{exercise}{3e}
+	Evaluate the following integral using the Cauchy residue theorem.
+	\[
+		\ointctrclockwise_{|z| = 1} \frac{1}{z^2\sin z}dz.
+	\]
+\end{exercise}
+We have singularities at $z = 0,\pm\pi,\pm2\pi,\ldots$ but since we are integrating around $|z| = 1$, we only care about the singularity at $z = 0$. Using the Cauchy residue theorem we 
+\begin{align*}
+	\ointctrclockwise_{|z| = 1} \frac{1}{z^2\sin z}dz &= 2\pi i\text{Res}(f;0) \\
+\end{align*}
+where $f(z) = \dfrac{1}{z^2\sin z}$. Using the Maclaurin series we have
+\[
+f(z) = \dfrac{1}{z^2\left(z - \dfrac{z^3}{3!} + \dfrac{z^5}{5!} - \ldots\right)} = \dfrac{1}{z^3\left(1 - \dfrac{z^2}{3!} + \dfrac{z^4}{5!} - \ldots\right)} .
+\]
+At $z = 0$ we have a pole of order 3, so
+\begin{align*}
+	\text{Res}(f;0) &= \lim_{z \to 0} \frac{1}{2} \frac{d^2}{dz}(z^3f(z)) \\
+			&= \lim_{z \to 0} \frac{1}{2} \frac{d^2}{dz^2} \left(\dfrac{1}{1 - \dfrac{z^2}{3!} + \dfrac{z^4}{5!} - \ldots}\right) \\
+			&= \lim_{z \to 0} \frac{1}{2} \frac{d}{dz}\left(\dfrac{\dfrac{z}{3} - \dfrac{z^3}{30} + \ldots}{\left(1 - \dfrac{z^2}{6} + \dfrac{z^4}{120} - \ldots\right)^{2}} \right) \\
+			&= \frac{1}{2} \cdot \dfrac{1\cdot\dfrac{1}{3} - 0\cdot 0}{1^4} \\
+			&= \frac{1}{6}
+\end{align*}
+and then
+\[
+	\ointctrclockwise_{|z|=1} \frac{1}{z^2\sin z}dz = \frac{\pi i}{3}.
+\]
+\begin{exercise}{6}
+	Suppose that $f$ is analytic and has a zero of order $m$ at the point $z_0$. Show that the function $g(z) = f'(z)/f(z)$ has a simple pole at $z_0$ with Res$(g;z_0) = m$
+\end{exercise}	
+\begin{proof}
+	Since $f$ is analytic and has a zero of order $m$ at $z_0$, we can write $f$ as
+	\[
+		f(z) = (z - z_0)^mh(z)
+	\]
+	where $h(z)$ is analytic and $h(z_0) \neq 0$. Then
+	\begin{align*}
+		g(z) = \frac{f'(z)}{f(z)} &= \frac{m(z - z_0)^{m-1}h(z) + (z - z_0)^mh'(z)}{(z - z_0)^mh(z)} \\
+					  &= \frac{mh(z) + (z - z_0)h'(z)}{(z - z_0)h(z)} \\
+					  &= \frac{m}{z - z_0} + \frac{h'(z)}{h(z)}
+	\end{align*}
+	and since $h(z)$ is analytic and $h(z_0) \neq 0$, $g(z)$ has a simple pole at $z = z_0$ and all negative coefficients for $h'(z)/h(z)$ in it's Laurent expansion are 0. Therefore,
+	\[
+		\text{Res}(g; z_0) = m
+	\]
+\end{proof}
+\end{document}

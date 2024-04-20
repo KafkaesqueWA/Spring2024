@@ -1,0 +1,115 @@
+\documentclass[12pt]{article}
+\linespread{1.2}
+\usepackage[margin=2cm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{multicol}
+\usepackage{amsthm}
+\usepackage{amssymb,scrextend}
+\usepackage{graphicx,tikz}
+\newtheorem{dfn}{Definition}
+\renewcommand{\qed}{\hfill$\blacksquare$}
+\let\newproof\proof
+\renewenvironment{proof}{\vspace{1em}\begin{addmargin}[2em]{0em}\begin{newproof}}{\end{newproof}\end{addmargin}\qed}
+\newenvironment{theorem}[2][Theorem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1} \hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{example}[2][Example]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1} \hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{lemma}[2][Lemma]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1} \hskip \labelsep {\bfseries #2}]}{\end{trivlist}}
+\newenvironment{exercise}[2][Exercise]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1} \hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{problem}[2][Problem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1} \hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{corollary}[2][Corollary]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1} \hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\usepackage{fancyhdr,enumitem,changepage,url,tcolorbox}
+\pagestyle{fancy}
+\author{Warren Atkison}
+\date{\today}
+\setlength{\headheight}{15pt}
+\begin{document}
+\fancyhf{}
+\fancyhead[L]{Warren Atkison}
+\fancyhead[C]{Homework Set 8}
+\fancyhead[R]{\today}
+\fancyfoot[R]{\thepage}
+
+\begin{exercise}{5.8.5 (3pt)}
+	Prove the following theorem:
+\end{exercise}
+\begin{tcolorbox}[colback=blue!10!white,colframe=blue!75!black]
+	\begin{theorem}{5.8.12} Brook's Theorem
+	\begin{center}
+		If $G$ is a graph other than $K_n$ or $C_{2n+1}$, $\chi \le \Delta$.
+	\end{center}
+	\end{theorem}
+\end{tcolorbox}
+\begin{proof}
+	By corollary 5.8.11 we need to consider only regular graphs. Regular graphs of degree 2 are easy, so we consider only regular graphs of degree at least 3. 
+
+Suppose $G$ is not 2 connected, then we have a bridge at some point seperating the graphs. Consider one block seperated by the bridge $G_1$. If $\Delta(G_1) < \Delta(G)$ then we can color $G_1$ with $\Delta(G)$ colors. If $\Delta(G_1) = \Delta(G)$, then the node with maximun degree can only be the vertex on the bridge, in which we can color the graph with $\Delta(G)$ colors since the color we color the other side of the bridge with can be repeated. Then, we can color the other block with $G_2$ with $\Delta(G)$ colors and if we choose different colors on the bridge the whole graph can be colored with $\Delta(G)$ colors.
+
+Suppose $G$ is 2 connected, we want to show that there exists vertices $u$, $v$, and $w$ such that $u$ is adjacent to both $v$ and $w$ but $v$ and $w$ are not adjacent, and $G - v - w$ is connected. Let $x$ be a vertex not adjacent to all points. Since $G \neq K_n$, such a point exists. 
+
+If $G - x$ is 2 connected, let $v = x$ and $w$ be any point of distance $2$ from $x$. This is possible since any point not adjacent to $x$ must be connected to $x$ by a path of distance $n$ and must be adjacent to a vertex with distance $n - 1$ from $x$. We can keep walking backwards along this path until we are at a point of distance 2 from $x$. Then, let a path of length 2 be $v$, $u$, $w$. Since $G$ is 2 connected and $v$ and $w$ are not adjacent to one another, By theorem 5.7.4 there is a path from $u$ to any other vertices not containing $v$ and not containing $w$. Therefore, $G - v - w$ is connected. 
+
+If $G-x$ is not 2 connected, then $G - x$ has a bridge with 2 blocks both connected to $x$ as well. Let $u = x$, and choose $w$ and $v$ adjacent to $x$ in two different blocks of $G - x$. Since $w$ and $v$ are in seperate blocks of $G - x$ and both blocks are still 2 connected, $v$ and $w$ are not adjacent an $G - u - v$ is connected.
+
+Given these vertices, color $v$ and $w$ with color 1, then use the greedy algorithm to color the rest. Since $u$ has maximum degree and we are able to repeat a color, namely color 1 for $v$ and $w$, we will end up with at most $\Delta(G)$ colors.
+
+\end{proof} \\
+Note: Lovasz's proof from 1975 used as an outline.
+\begin{exercise}{5.8.1 (2pt)}
+	Suppose $G$ has $n$ vertices and chromatic number $k$. Prove that $G$ has at least $\binom{k}{2}$ edges.
+\end{exercise}	
+\begin{proof}
+	Since $G$ has chromatic number $k$, every color have an edge connecting every other color. This mapping can be represented by $K_{k}$ which has $\binom{k}{2}$. $G$ must have at least as many edges as $K_k$ otherwise every color wouldn't connect to every other color as there wouldn't be enough edges to connect every color.  
+\end{proof}
+\begin{exercise}{5.8.3 (2pt)}
+	Show that $\chi(G - v)$ is either $\chi(G)$ or $\chi(G) - 1$
+\end{exercise}	
+\begin{proof}
+	Let $G$ be a graph with $n$ vertices and each vertex $v_i$ has coloring $c_i$ for where each color is not neccessairly distinct. Suppose we remove $v_j$ either $c_j = c_i$ for some $i \neq j$, in which case $\chi(G - v_j) = \chi(G)$, or $c_j \neq c_i$ for some $i \neq j$, in which case $\chi(G - v_j) = \chi(G) - 1$. 
+\end{proof}
+\begin{exercise}{5.8.4 (2pt)}
+	Prove theorem 5.8.10 without assuming any particular properties of the order $v_1,\ldots,v_n$.
+\end{exercise}	
+\begin{tcolorbox}[colback=blue!10!white,colframe=blue!75!black]
+	\begin{theorem}{5.8.10} \
+		\begin{center}
+			In any graph $G$, $\chi \le \Delta + 1$.
+		\end{center}
+	\end{theorem}
+\end{tcolorbox}
+\begin{proof}
+	Consider a graph with vertices $v_1,\ldots,v_n$. To color any vertex $v_i$, check all neighbors of $v_i$. Since $v_i$ has at most $\Delta$ neighboors and we have up to $\Delta + 1$ colors, we will always be able to find a color for $v_i$ by the pigeonhole principle.
+\end{proof}
+\begin{exercise}{5.9.1 (2pt)}
+	Show that the leading coefficient of $P(G)$ is 1.
+\end{exercise}	
+\begin{proof}
+	Induction of number of edges $n$ in $G$. When $n = 0$, $P_G(k) = k^{V(G)}$, which has a leading coefficient of $1$. Assume the leading coefficient for a graph with $n$ edges be 1. Consider a graph $G$ with $n+1$ edges. Then
+	\begin{align*}
+		P_G(k) = P_{G - e}(k) - P_{G/e}.
+	\end{align*}
+	Since $P_{G - e}(k)$ has $n$ edges, by our hypothesis it has a leading coefficient of 1. Also, since $V(G) = V(G/e) + 1$, $P_{G - e}$ and by theorem 5.9.3 $P_G$ is a polynomial of degree $V(G)$,
+	\begin{align*}
+		P_G(k) = k^{V(G)} + \ldots - (k^{V(G) - 1} + \ldots)
+	\end{align*}
+	and thus as a leading coefficient of 1.
+\end{proof} 
+\begin{exercise}{5.9.3 (2pt)}
+	Show that the constant term of $P_G(k)$ is 0. Show that the coefficient of $k$ is $P_G(k)$ in non-zero if and only if $G$ is connected.
+\end{exercise}	
+\begin{proof}
+	If we let $k = 0$, we then have 0 colors to color $G$ with, so we should expect $P_G(0) = 0$. This can only happen when the constant coefficient is 0.
+
+	Suppose $G$ is not connected. Then there are at least 2 different blocks of $G$ which we can color independantly. In either block the first vertex we color can have $k$ colors, so
+	\[
+		P_G(k) = k^2Q(k)
+	\]
+	for some polynomial $Q(k)$. Therefore $k$ in $P_G(k)$ has a coefficient of 0.
+\end{proof}
+\end{document}
