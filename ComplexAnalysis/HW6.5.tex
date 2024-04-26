@@ -1,0 +1,136 @@
+\documentclass[12pt]{article}
+\linespread{1.2}
+\usepackage[margin=2cm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{multicol}
+\usepackage{amsthm}
+\usepackage{amssymb,scrextend}
+\usepackage{graphicx,tikz}
+\newtheorem{dfn}{Definition}
+\renewcommand{\qed}{\hfill$\blacksquare$}
+\let\newproof\proof
+\renewenvironment{proof}{\vspace{1em}\begin{addmargin}[2em]{0em}\begin{newproof}}{\end{newproof}\end{addmargin}\qed}
+\newenvironment{theorem}[2][Theorem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1} \hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{example}[2][Example]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1} \hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{lemma}[2][Lemma]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1} \hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{exercise}[2][Exercise]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1} \hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{problem}[2][Problem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1} \hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{corollary}[2][Corollary]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1} \hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\usepackage{fancyhdr,enumitem,changepage,url}
+\pagestyle{fancy}
+\author{Warren Atkison}
+\date{\today}
+\setlength{\headheight}{15pt}
+\begin{document}
+\fancyhf{}
+\fancyhead[L]{Warren Atkison}
+\fancyhead[C]{Homework Set 6.5}
+\fancyhead[R]{\today}
+\fancyfoot[R]{\thepage}
+
+\begin{exercise}{4}
+	Using techniques of residues, verify the following integral formula.
+	\[
+		\int_{0}^{\infty} \frac{\sin(2x)}{x(x^2 + 1)^2}dx = \pi\left(\frac{1}{2}-\frac{1}{e^2}\right)
+	\]
+\end{exercise}
+
+Since $\sin(x)$ is even, we have
+\[
+	\int_{0}^{\infty} \frac{\sin(2x)}{x(x^2 + 1)^2}dx = \frac{1}{2}\int_{-\infty}^{\infty} \frac{\sin(2x)}{x(x^2 + 1)^2}dx
+\]
+
+which is the imaginary part of
+\begin{align*}
+	\int_{-\infty}^{\infty} \frac{e^{2ix}}{x(x^2 + 1)^2}dx.
+\end{align*}
+
+Let $f(z) = \dfrac{e^{2iz}}{z(z^2 + 1)^2}$. Since we have a singularity at $z = 0$, we have
+
+\[
+	\left(\int_{-\rho}^{r} + \int_{S_r} + \int_{r}^{\rho} + \int_{C_p^{+}}\right)f(z)dz = 2\pi i \text{Res}(f; i)
+\]
+
+By Jordan's lemma we have
+\[
+	\lim_{\rho \to \infty}\int_{C_p^{+}}f(z)dz = 0
+\]
+
+and
+\[
+	\lim_{r \to 0^{+}}\int_{S_r}f(z)dz = -i\pi \text{Res}(f; 0)
+\]
+
+so
+\[
+	\int_{-\infty}^{\infty} f(x)dx = 2\pi i\text{Res}(f; i) + \pi i \text{Res}(f; 0) - 0.
+\]
+
+Now we can find the residues. $\text{Res}(f; 0) = \lim_{z \to 0} f(z) = 1$, and
+\begin{align*}
+	\text{Res}(f; i) &= \lim_{z \to i} \frac{d}{dz}\left(\frac{e^{2iz}}{z(z + i)^2}\right) \\
+			 &= \frac{-4i(2ie^{-2}) - e^{-2}(-8)}{16} \\
+			 &= \frac{-1}{e^2}.
+\end{align*}
+
+Thus
+\begin{align*}
+	\int_{0}^{\infty} \frac{\sin(2x)}{x(x^2+1)^2}dx &= \frac{1}{2}\text{Im}\left(\frac{-2\pi i}{e^2} + \pi i\right) \\
+							&= \pi\left(\frac{1}{2} - \frac{1}{e^2}\right)
+\end{align*}
+
+\begin{exercise}{5}
+	Using techniques of residues, verify the following integral formula.
+	\[
+		\int_{0}^{\infty} \frac{\cos(x) - 1}{x^2}dx = \frac{\pi}{2}
+	\]
+\end{exercise}	
+
+since $\cos(x) - 1$ is and even function we have
+\[
+	\int_{0}^{\infty} \frac{\cos(x) - 1}{x^2}dx = \frac{1}{2}\int_{-\infty}^{\infty} \frac{\cos(x) - 1}{x^2}dx
+\]
+
+which is the real part of
+\[
+	\int_{-\infty}^{\infty} \frac{e^{ix} - 1}{x^2}dx.
+\]
+
+Let $f(z) = \dfrac{e^{iz} - 1}{z^2}$. Since we have a singularity at $z = 0$ we have
+\[
+	\left(\int_{-\rho}^{r} + \int_{S_r} + \int_{r}^{\rho} + \int_{C_p^{+}}\right)f(z)dz = 0
+\]
+
+By Jordan's lemma we have
+\[
+	\lim_{\rho \to \infty}\int_{C_p^{+}}f(z)dz = 0
+\]
+
+and
+\[
+	\lim_{r \to 0^{+}}\int_{S_r}f(z)dz = -i\pi \text{Res}(f; 0)
+\]
+
+so
+\[
+	\int_{-\infty}^{\infty} f(x)dx = \pi i \text{Res}(f; 0) - 0.
+\]
+
+Now we can find the residues.
+\begin{align*}
+	\text{Res}(f; 0) &= \lim_{z \to 0} \frac{d}{dz}(e^{iz} - 1) = i
+\end{align*}
+
+Thus
+\begin{align*}
+	\int_{0}^{\infty} \frac{\cos(x) - 1}{x^2} &= \frac{1}{2}\text{Re}\left(-\pi i (i)\right) = \frac{\pi}{2}
+\end{align*}
+\end{document}
