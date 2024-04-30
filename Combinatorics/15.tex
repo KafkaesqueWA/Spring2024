@@ -1,0 +1,64 @@
+
+\documentclass[12pt]{article}
+\linespread{1.2}
+\usepackage[margin=2cm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{multicol}
+\usepackage{amsthm}
+\usepackage{amssymb,scrextend}
+\usepackage{graphicx,tikz}
+\newtheorem{dfn}{Definition}
+\renewcommand{\qed}{\hfill$\blacksquare$}
+\let\newproof\proof
+\renewenvironment{proof}{\vspace{1em}\begin{addmargin}[2em]{0em}\begin{newproof}}{\end{newproof}\end{addmargin}\qed}
+\newenvironment{theorem}[2][Theorem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1} \hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{example}[2][Example]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1} \hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{lemma}[2][Lemma]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1} \hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{exercise}[2][Exercise]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1} \hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{problem}[2][Problem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1} \hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{corollary}[2][Corollary]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1} \hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\usepackage{fancyhdr,enumitem,changepage,url}
+\pagestyle{fancy}
+\author{Warren Atkison}
+\date{\today}
+\setlength{\headheight}{15pt}
+\begin{document}
+\fancyhf{}
+\fancyhead[L]{15 Puzzle}
+\fancyhead[C]{Problems}
+\fancyhead[R]{\today}
+\fancyfoot[R]{\thepage}
+
+\begin{problem}{1}
+	Scramble your puzzle and solve it.
+\end{problem}
+\vspace{50pt}
+\begin{problem}{2}
+	Is it possible to reverse the order of the puzzle?
+\end{problem}
+\vspace{50pt}
+\begin{problem}{3}
+	Is every scramble solveable? If we took out each peice and randomly inserted them into the 4x4 grid, could we get back to the starting point every time?
+\end{problem}
+\vspace{50pt}
+\begin{problem}{4}
+	Suppose two configurations are connected if you can get from one to another with a sequence of legal moves. How many different "compnents" are there, or configurations that cannot be connected?
+\end{problem}
+\vspace{50pt}
+\begin{problem}{5}
+	Develop an ad-hoc algorithm to solve the puzzle.
+\end{problem}
+\vspace{50pt}
+\begin{problem}{6}
+	If you add an edge from any two vertices, when does it allow you to complete a non-solveable puzzle?
+\end{problem}
+\vspace{50pt}
+\end{document}

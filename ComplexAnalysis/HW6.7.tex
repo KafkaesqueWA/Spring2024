@@ -1,0 +1,53 @@
+\documentclass[12pt]{article}
+\linespread{1.2}
+\usepackage[margin=2cm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{multicol}
+\usepackage{amsthm}
+\usepackage{amssymb,scrextend}
+\usepackage{graphicx,tikz}
+\newtheorem{dfn}{Definition}
+\renewcommand{\qed}{\hfill$\blacksquare$}
+\let\newproof\proof
+\renewenvironment{proof}{\vspace{1em}\begin{addmargin}[2em]{0em}\begin{newproof}}{\end{newproof}\end{addmargin}\qed}
+\newenvironment{theorem}[2][Theorem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1} \hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{example}[2][Example]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1} \hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{lemma}[2][Lemma]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1} \hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{exercise}[2][Exercise]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1} \hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{problem}[2][Problem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1} \hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{corollary}[2][Corollary]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1} \hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\usepackage{fancyhdr,enumitem,changepage,url}
+\pagestyle{fancy}
+\author{Warren Atkison}
+\date{\today}
+\setlength{\headheight}{15pt}
+\begin{document}
+\fancyhf{}
+\fancyhead[L]{Warren Atkison}
+\fancyhead[C]{Homework Set 6.7}
+\fancyhead[R]{\today}
+\fancyfoot[R]{\thepage}
+
+\begin{exercise}{8}
+	Prove that all the roots of the equation $z^6 - 5z^2 + 10 = 0$ lie in the annulus $1 < |z| < 2$.
+\end{exercise}
+\begin{proof}
+	Let $C_1$ be the circle $|z| = 1$ and $C_2$ the circle $|z| = 2$. Consider $f(z) = 10$ which has no zeros inside and on $C_1$, and $h(z) = z^6 - 5z^2$. Then on $C_1$
+	\begin{align*}
+		|h(z)| = |z^6 - 5z^2| \le |z|^6 + 5|z|^2 = 1 + 5 = 6
+	\end{align*}
+	which is striclty less than $|f(z)| = 10$. Therefore $z^6 - 5z^2 + 10$ has no roots inside and on $C_1$. Now consider $f(z) = z^6$ which clearly has 6 zeros striclty inside $C_2$, and $h(z) = -5z^2 + 10$. Then on $C_2$
+	\begin{align*}
+		|h(z)| = |-5z^2 + 10| \le 5|z|^2 + 10 = 5\cdot4 + 10 = 30
+	\end{align*}
+	which is striclty less than $|f(z)| = |z|^6 = 2^6 = 64$. Therefore $z^6 - 5z^2 + 10$ has six roots striclty inside $C_2$ thus has all six roots in the region $1 < |z| < 2$.
+\end{proof}
+\end{document}
